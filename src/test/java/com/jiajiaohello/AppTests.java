@@ -22,9 +22,6 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 public class AppTests {
     private MockMvc mockMvc;
 
-    @Autowired
-    private PersonDAO personDAO;
-
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
     protected WebApplicationContext wac;
@@ -37,8 +34,7 @@ public class AppTests {
     @Test
     public void simple() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("hello"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -47,21 +43,5 @@ public class AppTests {
         jedis.set("foo", "bar");
         String value = jedis.get("foo");
         System.out.println(value);
-    }
-
-    @Test
-    public void testHibernate() {
-        Person person = new Person();
-        person.setName("bohan5");
-        person.setCountry("中国5");
-        personDAO.save(person);
-
-        Person person2 = personDAO.find(1);
-        System.out.println("find:" + person2);
-
-        for (Person person1 : personDAO.list()) {
-            System.out.println("list: " + person1);
-        }
-
     }
 }
