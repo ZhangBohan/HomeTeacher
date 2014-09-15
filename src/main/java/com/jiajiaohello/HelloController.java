@@ -17,7 +17,7 @@ public class HelloController {
 	public String printWelcome(Model model) {
         LOG.info("welcome init");
 		model.addAttribute("msg", "你好，世界!");
-        MessageHelper.addSuccessAttribute(model, "你好世界");
+        MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函");
 		return "hello";
 	}
 }
