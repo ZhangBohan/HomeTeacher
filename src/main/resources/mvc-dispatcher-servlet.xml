@@ -8,6 +8,15 @@
 
     <context:component-scan base-package="com.jiajiaohello"/>
 
+    <bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <!--
+            Check system properties first, before trying the specified properties.
+            This allows system properties to override any other property source.
+        -->
+        <property name="systemPropertiesMode" value="2" />
+        <property name="location" value="classpath:server.properties" />
+    </bean>
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -31,10 +40,10 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/test" />
-        <property name="username" value="root" />
-        <property name="password" value="" />
+        <property name="driverClassName" value="${dataSource.driverClassName}" />
+        <property name="url" value="${dataSource.url}" />
+        <property name="username" value="${dataSource.username}" />
+        <property name="password" value="${dataSource.password}" />
     </bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
@@ -44,9 +53,9 @@
         <property name="packagesToScan" value="com.jiajiaohello" />
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <prop key="hibernate.show_sql">false</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
             </props>
         </property>
     </bean>
