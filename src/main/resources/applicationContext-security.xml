@@ -20,9 +20,10 @@
         </authentication-provider>
     </authentication-manager>
 
+    <http pattern="/" security="none"/>
     <http pattern="/public/**" security="none"/>
     <http use-expressions="true" auto-config="true">
-        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_USER')"/>
         <form-login always-use-default-target="true"
                     default-target-url="/"
                     login-page="/public/login.html"

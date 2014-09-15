@@ -16,7 +16,9 @@ public class Account {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
     private Date createdAt = new Date();
     private Date updatedAt = new Date();

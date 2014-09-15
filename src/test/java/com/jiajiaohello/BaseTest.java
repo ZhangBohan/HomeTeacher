@@ -14,6 +14,5 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration("classpath:mvc-dispatcher-servlet.xml")
-@TransactionConfiguration(defaultRollback=true)
 public abstract class BaseTest {
 }
