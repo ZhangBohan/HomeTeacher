@@ -1,10 +1,12 @@
 package com.jiajiaohello;
 
-import static com.jiajiaohello.support.core.Utils.LOG;
+import com.jiajiaohello.support.web.MessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import static com.jiajiaohello.support.core.Utils.LOG;
 
 
 @Controller
@@ -12,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HelloController {
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome(ModelMap model) {
+	public String printWelcome(Model model) {
         LOG.info("welcome init");
-		model.addAttribute("message", "你好，世界!");
+		model.addAttribute("msg", "你好，世界!");
+        MessageHelper.addSuccessAttribute(model, "你好世界");
 		return "hello";
 	}
 }
