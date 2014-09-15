@@ -6,7 +6,7 @@
  * 语言：`Java`, `HTML`, `JavaScript`, `CSS`, `SQL`
  * 版本管理：`Git`
  * 数据库：`MySQL`
- * 缓存/`NoSQL`：`Redis`
+ * 缓存 & `NoSQL`：`Redis`
 
 
 ##后台框架：

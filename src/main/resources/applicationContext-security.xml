@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	<!--
+	Just for develop
+
+    <debug />-->
+    <debug />
+
+    <global-method-security pre-post-annotations="enabled" />
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="userDetailsService">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <http pattern="/public/**" security="none"/>
+    <http use-expressions="true" auto-config="true">
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <form-login always-use-default-target="true"
+                    default-target-url="/"
+                    login-page="/public/login.html"
+                    username-parameter="username"
+                    password-parameter="password"
+                    authentication-failure-url="/public/login.html?error=true"
+                />
+        <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
+        <remember-me key="guide_mgnt_remember" user-service-ref="userDetailsService" />
+    </http>
+</beans:beans>
