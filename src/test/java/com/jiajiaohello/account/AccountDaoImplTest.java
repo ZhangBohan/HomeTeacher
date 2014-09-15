@@ -21,7 +21,7 @@ public class AccountDaoImplTest {
         Account account = new Account();
         account.setUsername("bohan");
         account.setPassword("123456");
-        accountDao.save(account);
+        accountDao.saveOrUpdate(account);
     }
 
     @Test
@@ -30,5 +30,16 @@ public class AccountDaoImplTest {
             System.out.println("account:" + account);
         }
 
+    }
+
+    @Test
+    public void testGet() {
+        Account account = accountDao.get("bohan");
+        System.out.println(account);
+        assertNotNull(account);
+
+        account = accountDao.get("bohan1");
+        System.out.println(account);
+        assertNull(account);
     }
 }

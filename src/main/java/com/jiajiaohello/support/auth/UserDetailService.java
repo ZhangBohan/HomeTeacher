@@ -1,6 +1,8 @@
 package com.jiajiaohello.support.auth;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import com.jiajiaohello.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -10,8 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * Time: 1:59 PM
  */
 public class UserDetailService implements UserDetailsService {
+    @Autowired
+    private AccountService accountService;
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        return accountService.get(username);
     }
 }

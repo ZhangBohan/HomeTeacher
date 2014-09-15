@@ -8,7 +8,9 @@ import java.util.List;
  * Time: 3:05 PM
  */
 public interface AccountDao {
-    void save(Account account);
+    void saveOrUpdate(Account account);
 
     List<Account> list();
+
+    Account get(String username);
 }
