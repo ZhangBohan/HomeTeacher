@@ -1,4 +1,4 @@
-package com.jiajiaohello.support.utils;
+package com.jiajiaohello.support.core;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

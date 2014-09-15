@@ -1,4 +1,4 @@
-package com.jiajiaohello.auth;
+package com.jiajiaohello.support.auth;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;

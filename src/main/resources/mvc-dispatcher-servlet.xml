@@ -58,7 +58,10 @@
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
             </props>
         </property>
+        <property name="namingStrategy" ref="namingStrategy" />
     </bean>
+
+    <bean id="namingStrategy" class="org.hibernate.cfg.ImprovedNamingStrategy" />
 
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
@@ -73,8 +76,8 @@
 
     <tx:annotation-driven />
 
-    <bean id="userDetailsService" class="com.jiajiaohello.auth.UserDetailService">
+    <bean id="userDetailsService" class="com.jiajiaohello.support.auth.UserDetailService">
 
     </bean>
-    <bean id="encoder" class="com.jiajiaohello.auth.PasswordEncoder"/>
+    <bean id="encoder" class="com.jiajiaohello.support.auth.PasswordEncoder"/>
 </beans>

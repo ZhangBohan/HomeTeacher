@@ -1,6 +1,6 @@
 package com.jiajiaohello;
 
-import static com.jiajiaohello.support.utils.Utils.LOG;
+import static com.jiajiaohello.support.core.Utils.LOG;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
