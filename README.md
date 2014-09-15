@@ -37,9 +37,15 @@
 
 ###消息模块
 
+**设置方法**
+
     // 消息支持 success, info, warning, error，类型可以是Model也可以是RedirectAttributes
     MessageHelper.addSuccessAttribute(model, "你好世界");
     MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函"); // 也可以传递参数
+    
+**取得方法**
+
+    <h2 class="${message.type}">${message.message}</h2>
    
 ##要完全的工作
 

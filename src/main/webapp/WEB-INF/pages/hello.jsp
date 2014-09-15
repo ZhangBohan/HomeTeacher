@@ -2,6 +2,6 @@
 <html>
 <body>
 	<h1>${msg}</h1>
-    <h2>${message.message}</h2>
+    <h2 class="${message.type}">${message.message}</h2>
 </body>
 </html>
