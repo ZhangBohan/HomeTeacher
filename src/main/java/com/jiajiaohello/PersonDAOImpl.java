@@ -1,11 +1,10 @@
 package com.jiajiaohello;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -16,23 +15,23 @@ import java.util.List;
 @Repository
 public class PersonDAOImpl implements PersonDAO {
 
+
     @Autowired
-    private SessionFactory sessionFactory;
+    private HibernateTemplate hibernateTemplate;
 
     @Override
+    public Person find(Integer id) {
+        return hibernateTemplate.get(Person.class, id);
+    }
+
+    @Override
+    @Transactional
     public void save(Person p) {
-        Session session = this.sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        session.save(p);
-        tx.commit();
-        session.close();
+        hibernateTemplate.saveOrUpdate(p);
     }
 
     @Override
     public List<Person> list() {
-        Session session = this.sessionFactory.openSession();
-        List<Person> personList = session.createQuery("from Person").list();
-        session.close();
-        return personList;
+        return (List<Person>) hibernateTemplate.find("from Person");
     }
 }

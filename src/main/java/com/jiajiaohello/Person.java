@@ -8,23 +8,31 @@ import javax.persistence.*;
  * Time: 11:54 PM
  */
 @Entity
-@Table(name="PERSON")
+@Table(name="person")
 public class Person {
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue
+    private Integer id;
 
     private String name;
 
     private String country;
 
-    public int getId() {
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,10 +50,5 @@ public class Person {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    @Override
-    public String toString(){
-        return "id="+id+", name="+name+", country="+country;
     }
 }

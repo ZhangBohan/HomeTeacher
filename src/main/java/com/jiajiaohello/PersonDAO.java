@@ -8,6 +8,8 @@ import java.util.List;
  * Time: 11:55 PM
  */
 public interface PersonDAO {
+    Person find(Integer id);
+
     public void save(Person p);
 
     public List<Person> list();

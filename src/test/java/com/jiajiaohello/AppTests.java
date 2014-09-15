@@ -52,12 +52,15 @@ public class AppTests {
     @Test
     public void testHibernate() {
         Person person = new Person();
-        person.setId(1);
-        person.setName("bohan");
-        person.setCountry("中国");
+        person.setName("bohan5");
+        person.setCountry("中国5");
         personDAO.save(person);
+
+        Person person2 = personDAO.find(1);
+        System.out.println("find:" + person2);
+
         for (Person person1 : personDAO.list()) {
-            System.out.println(person1);
+            System.out.println("list: " + person1);
         }
 
     }
