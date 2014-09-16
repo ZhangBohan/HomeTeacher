@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import static com.jiajiaohello.support.core.Utils.LOG;
+import static com.jiajiaohello.support.core.CommonHelper.LOG;
 
 
 @Controller
