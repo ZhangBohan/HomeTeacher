@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import static org.junit.Assert.*;
 
-public class UserDetailServiceTest extends BaseTest {
-    @Autowired private UserDetailService userDetailService;
+public class UserUserDetailServiceTest extends BaseTest {
+    @Autowired private UserUserDetailService userUserDetailService;
 
     @Test
     public void testLoadUserByUsername() throws Exception {
-        UserDetails user = userDetailService.loadUserByUsername("bohan");
+        UserDetails user = userUserDetailService.loadUserByUsername("bohan");
         System.out.println(user);
         assertNotNull(user);
     }

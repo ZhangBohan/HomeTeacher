@@ -1,8 +1,6 @@
 package com.jiajiaohello.account.dao;
 
 import com.jiajiaohello.BaseTest;
-import com.jiajiaohello.account.AccountService;
-import com.jiajiaohello.account.model.Account;
 import com.jiajiaohello.account.model.TeacherAccount;
 import com.jiajiaohello.account.model.UserAccount;
 import org.junit.Test;

@@ -75,9 +75,4 @@
     </bean>
 
     <tx:annotation-driven />
-
-    <bean id="userDetailsService" class="com.jiajiaohello.support.auth.UserDetailService">
-
-    </bean>
-    <bean id="encoder" class="com.jiajiaohello.support.auth.PasswordEncoder"/>
 </beans>

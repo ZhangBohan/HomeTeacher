@@ -12,26 +12,57 @@
     <debug />-->
     <debug />
 
+    <beans:bean id="encoder" class="com.jiajiaohello.support.auth.PasswordEncoder"/>
+
     <global-method-security pre-post-annotations="enabled" />
 
     <authentication-manager>
-        <authentication-provider user-service-ref="userDetailsService">
+        <authentication-provider user-service-ref="userUserDetailsService">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+        <authentication-provider user-service-ref="teacherUserDetailsService">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+        <authentication-provider user-service-ref="managerUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
     </authentication-manager>
 
     <http pattern="/" security="none"/>
     <http pattern="/public/**" security="none"/>
-    <http use-expressions="true" auto-config="true">
+    <http use-expressions="true" auto-config="true" pattern="/dashboard/users/**">
         <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_USER')"/>
-        <form-login always-use-default-target="true"
-                    default-target-url="/"
-                    login-page="/public/login.html"
+        <form-login default-target-url="/"
+                    login-page="/auth/user/login"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/public/login.html?error=true"
                 />
         <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
-        <remember-me key="guide_mgnt_remember" user-service-ref="userDetailsService" />
+        <remember-me key="jiajiaohello_user" user-service-ref="userUserDetailsService" />
+    </http>
+
+    <http use-expressions="true" auto-config="true" pattern="/dashboard/teachers/**">
+        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_TEACHER')"/>
+        <form-login default-target-url="/"
+                    login-page="/auth/teacher/login"
+                    username-parameter="username"
+                    password-parameter="password"
+                    authentication-failure-url="/public/login.html?error=true"
+                />
+        <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
+        <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />
+    </http>
+
+    <http use-expressions="true" auto-config="true" pattern="/dashboard/admin/**">
+        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_ADMIN')"/>
+        <form-login default-target-url="/"
+                    login-page="/auth/admin/login"
+                    username-parameter="username"
+                    password-parameter="password"
+                    authentication-failure-url="/public/login.html?error=true"
+                />
+        <logout logout-success-url="/auth/admin/login" delete-cookies="JSESSIONID"/>
+        <remember-me key="jiajiaohello_manager" user-service-ref="managerUserDetailsService" />
     </http>
 </beans:beans>
