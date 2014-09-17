@@ -1,4 +1,4 @@
-package com.jiajiaohello.account;
+package com.jiajiaohello.account.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,8 +24,15 @@ public class Account {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    private Date createdAt = new Date();
-    private Date updatedAt = new Date();
+    private Date createdAt;
+    private Date updatedAt;
+
+    public Account() {
+    }
+
+    public Account(String username) {
+        this.username = username;
+    }
 
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package com.jiajiaohello.account;
 
+import com.jiajiaohello.account.dao.AccountDao;
+import com.jiajiaohello.account.model.Account;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,19 +21,20 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     public static final String DEFAULT_ROLE = "ROLE_USER";
 
-    @Autowired private AccountDao accountDao;
+//    @Autowired private AccountDao<Account> accountDao;
     private List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
 
 
     @Override
     public User get(String username) {
-        Account account = accountDao.get(username);
-        if(account == null) {
-            return null;
-        }
-        account.setUpdatedAt(new Date());
-        accountDao.saveOrUpdate(account);
-        return new User(account.getUsername(), account.getPassword(), authorities);
+//        Account account = accountDao.get(username);
+//        if(account == null) {
+//            return null;
+//        }
+//        account.setUpdatedAt(new Date());
+//        accountDao.saveOrUpdate(account);
+//        return new User(account.getUsername(), account.getPassword(), authorities);
+        return null;
     }
 
     @Override
@@ -39,6 +42,6 @@ public class AccountServiceImpl implements AccountService {
         PasswordEncoder passwordEncoder = new PasswordEncoder();
         String encodedPassWord = passwordEncoder.encode(account.getPassword());
         account.setPassword(encodedPassWord);
-        accountDao.saveOrUpdate(account);
+//        accountDao.saveOrUpdate(account);
     }
 }

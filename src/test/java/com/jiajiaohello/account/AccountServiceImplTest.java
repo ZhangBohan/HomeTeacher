@@ -1,10 +1,9 @@
 package com.jiajiaohello.account;
 
 import com.jiajiaohello.BaseTest;
+import com.jiajiaohello.account.model.Account;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.Assert.*;
 
 public class AccountServiceImplTest extends BaseTest {
     @Autowired private AccountService accountService;

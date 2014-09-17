@@ -1,5 +1,6 @@
 package com.jiajiaohello.account;
 
+import com.jiajiaohello.account.model.Account;
 import org.springframework.security.core.userdetails.User;
 
 /**
