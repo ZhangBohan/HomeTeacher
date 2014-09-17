@@ -10,19 +10,24 @@
 	Just for develop
 
     <debug />-->
-    <debug />
 
     <beans:bean id="encoder" class="com.jiajiaohello.support.auth.PasswordEncoder"/>
 
     <global-method-security pre-post-annotations="enabled" />
 
-    <authentication-manager>
+    <authentication-manager id="userAuthenticationManager">
         <authentication-provider user-service-ref="userUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
+    </authentication-manager>
+
+    <authentication-manager id="teacherAuthenticationManager">
         <authentication-provider user-service-ref="teacherUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
+    </authentication-manager>
+
+    <authentication-manager id="mangerAuthenticationManager">
         <authentication-provider user-service-ref="managerUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
@@ -30,37 +35,40 @@
 
     <http pattern="/" security="none"/>
     <http pattern="/public/**" security="none"/>
-    <http use-expressions="true" auto-config="true" pattern="/dashboard/users/**">
-        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_USER')"/>
+    <http use-expressions="true" auto-config="true" pattern="/users/**" authentication-manager-ref="userAuthenticationManager">
+        <intercept-url pattern="/users/**" access="hasRole('ROLE_USER')"/>
         <form-login default-target-url="/"
                     login-page="/auth/user/login"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/public/login.html?error=true"
+                    login-processing-url="/users/j_spring_security_check"
                 />
         <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_user" user-service-ref="userUserDetailsService" />
     </http>
 
-    <http use-expressions="true" auto-config="true" pattern="/dashboard/teachers/**">
-        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_TEACHER')"/>
+    <http use-expressions="true" auto-config="true" pattern="/teachers/**" authentication-manager-ref="teacherAuthenticationManager">
+        <intercept-url pattern="/teachers/**" access="hasRole('ROLE_TEACHER')"/>
         <form-login default-target-url="/"
                     login-page="/auth/teacher/login"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/public/login.html?error=true"
+                    login-processing-url="/teachers/j_spring_security_check"
                 />
         <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />
     </http>
 
-    <http use-expressions="true" auto-config="true" pattern="/dashboard/admin/**">
-        <intercept-url pattern="/dashboard/**" access="hasRole('ROLE_ADMIN')"/>
+    <http use-expressions="true" auto-config="true" pattern="/admin/**" authentication-manager-ref="mangerAuthenticationManager">
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <form-login default-target-url="/"
-                    login-page="/auth/admin/login"
+                    login-page="/auth/admins/login"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/public/login.html?error=true"
+                    login-processing-url="/admin/j_spring_security_check"
                 />
         <logout logout-success-url="/auth/admin/login" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_manager" user-service-ref="managerUserDetailsService" />

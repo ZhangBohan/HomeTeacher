@@ -49,4 +49,10 @@ public class PasswordEncoder implements org.springframework.security.crypto.pass
 		return StringUtils.equals(encode(rawPassword, salt), encodedPassword);
 	}
 
+    public static void main(String[] args) {
+        PasswordEncoder encoder = new PasswordEncoder();
+        String jiajiaohello = encoder.encode("123456", "jiajiaohello");
+        System.out.println(jiajiaohello);
+    }
+
 }
