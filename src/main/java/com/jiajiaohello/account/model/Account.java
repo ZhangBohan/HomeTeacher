@@ -39,7 +39,7 @@ public class Account {
         return "Account{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password=(Password Not Show)" +
                 ", disabled=" + disabled +
                 ", avatar='" + avatar + '\'' +
                 ", name='" + name + '\'' +

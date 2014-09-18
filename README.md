@@ -48,6 +48,11 @@
    * 页面框架：`Admin LTE`
    * 页面动态：`AngularJS`
    
+##配置文件
+
+配置文件当前使用启动后自动加载`jiajiaohello/src/main/resources/server.properties`文件，如果需要自定义
+配置文件中的某项，可以使用传递系统参数的办法，例如：`mvn jetty:run -DdataSource.password=123456`
+   
 ##组件使用
 关于本项目内的一些系统级别组件的使用方法
 
