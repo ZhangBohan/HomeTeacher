@@ -20,4 +20,14 @@ public class HelloController {
         MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函");
 		return "hello";
 	}
+
+    @RequestMapping(value = "/ali/index",method = RequestMethod.GET)
+    public String aliIndex() {
+        return "ali/index";
+    }
+
+    @RequestMapping(value = "/ali/api",method = RequestMethod.GET)
+    public String aliAPI() {
+        return "ali/alipayapi";
+    }
 }
