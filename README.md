@@ -5,6 +5,22 @@
 * `Java`版本`1.7`
 * `Git`进行版本控制
 * `Maven`管理项目中的依赖
+* `Redis`
+
+##安装开发环境
+###UBuntu
+    sudo apt-get install python-software-properties
+    sudo add-apt-repository ppa:webupd8team/java
+    sudo apt-get update
+    
+    sudo apt-get install oracle-java7-installer
+
+    sudo apt-get install git
+    
+    sudo apt-get install maven
+
+    sudo apt-get install redis-server
+
 
 ##如何开始
     
