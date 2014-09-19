@@ -48,7 +48,7 @@ public class AppTests {
 
     @Test
     public void testHttp() {
-        IpData ipData = CommonHelper.analyzeIp("119.80.62.130");
+        IpData ipData = CommonHelper.analyzeIP("119.80.62.130");
         System.out.println(ipData);
     }
 }

@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -33,7 +34,7 @@ public class CommonHelper {
      * @param ip IP地址
      * @return  国家 、省（自治区或直辖市）、市（县）、运营商信息
      */
-    public static IpData analyzeIp(String ip) {
+    public static IpData analyzeIP(String ip) {
         HttpRequest request = HttpRequest.get(API_URL, true, "ip", ip);
         if (request.ok()) {
             ResultData resultData = gson.fromJson(request.body(), ResultData.class);
@@ -45,6 +46,15 @@ public class CommonHelper {
             }
         }
         return null;
+    }
+
+    public static String getIP(HttpServletRequest request) {
+        //is client behind something?
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
+        return ipAddress;
     }
 }
 
