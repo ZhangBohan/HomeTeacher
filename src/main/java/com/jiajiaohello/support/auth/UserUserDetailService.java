@@ -1,6 +1,6 @@
 package com.jiajiaohello.support.auth;
 
-import com.jiajiaohello.account.service.UserAccountService;
+import com.jiajiaohello.core.account.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;

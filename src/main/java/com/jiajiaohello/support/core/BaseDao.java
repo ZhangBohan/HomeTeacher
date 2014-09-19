@@ -1,6 +1,6 @@
 package com.jiajiaohello.support.core;
 
-import com.jiajiaohello.notification.Notification;
+import com.jiajiaohello.core.notification.Notification;
 
 import java.util.List;
 
@@ -12,9 +12,9 @@ import java.util.List;
 public interface BaseDao<T> {
     T get(Integer id);
 
-    void saveOrUpdate(Notification notification);
+    void saveOrUpdate(T entity);
 
     List<T> getList(T entity);
 
-    List<Notification> getList(T entity, int firstResult, int maxResult);
+    List<T> getList(T entity, int firstResult, int maxResult);
 }
