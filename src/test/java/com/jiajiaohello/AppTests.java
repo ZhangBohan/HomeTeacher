@@ -1,5 +1,7 @@
 package com.jiajiaohello;
 
+import com.jiajiaohello.support.core.CommonHelper;
+import com.jiajiaohello.support.core.IpData;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,5 +44,11 @@ public class AppTests {
         jedis.set("foo", "bar");
         String value = jedis.get("foo");
         System.out.println(value);
+    }
+
+    @Test
+    public void testHttp() {
+        IpData ipData = CommonHelper.analyzeIp("119.80.62.130");
+        System.out.println(ipData);
     }
 }

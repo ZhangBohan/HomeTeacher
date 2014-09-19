@@ -43,10 +43,11 @@
    * 依赖：`Spring`
    * 权限系统：`Spring Security`
    * 数据存储：`Hibernate`
+   * [http-request](http://kevinsawicki.github.io/http-request/): A simple convenience library for using a HttpURLConnection to make requests and access the response.
 
 ###前端框架：
-   * 页面框架：`Admin LTE`
-   * 页面动态：`AngularJS`
+   * [Admin LTE](https://github.com/almasaeed2010/AdminLTE): Free Premium Admin control Panel Theme That Is Based On Bootstrap 3.x
+   * [AngularJS](https://github.com/angular/angular.js): HTML enhanced for web apps!
    
 ##配置文件
 
