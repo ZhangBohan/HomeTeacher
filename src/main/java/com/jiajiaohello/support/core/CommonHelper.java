@@ -4,6 +4,7 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -26,6 +27,8 @@ public class CommonHelper {
 
     public static final String API_URL = "http://ip.taobao.com/service/getIpInfo.php";
 
+    public static final String[] LOCAL_IPS = new String[]{"0:0:0:0:0:0:0:1", "127.0.0.1"};
+
     /**
      * <p>淘宝IP地址库</p>
      *
@@ -35,6 +38,13 @@ public class CommonHelper {
      * @return  国家 、省（自治区或直辖市）、市（县）、运营商信息
      */
     public static IpData analyzeIP(String ip) {
+
+        for (String localIp : LOCAL_IPS) {  // skip local ip
+            if(localIp.equals(ip)) {
+                return null;
+            }
+        }
+
         HttpRequest request = HttpRequest.get(API_URL, true, "ip", ip);
         if (request.ok()) {
             ResultData resultData = gson.fromJson(request.body(), ResultData.class);
