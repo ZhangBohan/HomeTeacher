@@ -1,6 +1,6 @@
 package com.jiajiaohello.core.account.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.jiajiaohello.core.account.model.TeacherAccount;
 
 /**
  * User: bohan
@@ -8,7 +8,5 @@ import org.springframework.security.core.userdetails.User;
  * Time: 4:05 PM
  */
 public interface TeacherAccountService {
-    static final String DEFAULT_ROLE = "ROLE_TEACHER";
-
-    User get(String username);
+    TeacherAccount get(String username);
 }

@@ -1,8 +1,11 @@
 package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.core.area.Area;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -11,7 +14,7 @@ import java.util.Date;
  * Time: 2:59 PM
  */
 @Entity
-public class Account {
+public class Account implements UserDetails {
     @Id
     @GeneratedValue
     private Integer id;
@@ -64,8 +67,33 @@ public class Account {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return disabled;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {

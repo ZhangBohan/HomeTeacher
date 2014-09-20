@@ -22,11 +22,9 @@ public class ManagerAccountServiceImpl implements ManagerAccountService {
     @Autowired
     private ManagerAccountDao userAccountDao;
 
-    private List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
-
     @Override
     @Transactional
-    public User get(String username) {
+    public ManagerAccount get(String username) {
         ManagerAccount account = new ManagerAccount(username);
         account = userAccountDao.get(account);
         if(account == null) {
@@ -34,6 +32,6 @@ public class ManagerAccountServiceImpl implements ManagerAccountService {
         }
         account.setUpdatedAt(new Date());
         userAccountDao.saveOrUpdate(account);
-        return new User(account.getUsername(), account.getPassword(), authorities);
+        return account;
     }
 }

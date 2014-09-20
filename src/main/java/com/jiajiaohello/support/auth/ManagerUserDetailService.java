@@ -1,8 +1,9 @@
 package com.jiajiaohello.support.auth;
 
+import com.jiajiaohello.core.account.model.ManagerAccount;
 import com.jiajiaohello.core.account.service.ManagerAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class ManagerUserDetailService implements UserDetailsService {
     private ManagerAccountService managerAccountService;
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
+    public ManagerAccount loadUserByUsername(String username) throws UsernameNotFoundException {
         return managerAccountService.get(username);
     }
 }

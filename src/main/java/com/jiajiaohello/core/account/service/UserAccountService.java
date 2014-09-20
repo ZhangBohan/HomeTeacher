@@ -1,6 +1,6 @@
 package com.jiajiaohello.core.account.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.jiajiaohello.core.account.model.UserAccount;
 
 /**
  * User: bohan
@@ -8,7 +8,5 @@ import org.springframework.security.core.userdetails.User;
  * Time: 4:05 PM
  */
 public interface UserAccountService {
-    static final String DEFAULT_ROLE = "ROLE_USER";
-
-    User get(String username);
+    UserAccount get(String username);
 }
