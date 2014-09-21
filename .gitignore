@@ -3,3 +3,6 @@ jiajiaohello.iml
 target/
 
 .project/
+.project
+.classpath
+.settings/
