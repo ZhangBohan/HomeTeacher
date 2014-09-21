@@ -24,7 +24,7 @@ public class HelloController {
         IpData ipData = CommonHelper.analyzeIP(ip);
         model.addAttribute("ip", ip);
         model.addAttribute("ipData", ipData);
-        MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函");
+        MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函1");
 		return "hello";
 	}
 
