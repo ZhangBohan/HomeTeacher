@@ -37,6 +37,9 @@
  * 缓存 & `NoSQL`：`Redis`
 
 
+##数据结构图
+![image](http://static-jjh.oss-cn-beijing.aliyuncs.com/diagram.jpg)
+
 ###后台框架：
 
    * 控制器：`Spring MVC`
