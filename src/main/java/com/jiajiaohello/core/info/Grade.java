@@ -1,31 +1,27 @@
-package com.jiajiaohello.core.area;
+package com.jiajiaohello.core.info;
 
 import com.jiajiaohello.support.core.CommonHelper;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
 
 /**
+ *
+ * 年级
+ *
  * User: bohan
- * Date: 9/18/14
- * Time: 11:45 PM
+ * Date: 9/24/14
+ * Time: 11:06 PM
  */
 @Entity
-public class Area {
+public class Grade {
     @Id
     @GeneratedValue
     private Integer id;
-
     private String name;
-
-    private String phone;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
-
     private Date createdAt;
     private Date updatedAt;
 
@@ -36,10 +32,9 @@ public class Area {
 
     @Override
     public String toString() {
-        return "Area{" +
+        return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
                 ", description='" + description + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
@@ -60,14 +55,6 @@ public class Area {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getDescription() {

@@ -1,31 +1,27 @@
-package com.jiajiaohello.core.area;
+package com.jiajiaohello.core.lesson;
 
+import com.jiajiaohello.core.ticket.ClassTicket;
 import com.jiajiaohello.support.core.CommonHelper;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 /**
  * User: bohan
- * Date: 9/18/14
- * Time: 11:45 PM
+ * Date: 9/24/14
+ * Time: 11:17 PM
  */
 @Entity
-public class Area {
+public class Lesson {
     @Id
     @GeneratedValue
     private Integer id;
-
-    private String name;
-
-    private String phone;
-
-    @Column(nullable = false, columnDefinition = "TEXT")
-    private String description;
-
+    @ManyToOne
+    private ClassTicket classTicket;
+    private Integer status;
     private Date createdAt;
     private Date updatedAt;
 
@@ -36,11 +32,10 @@ public class Area {
 
     @Override
     public String toString() {
-        return "Area{" +
+        return "Lesson{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", description='" + description + '\'' +
+                ", classTicket=" + classTicket +
+                ", status=" + status +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -54,28 +49,20 @@ public class Area {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public ClassTicket getClassTicket() {
+        return classTicket;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClassTicket(ClassTicket classTicket) {
+        this.classTicket = classTicket;
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Date getCreatedAt() {

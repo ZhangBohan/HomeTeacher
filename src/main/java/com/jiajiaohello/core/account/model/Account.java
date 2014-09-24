@@ -20,17 +20,13 @@ public class Account implements UserDetails {
     private Integer id;
     @Column(unique = true, nullable = false)
     private String username;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
     private Boolean disabled = false;
     private String avatar;
     private String name;
     @ManyToOne(optional = false)
     private Area area;
-    @Column(nullable = false)
     private Date createdAt;
-    @Column(nullable = false)
     private Date updatedAt;
 
     public Account() {
