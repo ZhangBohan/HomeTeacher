@@ -38,7 +38,7 @@
 
 
 ##数据结构图
-![image](http://static-jjh.oss-cn-beijing.aliyuncs.com/diagram.jpg)
+![image](http://static-jjh.oss-cn-beijing.aliyuncs.com/diagram.jpg?v=2)
 
 ###后台框架：
 
