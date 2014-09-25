@@ -7,6 +7,8 @@ import com.jiajiaohello.core.area.Area;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 
 public class AccountDaoTest extends BaseTest {
@@ -17,7 +19,6 @@ public class AccountDaoTest extends BaseTest {
     @Autowired
     private TeacherAccountDao teacherAccountDao;
 
-    @Test
     public void testSaveOrUpdate() throws Exception {
         UserAccount userAccount = new UserAccount();
         userAccount.setName("伯函");
@@ -25,7 +26,7 @@ public class AccountDaoTest extends BaseTest {
         userAccount.setPassword("123456");
         Area area = new Area();
         area.setId(1);
-        userAccount.setArea(area);
+        userAccount.setAreas(Collections.EMPTY_LIST);
         userAccountDao.saveOrUpdate(userAccount);
     }
 

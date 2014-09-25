@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: bohan
@@ -24,8 +25,8 @@ public class Account implements UserDetails {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    @ManyToOne(optional = false)
-    private Area area;
+    @ManyToMany
+    private List<Area> areas;
     private Date createdAt;
     private Date updatedAt;
 
@@ -45,7 +46,7 @@ public class Account implements UserDetails {
                 ", disabled=" + disabled +
                 ", avatar='" + avatar + '\'' +
                 ", name='" + name + '\'' +
-                ", area=" + area +
+                ", areas=" + areas +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -124,12 +125,12 @@ public class Account implements UserDetails {
         this.name = name;
     }
 
-    public Area getArea() {
-        return area;
+    public List<Area> getAreas() {
+        return areas;
     }
 
-    public void setArea(Area area) {
-        this.area = area;
+    public void setAreas(List<Area> areas) {
+        this.areas = areas;
     }
 
     public Date getCreatedAt() {
