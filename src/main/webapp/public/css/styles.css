@@ -1,0 +1,64 @@
+.top-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F4F4F4;
+}
+
+.bg-color-white {
+    background-color: #ffffff;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.main-block {
+    margin-top: 50px;
+    clear: left;
+}
+
+@media (max-width: 768px) {
+    .publish-message {
+        margin-top: 20px;
+    }
+}
+
+.teacher-block {
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    padding: 0 5px 0 5px;
+}
+
+.avatar-block {
+    width: 100px;
+    height: 100px;
+    float: left;
+    padding: 5px 5px 5px 5px;
+}
+
+.teacher-content {
+    margin-left: 100px;
+    padding: 5px 0 5px 0;
+}
+
+footer {
+    margin-top: 100px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 12px;
+}
+
+.debug {
+    border: 1px solid darkgreen;
+}
