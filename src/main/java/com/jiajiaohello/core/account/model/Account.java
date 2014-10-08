@@ -17,11 +17,15 @@ import java.util.List;
  */
 @Entity
 public class Account implements UserDetails {
+
+    private static final long serialVersionUID = 8942616556058173814L;
+
     @Id
     @GeneratedValue
     private Integer id;
     @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
     private Boolean disabled = false;
     private String avatar;

@@ -28,7 +28,7 @@ public class AccountDaoTest extends BaseTest {
         userAccount.setPassword(new PasswordEncoder().encode("123456"));
         Area area = new Area();
         area.setId(1);
-        userAccount.setAreas(Collections.EMPTY_LIST);
+        userAccount.setAreas(Collections.singletonList(area));
         teacherAccountDao.saveOrUpdate(userAccount);
     }
 

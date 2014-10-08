@@ -63,7 +63,7 @@
 
     <http use-expressions="true" auto-config="true" pattern="/admin/**" authentication-manager-ref="mangerAuthenticationManager">
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-        <form-login default-target-url="/"
+        <form-login default-target-url="/teachers/index"
                     login-page="/auth/admins/login"
                     username-parameter="username"
                     password-parameter="password"
