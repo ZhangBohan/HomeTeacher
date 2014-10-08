@@ -6,11 +6,11 @@
     <title>AdminLTE | Log in</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- bootstrap 3.0.2 -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- font Awesome -->
-    <link href="../../css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="../../css/AdminLTE.css" rel="stylesheet" type="text/css" />
+    <link href="/public/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <style>
         .header-link {
             color: #ffffff;
@@ -33,13 +33,13 @@
 
 <div class="form-box" id="login-box">
     <div class="header">用户登录 | <a class="header-link" href="#">教员点我登录</a></div>
-    <form action="../../index.html" method="post">
+    <form action="/teachers/j_spring_security_check" method="post">
         <div class="body bg-gray">
             <div class="form-group">
-                <input type="text" name="userid" class="form-control" placeholder="用户名"/>
+                <input type="text" name="username" class="form-control" placeholder="用户名" value="bohan" />
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="密码"/>
+                <input type="password" name="password" class="form-control" placeholder="密码" value="123456"/>
             </div>
             <div class="form-group">
                 <input type="checkbox" name="remember_me"/> 记住我
@@ -57,9 +57,9 @@
 
 
 <!-- jQuery 2.0.2 -->
-<script src="../../js/jquery.min.js"></script>
+<script src="/public/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
 
 </body>
 </html>

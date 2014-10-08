@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/auth")
 public class AuthController {
 
-    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login/user", method = RequestMethod.GET)
     public String userLogin() {
         return "auth/user_login";
+    }
+
+    @RequestMapping(value = "/login/teacher", method = RequestMethod.GET)
+    public String teacherLogin() {
+        return "auth/teacher_login";
     }
 }

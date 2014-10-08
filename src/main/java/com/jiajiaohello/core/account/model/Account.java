@@ -1,6 +1,7 @@
 package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.core.area.Area;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -25,7 +26,7 @@ public class Account implements UserDetails {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Area> areas;
     private Date createdAt;
     private Date updatedAt;
@@ -81,7 +82,7 @@ public class Account implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return disabled;
+        return !disabled;
     }
 
     public void setUsername(String username) {

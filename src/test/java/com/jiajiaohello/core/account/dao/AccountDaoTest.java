@@ -4,6 +4,7 @@ import com.jiajiaohello.BaseTest;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.core.area.Area;
+import com.jiajiaohello.support.auth.PasswordEncoder;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,15 +20,16 @@ public class AccountDaoTest extends BaseTest {
     @Autowired
     private TeacherAccountDao teacherAccountDao;
 
+    @Test
     public void testSaveOrUpdate() throws Exception {
-        UserAccount userAccount = new UserAccount();
+        TeacherAccount userAccount = new TeacherAccount();
         userAccount.setName("伯函");
-        userAccount.setUsername("bohan1");
-        userAccount.setPassword("123456");
+        userAccount.setUsername("bohan");
+        userAccount.setPassword(new PasswordEncoder().encode("123456"));
         Area area = new Area();
         area.setId(1);
         userAccount.setAreas(Collections.EMPTY_LIST);
-        userAccountDao.saveOrUpdate(userAccount);
+        teacherAccountDao.saveOrUpdate(userAccount);
     }
 
     @Test

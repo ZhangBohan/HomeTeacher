@@ -51,10 +51,10 @@
     <http use-expressions="true" auto-config="true" pattern="/teachers/**" authentication-manager-ref="teacherAuthenticationManager">
         <intercept-url pattern="/teachers/**" access="hasRole('ROLE_TEACHER')"/>
         <form-login default-target-url="/"
-                    login-page="/auth/teacher/login"
+                    login-page="/auth/login/teacher"
                     username-parameter="username"
                     password-parameter="password"
-                    authentication-failure-url="/public/login.html?error=true"
+                    authentication-failure-url="/auth/login/teacher?error=true"
                     login-processing-url="/teachers/j_spring_security_check"
                 />
         <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
