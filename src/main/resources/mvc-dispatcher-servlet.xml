@@ -75,4 +75,28 @@
     </bean>
 
     <tx:annotation-driven />
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxActive" value="50" />
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="10" />
+        <property name="maxWait" value="2000" />
+    </bean>
+
+    <!-- Jedis ConnectionFactory -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="timeout" value="5000" />
+        <property name="poolConfig" ref="jedisPoolConfig" />
+    </bean>
+
+    <bean
+            id="stringRedisSerializer"
+            class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <!-- redis template definition -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <property name="keySerializer" ref="stringRedisSerializer" />
+        <property name="hashKeySerializer" ref="stringRedisSerializer" />
+    </bean>
 </beans>
