@@ -28,12 +28,18 @@ public class HelloController {
 		return "hello";
 	}
 
-    @RequestMapping(value = "/ali/index",method = RequestMethod.GET)
+    @RequestMapping(value = "error",method = RequestMethod.GET)
+    public void error() throws Exception {
+        CommonHelper.LOG.error("exception test");
+        throw new Exception("exception test");
+    }
+
+    @RequestMapping(value = "ali/index",method = RequestMethod.GET)
     public String aliIndex() {
         return "ali/index";
     }
 
-    @RequestMapping(value = "/ali/api",method = RequestMethod.GET)
+    @RequestMapping(value = "ali/api",method = RequestMethod.GET)
     public String aliAPI() {
         return "ali/alipayapi";
     }
