@@ -25,7 +25,7 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(TeacherInfoNotFillException.class)
     public ModelAndView handleTeacherNotFillException() {
-        ModelAndView model = new ModelAndView("redirect:/teachers/info");
+        ModelAndView model = new ModelAndView("redirect:/teacher/edit");
         return model;
     }
 }

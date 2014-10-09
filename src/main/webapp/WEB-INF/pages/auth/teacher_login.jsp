@@ -33,7 +33,7 @@
 
 <div class="form-box" id="login-box">
     <div class="header">用户登录 | <a class="header-link" href="#">教员点我登录</a></div>
-    <form action="/teachers/j_spring_security_check" method="post">
+    <form action="/teacher/j_spring_security_check" method="post">
         <div class="body bg-gray">
             <div class="form-group">
                 <input type="text" name="username" class="form-control" placeholder="用户名" value="bohan" />

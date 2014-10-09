@@ -5,7 +5,9 @@ import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.exception.TeacherInfoNotFillException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -14,13 +16,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Time: 10:43 PM
  */
 @Controller
-@RequestMapping("/teachers")
+@RequestMapping("/teacher")
 public class TeacherController {
-    @RequestMapping("/index")
+    @RequestMapping
     @ResponseBody
     public TeacherAccount index() throws TeacherInfoNotFillException {
         verify();
         return AuthHelper.getTeacherAccount();
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String getEdit(Model model) {
+        TeacherAccount teacherAccount = AuthHelper.getTeacherAccount();
+        model.addAttribute("teacherAccount", teacherAccount);
+        return "teacher/edit";
     }
 
     public void verify() throws TeacherInfoNotFillException {

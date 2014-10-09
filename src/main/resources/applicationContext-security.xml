@@ -48,16 +48,16 @@
         <remember-me key="jiajiaohello_user" user-service-ref="userUserDetailsService" />
     </http>
 
-    <http use-expressions="true" auto-config="true" pattern="/teachers/**" authentication-manager-ref="teacherAuthenticationManager">
-        <intercept-url pattern="/teachers/**" access="hasRole('ROLE_TEACHER')"/>
+    <http use-expressions="true" auto-config="true" pattern="/teacher/**" authentication-manager-ref="teacherAuthenticationManager">
+        <intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')"/>
         <form-login default-target-url="/"
                     login-page="/auth/login/teacher"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/auth/login/teacher?error=true"
-                    login-processing-url="/teachers/j_spring_security_check"
+                    login-processing-url="/teacher/j_spring_security_check"
                 />
-        <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
+        <logout logout-url="/teacher/j_spring_security_logout" logout-success-url="/pages/teacher" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />
     </http>
 
