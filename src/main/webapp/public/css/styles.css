@@ -62,3 +62,8 @@ footer p {
 .debug {
     border: 1px solid darkgreen;
 }
+
+.avatar {
+    width: 100px;
+    height: 100px;
+}

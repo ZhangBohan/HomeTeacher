@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionController {
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllException(Exception ex) {
-        CommonHelper.LOG.error(ex);
+        CommonHelper.LOG.error(ex.getMessage(), ex);
         ModelAndView model = new ModelAndView("error");
         model.addObject("ex", ex);
 

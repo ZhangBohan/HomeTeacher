@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * User: bohan
@@ -30,6 +31,12 @@ public class TeacherController {
         TeacherAccount teacherAccount = AuthHelper.getTeacherAccount();
         model.addAttribute("teacherAccount", teacherAccount);
         return "teacher/edit";
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String postEdit(TeacherAccount teacherAccount, MultipartFile avatarFile) {
+
+        return "redirect:/teacher/edit";
     }
 
     public void verify() throws TeacherInfoNotFillException {

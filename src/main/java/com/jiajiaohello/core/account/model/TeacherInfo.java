@@ -2,6 +2,7 @@ package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.support.core.CommonHelper;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,11 @@ public class TeacherInfo implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;
+
+    private String school;
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     private Boolean completed;
     private Boolean audited;
 
@@ -72,5 +78,21 @@ public class TeacherInfo implements Serializable{
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

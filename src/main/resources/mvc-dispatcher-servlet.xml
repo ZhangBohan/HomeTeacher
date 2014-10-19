@@ -40,6 +40,13 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="5242880000" />
+        <property name="maxInMemorySize" value="512000" />
+        <property name="defaultEncoding" value="UTF-8" />
+    </bean>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
