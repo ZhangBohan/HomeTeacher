@@ -93,28 +93,29 @@
 <!-- right column -->
 <div>
     <!-- general form elements disabled -->
-    <div class="box">
-        <div class="box-body">
-            <form role="form" action="" method="post" >
-                <div class="form-group">
-                    <img src="${teacherAccount.avatar}" class="avatar">
-                    <input type="file" name="avatarFile" class="btn">
-                </div>
-                <!-- text input -->
-                <div class="form-group">
-                    <label>名称</label>
-                    <input type="text" name="name" class="form-control" placeholder="请输入名称" value="${teacherAccount.name}"/>
-                </div>
-                <div class="form-group">
-                    <label>描述</label>
-                    <textarea name="info.description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
-                </div>
-                <div class="form-control">
-                    <button class="btn btn-primary">提交</button>
-                </div>
-            </form>
-        </div><!-- /.box-body -->
-    </div><!-- /.box -->
+    <form role="form" action="" method="post" enctype="multipart/form-data">
+        <div class="box">
+            <div class="box-body">
+                    <div class="form-group">
+                        <img src="${teacherAccount.avatar}" class="avatar">
+                        <input type="file" name="avatarFile" class="btn">
+                    </div>
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>名称</label>
+                        <input type="text" name="name" class="form-control" placeholder="请输入名称" value="${teacherAccount.name}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>描述</label>
+                        <textarea name="info.description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
+                    </div>
+            </div><!-- /.box-body -->
+            <div class="box-footer">
+                <input type="hidden" name="username" value="${teacherAccount.username}">
+                <button class="btn btn-primary">提交</button>
+            </div>
+        </div><!-- /.box -->
+    </form>
 </div><!--/.col (right) -->
 </div>   <!-- /.row -->
 </section><!-- /.content -->

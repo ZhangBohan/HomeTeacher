@@ -29,6 +29,8 @@ public class CommonHelper {
 
     public static final String[] LOCAL_IPS = new String[]{"0:0:0:0:0:0:0:1", "127.0.0.1"};
 
+    public static final String OSS_DEFAULT_BUCKET_NAME = "static-jjh";
+
     /**
      * <p>淘宝IP地址库</p>
      *

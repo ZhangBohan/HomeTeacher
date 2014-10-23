@@ -1,6 +1,9 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.TeacherAccount;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * User: bohan
@@ -9,4 +12,6 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
  */
 public interface TeacherAccountService {
     TeacherAccount get(String username);
+
+    void update(TeacherAccount teacherAccount, MultipartFile avatarFile) throws IOException;
 }

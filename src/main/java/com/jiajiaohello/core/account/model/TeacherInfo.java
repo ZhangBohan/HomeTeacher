@@ -1,6 +1,7 @@
 package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.support.core.CommonHelper;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ public class TeacherInfo implements Serializable{
     private Integer id;
 
     private String school;
+    @NotBlank
     @Column(columnDefinition = "TEXT")
     private String description;
 

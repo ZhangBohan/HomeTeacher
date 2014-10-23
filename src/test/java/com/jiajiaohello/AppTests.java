@@ -1,5 +1,8 @@
 package com.jiajiaohello;
 
+import com.aliyun.openservices.oss.OSSClient;
+import com.aliyun.openservices.oss.model.ObjectMetadata;
+import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.core.IpData;
 import junit.framework.Assert;
@@ -16,6 +19,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 import redis.clients.jedis.Jedis;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -67,5 +74,34 @@ public class AppTests {
         Assert.assertEquals(redisTemplate.opsForValue().get(key), 1);
         Thread.sleep(DateUtils.MILLIS_PER_SECOND * 2);
         Assert.assertNull(redisTemplate.opsForValue().get(key));
+    }
+
+    @Test
+    public void testOSS() throws FileNotFoundException {
+        String bucketName = "static-jjh";
+        String key = "bohan.png";
+        String filePath = "/Users/bohan/Desktop/bohan.png";
+        putObject(bucketName, key, filePath);
+    }
+
+    public void putObject(String bucketName, String key, String filePath) throws FileNotFoundException {
+
+        // 初始化OSSClient
+        OSSClient client = new OSSClient("http://oss-cn-beijing.aliyuncs.com", "xERQO6Ysp6tySMNn", "uUXpdc3A20VhcDHDW5PLS3p2rcYpGD");
+
+        // 获取指定文件的输入流
+        File file = new File(filePath);
+        InputStream content = new FileInputStream(file);
+
+        // 创建上传Object的Metadata
+        ObjectMetadata meta = new ObjectMetadata();
+
+        // 必须设置ContentLength
+        meta.setContentLength(file.length());
+
+        // 上传Object.
+        PutObjectResult result = client.putObject(bucketName, key, content, meta);
+        // 打印ETag
+        System.out.println(result.getETag());
     }
 }

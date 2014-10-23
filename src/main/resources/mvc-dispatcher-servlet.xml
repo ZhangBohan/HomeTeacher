@@ -115,4 +115,10 @@
         <property name="keySerializer" ref="stringRedisSerializer" />
         <property name="hashKeySerializer" ref="stringRedisSerializer" />
     </bean>
+
+    <bean id="ossClient" class="com.aliyun.openservices.oss.OSSClient">
+        <constructor-arg name="endpoint" value="http://${ossClient.endpoint.domain}" />
+        <constructor-arg name="accessKeyId" value="${ossClient.accessKeyId}" />
+        <constructor-arg name="accessKeySecret" value="${ossClient.accessKeySecret}" />
+    </bean>
 </beans>
