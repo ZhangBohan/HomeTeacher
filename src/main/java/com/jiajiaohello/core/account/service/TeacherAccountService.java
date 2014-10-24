@@ -1,6 +1,7 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.TeacherAccount;
+import com.jiajiaohello.core.teacher.dto.EditForm;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -13,5 +14,5 @@ import java.io.IOException;
 public interface TeacherAccountService {
     TeacherAccount get(String username);
 
-    void update(TeacherAccount teacherAccount, MultipartFile avatarFile) throws IOException;
+    void update(EditForm editForm) throws IOException;
 }

@@ -57,7 +57,7 @@
                     authentication-failure-url="/auth/login/teacher?error=true"
                     login-processing-url="/teacher/j_spring_security_check"
                 />
-        <logout logout-url="/teacher/j_spring_security_logout" logout-success-url="/pages/teacher" delete-cookies="JSESSIONID"/>
+        <logout logout-url="/teacher/j_spring_security_logout" logout-success-url="/" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />
     </http>
 

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,7 +27,6 @@ public class TeacherInfo implements Serializable{
 
     private String school;
     @NotBlank
-    @Column(columnDefinition = "TEXT")
     private String description;
 
     private Boolean completed;
@@ -36,7 +36,7 @@ public class TeacherInfo implements Serializable{
     private Date updatedAt;
 
     public void init() {
-        this.completed = Boolean.FALSE;
+        this.completed = Boolean.TRUE;
         this.audited = Boolean.FALSE;
         this.createdAt = CommonHelper.now();
         this.updatedAt = CommonHelper.now();

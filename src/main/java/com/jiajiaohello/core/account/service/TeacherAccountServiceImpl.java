@@ -5,6 +5,9 @@ import com.aliyun.openservices.oss.model.ObjectMetadata;
 import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.jiajiaohello.core.account.dao.TeacherAccountDao;
 import com.jiajiaohello.core.account.model.TeacherAccount;
+import com.jiajiaohello.core.account.model.TeacherInfo;
+import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.core.CommonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,10 +43,19 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     }
 
     @Override
-    public void update(TeacherAccount teacherAccount, MultipartFile avatarFile) throws IOException {
-        TeacherAccount account = get(teacherAccount.getUsername());
+    public void update(EditForm editForm) throws IOException {
+        TeacherAccount account = get(editForm.getUsername());
+        if(account.getInfo() == null) {
+            TeacherInfo teacherInfo = new TeacherInfo();
+            teacherInfo.init();
+            account.setInfo(teacherInfo);
+        }
 
-        if (avatarFile != null) {
+        account.setName(editForm.getName());
+        account.getInfo().setDescription(editForm.getDescription());
+
+        MultipartFile avatarFile = editForm.getAvatarFile();
+        if (avatarFile != null && avatarFile.getSize() > 0) {
             // 获取指定文件的输入流
 
             // 创建上传Object的Metadata

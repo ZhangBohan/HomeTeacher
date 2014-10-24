@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,6 +90,11 @@
 
 <!-- Main content -->
 <section class="content">
+    <c:if test="${not empty message}">
+        <div class="alert alert-${message.type}">
+                ${message.message}
+        </div>
+    </c:if>
 <div class="row">
 <!-- right column -->
 <div>
@@ -107,7 +113,7 @@
                     </div>
                     <div class="form-group">
                         <label>描述</label>
-                        <textarea name="info.description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
+                        <textarea name="description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
                     </div>
             </div><!-- /.box-body -->
             <div class="box-footer">

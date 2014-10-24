@@ -30,7 +30,6 @@ public class Account implements UserDetails {
     private String password;
     private Boolean disabled = false;
     private String avatar;
-    @NotBlank
     private String name;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Area> areas;

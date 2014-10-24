@@ -22,6 +22,9 @@ public class TeacherAccountDaoImpl implements TeacherAccountDao {
     @Override
     @Transactional
     public void saveOrUpdate(TeacherAccount account) {
+        if(account.getInfo() != null) {
+            hibernateTemplate.saveOrUpdate(account.getInfo());
+        }
         hibernateTemplate.saveOrUpdate(account);
     }
 

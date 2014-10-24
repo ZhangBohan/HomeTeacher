@@ -42,7 +42,7 @@
                 <input type="password" name="password" class="form-control" placeholder="密码" value="123456"/>
             </div>
             <div class="form-group">
-                <input type="checkbox" name="remember_me"/> 记住我
+                <input type="checkbox" name="_spring_security_remember_me" checked /> 记住我
             </div>
         </div>
         <div class="footer">

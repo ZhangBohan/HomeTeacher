@@ -79,7 +79,7 @@ public class AppTests {
     @Test
     public void testOSS() throws FileNotFoundException {
         String bucketName = "static-jjh";
-        String key = "bohan.png";
+        String key = "bohan3.png";
         String filePath = "/Users/bohan/Desktop/bohan.png";
         putObject(bucketName, key, filePath);
     }
@@ -98,6 +98,8 @@ public class AppTests {
 
         // 必须设置ContentLength
         meta.setContentLength(file.length());
+        meta.setContentType("image/png");
+        meta.setContentDisposition(String.format("inline; filename=\"%s\"", key));
 
         // 上传Object.
         PutObjectResult result = client.putObject(bucketName, key, content, meta);
