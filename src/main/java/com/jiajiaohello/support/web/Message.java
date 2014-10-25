@@ -5,11 +5,6 @@ package com.jiajiaohello.support.web;
  */
 public class Message {
     /**
-     * Name of the flash attribute.
-     */
-	public static final String MESSAGE_ATTRIBUTE = "message";
-
-    /**
      * The type of the message to be displayed. The type is used to show message in a different style.
      */
 	public static enum Type {

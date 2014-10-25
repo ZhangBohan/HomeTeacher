@@ -18,8 +18,11 @@ public class EditForm {
     private String name;
 
     @NotBlank
-    @Size(min = 10, message = "描述长短！")
+    @Size(min = 10, message = "描述长短")
     private String description;
+
+    @Size(min = 1, message = "请正确输入教育信息")
+    private String school;
 
     private MultipartFile avatarFile;
 
@@ -53,5 +56,13 @@ public class EditForm {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 }

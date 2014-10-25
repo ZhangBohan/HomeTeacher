@@ -1,4 +1,4 @@
-package com.jiajiaohello.support.oss;
+package com.jiajiaohello.support.core;
 
 import com.aliyun.openservices.ClientException;
 import com.aliyun.openservices.ServiceException;

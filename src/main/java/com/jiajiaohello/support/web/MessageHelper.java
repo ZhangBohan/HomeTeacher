@@ -3,7 +3,17 @@ package com.jiajiaohello.support.web;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class MessageHelper {
+
+    /**
+     * Name of the flash attribute.
+     */
+    public static final String MESSAGES_ATTRIBUTE = "message";
+
+    private List<Message> messages = new ArrayList<>();
 
     private MessageHelper() {
 
@@ -26,7 +36,7 @@ public final class MessageHelper {
     }
 
     private static void addAttribute(RedirectAttributes ra, String message, Message.Type type, Object... args) {
-        ra.addFlashAttribute(Message.MESSAGE_ATTRIBUTE, new Message(message, type, args));
+        ra.addFlashAttribute(MESSAGES_ATTRIBUTE, new Message(message, type, args));
     }
 
     public static void addSuccessAttribute(Model model, String message, Object... args) {
@@ -46,6 +56,6 @@ public final class MessageHelper {
     }
 
     private static void addAttribute(Model model, String message, Message.Type type, Object... args) {
-        model.addAttribute(Message.MESSAGE_ATTRIBUTE, new Message(message, type, args));
+        model.addAttribute(MESSAGES_ATTRIBUTE, new Message(message, type, args));
     }
 }

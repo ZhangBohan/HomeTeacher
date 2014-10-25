@@ -115,6 +115,10 @@
                         <label>描述</label>
                         <textarea name="description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label>教育信息</label>
+                        <input type="text" name="school" class="form-control" placeholder="请输入教育信息" value="${teacherAccount.info.school}"/>
+                    </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <input type="hidden" name="username" value="${teacherAccount.username}">

@@ -9,6 +9,8 @@ import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.core.CommonHelper;
+import com.jiajiaohello.support.core.OSSService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +29,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     @Autowired
     private TeacherAccountDao teacherAccountDao;
     @Autowired
-    private OSSClient ossClient;
+    private OSSService ossService;
 
     @Override
     @Transactional
@@ -53,25 +55,11 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
         account.setName(editForm.getName());
         account.getInfo().setDescription(editForm.getDescription());
+        account.getInfo().setSchool(editForm.getSchool());
 
-        MultipartFile avatarFile = editForm.getAvatarFile();
-        if (avatarFile != null && avatarFile.getSize() > 0) {
-            // 获取指定文件的输入流
-
-            // 创建上传Object的Metadata
-            ObjectMetadata meta = new ObjectMetadata();
-
-            // 必须设置ContentLength
-            meta.setContentLength(avatarFile.getSize());
-            meta.setContentType(avatarFile.getContentType());
-
-            String fileName = avatarFile.getOriginalFilename();
-            // 上传Object.
-            PutObjectResult result = ossClient.putObject(CommonHelper.OSS_DEFAULT_BUCKET_NAME, fileName,
-                    avatarFile.getInputStream(), meta);
-            String avatarUrl = String.format("http://%s.oss-cn-beijing.aliyuncs.com/%s",
-                    CommonHelper.OSS_DEFAULT_BUCKET_NAME, fileName);
-            account.setAvatar(avatarUrl);
+        String avatar = ossService.upload(editForm.getAvatarFile());
+        if(StringUtils.isNotBlank(avatar)) {
+            account.setAvatar(avatar);
         }
 
         teacherAccountDao.saveOrUpdate(account);
