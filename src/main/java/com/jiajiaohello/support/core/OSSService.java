@@ -1,6 +1,8 @@
 package com.jiajiaohello.support.core;
 
 import com.aliyun.openservices.oss.OSSClient;
+import com.aliyun.openservices.oss.model.OSSObjectSummary;
+import com.aliyun.openservices.oss.model.ObjectListing;
 import com.aliyun.openservices.oss.model.ObjectMetadata;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,18 @@ public class OSSService {
     @Autowired
     private OSSClient ossClient;
 
-    public String upload(MultipartFile multipartFile, String fileName) throws IOException {
+    /**
+     * 上传文件
+     *
+     * @param multipartFile 文件
+     * @param ossBucket 目录
+     * @param fileName 文件名，无需扩展名
+     * @return 线上URL
+     * @throws IOException
+     */
+    public String upload(MultipartFile multipartFile, OSSBucket ossBucket, String fileName) throws IOException {
         if (multipartFile != null && multipartFile.getSize() > 0) {
-
+            fileName += "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
             // 创建上传Object的Metadata
             ObjectMetadata meta = new ObjectMetadata();
 
@@ -31,16 +42,16 @@ public class OSSService {
             meta.setContentType(multipartFile.getContentType());
 
             // 上传Object.
-            ossClient.putObject(CommonHelper.OSS_DEFAULT_BUCKET_NAME, fileName,
+            ossClient.putObject(ossBucket.getName(), fileName,
                     multipartFile.getInputStream(), meta);
             return String.format("http://%s.oss-cn-beijing.aliyuncs.com/%s",
-                    CommonHelper.OSS_DEFAULT_BUCKET_NAME, fileName);
+                    ossBucket.getName(), fileName);
         }
         return null;
     }
 
-    public String upload(MultipartFile multipartFile) throws IOException {
-        String fileName = UUID.randomUUID().toString() + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-        return upload(multipartFile, fileName);
+    public String upload(MultipartFile multipartFile, OSSBucket ossBucket) throws IOException {
+        String fileName = UUID.randomUUID().toString();
+        return upload(multipartFile, ossBucket, fileName);
     }
 }

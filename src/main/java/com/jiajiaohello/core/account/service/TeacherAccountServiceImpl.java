@@ -1,19 +1,14 @@
 package com.jiajiaohello.core.account.service;
 
-import com.aliyun.openservices.oss.OSSClient;
-import com.aliyun.openservices.oss.model.ObjectMetadata;
-import com.aliyun.openservices.oss.model.PutObjectResult;
 import com.jiajiaohello.core.account.dao.TeacherAccountDao;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
-import com.jiajiaohello.support.auth.AuthHelper;
-import com.jiajiaohello.support.core.CommonHelper;
+import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -57,7 +52,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         account.getInfo().setDescription(editForm.getDescription());
         account.getInfo().setSchool(editForm.getSchool());
 
-        String avatar = ossService.upload(editForm.getAvatarFile());
+        String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
         if(StringUtils.isNotBlank(avatar)) {
             account.setAvatar(avatar);
         }

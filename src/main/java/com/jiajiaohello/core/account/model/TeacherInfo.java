@@ -1,15 +1,17 @@
 package com.jiajiaohello.core.account.model;
 
+import com.jiajiaohello.core.info.Course;
+import com.jiajiaohello.core.info.Grade;
+import com.jiajiaohello.core.info.Stage;
 import com.jiajiaohello.support.core.CommonHelper;
+import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.context.annotation.Lazy;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: bohan
@@ -28,7 +30,9 @@ public class TeacherInfo implements Serializable{
     private String school;
     @NotBlank
     private String description;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @OrderColumn
+    List<Course> courses;
     private Boolean completed;
     private Boolean audited;
 
@@ -42,12 +46,54 @@ public class TeacherInfo implements Serializable{
         this.updatedAt = CommonHelper.now();
     }
 
+    @Override
+    public String toString() {
+        return "TeacherInfo{" +
+                "id=" + id +
+                ", school='" + school + '\'' +
+                ", description='" + description + '\'' +
+                ", courses=" + courses +
+                ", completed=" + completed +
+                ", audited=" + audited +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public Boolean getCompleted() {
@@ -80,21 +126,5 @@ public class TeacherInfo implements Serializable{
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getSchool() {
-        return school;
-    }
-
-    public void setSchool(String school) {
-        this.school = school;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

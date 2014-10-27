@@ -1,5 +1,14 @@
 package com.jiajiaohello.core.info;
 
+/**
+ *
+ * 阶段（小学、中学、高中、大学、其它）
+ *
+ * User: bohan
+ * Date: 10/27/14
+ * Time: 6:09 PM
+ */
+
 import com.jiajiaohello.support.core.CommonHelper;
 
 import javax.persistence.Entity;
@@ -9,22 +18,15 @@ import javax.persistence.ManyToMany;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 年级
- *
- * User: bohan
- * Date: 9/24/14
- * Time: 11:06 PM
- */
 @Entity
-public class Grade {
+public class Stage {
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
     private String description;
     @ManyToMany
-    private List<Course> courses;
+    private List<Grade> grades;
     private Date createdAt;
     private Date updatedAt;
 
@@ -35,11 +37,11 @@ public class Grade {
 
     @Override
     public String toString() {
-        return "Grade{" +
+        return "Stage{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", courses=" + courses +
+                ", grades=" + grades +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -69,6 +71,14 @@ public class Grade {
         this.description = description;
     }
 
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -83,13 +93,5 @@ public class Grade {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public List<Course> getCourses() {
-        return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 }
