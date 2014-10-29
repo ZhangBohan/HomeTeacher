@@ -136,6 +136,28 @@
                         <span class="text-light-blue">什么时间方便授课（例如：周六周日全天等）。</span>
                         <textarea name="freeTime" class="form-control" rows="3" placeholder="授课时间">${teacherAccount.info.freeTime}</textarea>
                     </div>
+                    <div class="form-group">
+                        <label>身份认证信息</label>
+                        <input type="file" name="identityFile" class="btn">
+                        <c:if test="${not empty teacherAccount.info.identityUrl}">
+                            <p class="text-success">已填加身份认证信息</p>
+                            <a href="${teacherAccount.info.identityUrl}" target="_blank">点击查看</a>
+                        </c:if>
+                        <c:if test="${empty teacherAccount.info.identityUrl}">
+                            <p class="text-warning">未填加身份认证信息</p>
+                        </c:if>
+                    </div>
+                <div class="form-group">
+                    <label>学历认证信息</label>
+                    <input type="file" name="educationFile" class="btn">
+                    <c:if test="${not empty teacherAccount.info.educationUrl}">
+                        <p class="text-success">已填加学历认证信息</p>
+                        <a href="${teacherAccount.info.educationUrl}" target="_blank">点击查看</a>
+                    </c:if>
+                    <c:if test="${empty teacherAccount.info.educationUrl}">
+                        <p class="text-warning">未填加学历认证信息</p>
+                    </c:if>
+                </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <input type="hidden" name="username" value="${teacherAccount.username}">
