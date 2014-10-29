@@ -33,6 +33,10 @@ public class TeacherInfo implements Serializable{
     @ManyToMany(fetch = FetchType.EAGER)
     @OrderColumn
     List<Course> courses;
+
+    private String identityUrl;
+    private String educationUrl;
+
     private Boolean completed;
     private Boolean audited;
 
@@ -126,5 +130,21 @@ public class TeacherInfo implements Serializable{
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getIdentityUrl() {
+        return identityUrl;
+    }
+
+    public void setIdentityUrl(String identityUrl) {
+        this.identityUrl = identityUrl;
+    }
+
+    public String getEducationUrl() {
+        return educationUrl;
+    }
+
+    public void setEducationUrl(String educationUrl) {
+        this.educationUrl = educationUrl;
     }
 }

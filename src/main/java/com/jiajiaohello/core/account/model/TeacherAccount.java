@@ -18,23 +18,14 @@ import java.util.List;
 public class TeacherAccount extends Account {
     private static final long serialVersionUID = -1112204397272052960L;
 
-    static final String DEFAULT_ROLE = "ROLE_TEACHER";
-
     @OneToOne
     private TeacherInfo info;
-
-    static List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
 
     public TeacherAccount() {
     }
 
     public TeacherAccount(String username) {
         super(username);
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
     }
 
     public TeacherInfo getInfo() {

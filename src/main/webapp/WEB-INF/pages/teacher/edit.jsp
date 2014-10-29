@@ -109,14 +109,17 @@
                     <!-- text input -->
                     <div class="form-group">
                         <label>名称</label>
+                        <span class="text-light-blue">在网站中显示的名称</span>
                         <input type="text" name="name" class="form-control" placeholder="请输入名称" value="${teacherAccount.name}"/>
                     </div>
                     <div class="form-group">
                         <label>描述</label>
-                        <textarea name="description" class="form-control" rows="3" placeholder="请输入您的自我介绍，授课时间等">${teacherAccount.info.description}</textarea>
+                        <span class="text-light-blue">写一段自我介绍吧，一个好的介绍可以直接打动别人。</span>
+                        <textarea name="description" class="form-control" rows="3" placeholder="自我介绍">${teacherAccount.info.description}</textarea>
                     </div>
                     <div class="form-group">
                         <label>教育信息</label>
+                        <span class="text-light-blue">如果是在校大学生请写所上的学校，如果是老师请写任教学校。</span>
                         <input type="text" name="school" class="form-control" placeholder="请输入教育信息" value="${teacherAccount.info.school}"/>
                     </div>
             </div><!-- /.box-body -->

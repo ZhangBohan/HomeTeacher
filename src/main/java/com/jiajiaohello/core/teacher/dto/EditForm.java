@@ -25,6 +25,8 @@ public class EditForm {
     private String school;
 
     private MultipartFile avatarFile;
+    private MultipartFile identityFile;
+    private MultipartFile educationFile;
 
     public String getName() {
         return name;
@@ -64,5 +66,21 @@ public class EditForm {
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public MultipartFile getIdentityFile() {
+        return identityFile;
+    }
+
+    public void setIdentityFile(MultipartFile identityFile) {
+        this.identityFile = identityFile;
+    }
+
+    public MultipartFile getEducationFile() {
+        return educationFile;
+    }
+
+    public void setEducationFile(MultipartFile educationFile) {
+        this.educationFile = educationFile;
     }
 }

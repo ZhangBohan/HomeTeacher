@@ -38,12 +38,12 @@ public class TeacherController {
     @ResponseBody
     public TeacherAccount index() throws TeacherInfoNotFillException {
         verify();
-        return AuthHelper.getTeacherAccount();
+        return teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String getEdit(Model model) {
-        TeacherAccount teacherAccount = teacherAccountService.get(AuthHelper.getTeacherAccount().getUsername());
+        TeacherAccount teacherAccount = teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
         model.addAttribute("teacherAccount", teacherAccount);
         return "teacher/edit";
     }
@@ -62,7 +62,7 @@ public class TeacherController {
     }
 
     public void verify() throws TeacherInfoNotFillException {
-        TeacherAccount teacherAccount = AuthHelper.getTeacherAccount();
+        TeacherAccount teacherAccount = teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
         TeacherInfo info = teacherAccount.getInfo();
         if(info == null || !info.getCompleted()) {
             throw new TeacherInfoNotFillException();

@@ -1,9 +1,8 @@
 package com.jiajiaohello.support.auth;
 
 import com.jiajiaohello.core.account.model.Account;
-import com.jiajiaohello.core.account.model.ManagerAccount;
-import com.jiajiaohello.core.account.model.TeacherAccount;
-import com.jiajiaohello.core.account.model.UserAccount;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -35,27 +34,16 @@ public class AuthHelper {
         return null;
     }
 
-    public static UserAccount getUserAccount() {
+    public static AuthUser getUserAccount() {
         Object principal = getPrincipal();
         if (principal instanceof UserDetails) {
-            return ((UserAccount) principal);
+            return ((AuthUser) principal);
         }
         return null;
     }
 
-    public static TeacherAccount getTeacherAccount() {
-        Object principal = getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((TeacherAccount) principal);
-        }
-        return null;
-    }
-
-    public static ManagerAccount getManagerAccount() {
-        Object principal = getPrincipal();
-        if (principal instanceof UserDetails) {
-            return ((ManagerAccount) principal);
-        }
-        return null;
+    public static void reloadAccount(Account account) {
+        Authentication authentication = new UsernamePasswordAuthenticationToken(account, account.getPassword(), account.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

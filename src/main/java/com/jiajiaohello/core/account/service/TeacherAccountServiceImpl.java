@@ -4,6 +4,7 @@ import com.jiajiaohello.core.account.dao.TeacherAccountDao;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
 import org.apache.commons.lang3.StringUtils;
@@ -56,7 +57,15 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         if(StringUtils.isNotBlank(avatar)) {
             account.setAvatar(avatar);
         }
-
+        String identityUrl = ossService.upload(editForm.getIdentityFile(), OSSBucket.avatar, "identity_" + account.getId());
+        if(StringUtils.isNotBlank(identityUrl)) {
+            account.getInfo().setIdentityUrl(identityUrl);
+        }
+        String educationUrl = ossService.upload(editForm.getEducationFile(), OSSBucket.avatar, "education_" + account.getId());
+        if(StringUtils.isNotBlank(educationUrl)) {
+            account.getInfo().setEducationUrl(educationUrl);
+        }
+        AuthHelper.reloadAccount(account);
         teacherAccountDao.saveOrUpdate(account);
     }
 }
