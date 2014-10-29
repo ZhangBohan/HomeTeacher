@@ -54,6 +54,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         account.getInfo().setDescription(editForm.getDescription());
         account.getInfo().setSchool(editForm.getSchool());
         account.getInfo().setFreeTime(editForm.getFreeTime());
+        account.getInfo().setIdentity(editForm.getIdentity());
 
         String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
         if(StringUtils.isNotBlank(avatar)) {

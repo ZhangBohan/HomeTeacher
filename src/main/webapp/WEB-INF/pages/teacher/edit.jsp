@@ -118,6 +118,15 @@
                         <textarea name="description" class="form-control" rows="3" placeholder="自我介绍">${teacherAccount.info.description}</textarea>
                     </div>
                     <div class="form-group">
+                        <label>您是一名：</label> <br>
+                        <input type="radio" name="identity" value="1"
+                               <c:if test="${teacherAccount.info.identity == 1}">checked</c:if>>在职教师&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="identity" value="2"
+                               <c:if test="${teacherAccount.info.identity == 2}">checked</c:if>>退休教师&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="identity" value="3"
+                               <c:if test="${teacherAccount.info.identity == 3}">checked</c:if>>大学生&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="form-group">
                         <label>教育信息</label>
                         <span class="text-light-blue">如果是在校大学生请写所上的学校，如果是老师请写任教学校。</span>
                         <input type="text" name="school" class="form-control" placeholder="请输入教育信息" value="${teacherAccount.info.school}"/>

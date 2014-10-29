@@ -22,7 +22,7 @@ public class TeacherInfo implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;
-
+    private Integer identity = IdentityStatus.student.getId();
     private String school;
     private String description;
     private String freeTime;
@@ -50,9 +50,13 @@ public class TeacherInfo implements Serializable{
     public String toString() {
         return "TeacherInfo{" +
                 "id=" + id +
+                ", identity=" + identity +
                 ", school='" + school + '\'' +
                 ", description='" + description + '\'' +
+                ", freeTime='" + freeTime + '\'' +
                 ", courses=" + courses +
+                ", identityUrl='" + identityUrl + '\'' +
+                ", educationUrl='" + educationUrl + '\'' +
                 ", completed=" + completed +
                 ", audited=" + audited +
                 ", createdAt=" + createdAt +
@@ -150,5 +154,13 @@ public class TeacherInfo implements Serializable{
 
     public void setFreeTime(String freeTime) {
         this.freeTime = freeTime;
+    }
+
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
     }
 }

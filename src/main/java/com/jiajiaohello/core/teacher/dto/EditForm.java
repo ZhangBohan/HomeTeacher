@@ -3,6 +3,7 @@ package com.jiajiaohello.core.teacher.dto;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,6 +26,8 @@ public class EditForm {
     private String school;
     @Size(min = 10, message = "授课时间长度在10到255字符之间")
     private String freeTime;
+    @NotNull(message = "请选择您的身份")
+    private Integer identity;
 
     private MultipartFile avatarFile;
     private MultipartFile identityFile;
@@ -92,5 +95,13 @@ public class EditForm {
 
     public void setFreeTime(String freeTime) {
         this.freeTime = freeTime;
+    }
+
+    public Integer getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Integer identity) {
+        this.identity = identity;
     }
 }
