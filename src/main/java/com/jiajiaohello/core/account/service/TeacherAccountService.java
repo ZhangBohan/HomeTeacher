@@ -2,6 +2,7 @@ package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.support.auth.RegisterForm;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -15,4 +16,6 @@ public interface TeacherAccountService {
     TeacherAccount get(String username);
 
     void update(EditForm editForm) throws IOException;
+
+    void create(RegisterForm registerForm);
 }

@@ -5,15 +5,18 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
+import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 /**
@@ -70,5 +73,19 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         }
         AuthHelper.reloadAccount(account, TeacherUserDetailService.authorities);
         teacherAccountDao.saveOrUpdate(account);
+    }
+
+    @Override
+    public void create(RegisterForm registerForm) {
+        //TODO 把放入Redis的验证码拿出来验证
+
+        TeacherAccount teacherAccount = new TeacherAccount();
+        try {
+            BeanUtils.copyProperties(teacherAccount, registerForm);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        teacherAccountDao.saveOrUpdate(teacherAccount);
     }
 }
