@@ -1,4 +1,4 @@
-package com.jiajiaohello.core.info;
+package com.jiajiaohello.core.info.model;
 
 import com.jiajiaohello.support.core.CommonHelper;
 

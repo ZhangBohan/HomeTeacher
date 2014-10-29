@@ -26,7 +26,7 @@ public class TeacherUserDetailService implements UserDetailsService {
     private TeacherAccountService teacherAccountService;
 
     static final String DEFAULT_ROLE = "ROLE_TEACHER";
-    static List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
+    public static List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
 
     @Override
     public AuthUser loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -18,11 +18,13 @@ public class EditForm {
     private String name;
 
     @NotBlank
-    @Size(min = 10, message = "描述长短")
+    @Size(min = 10, max = 255, message = "描述长度在10到255字符之间")
     private String description;
 
     @Size(min = 1, message = "请正确输入教育信息")
     private String school;
+    @Size(min = 10, message = "授课时间长度在10到255字符之间")
+    private String freeTime;
 
     private MultipartFile avatarFile;
     private MultipartFile identityFile;
@@ -82,5 +84,13 @@ public class EditForm {
 
     public void setEducationFile(MultipartFile educationFile) {
         this.educationFile = educationFile;
+    }
+
+    public String getFreeTime() {
+        return freeTime;
+    }
+
+    public void setFreeTime(String freeTime) {
+        this.freeTime = freeTime;
     }
 }

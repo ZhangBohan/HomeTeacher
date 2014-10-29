@@ -1,8 +1,8 @@
 package com.jiajiaohello.core.ticket;
 
 import com.jiajiaohello.core.account.model.UserAccount;
-import com.jiajiaohello.core.info.Course;
-import com.jiajiaohello.core.info.Grade;
+import com.jiajiaohello.core.info.model.Course;
+import com.jiajiaohello.core.info.model.Grade;
 import com.jiajiaohello.support.core.CommonHelper;
 
 import javax.persistence.*;

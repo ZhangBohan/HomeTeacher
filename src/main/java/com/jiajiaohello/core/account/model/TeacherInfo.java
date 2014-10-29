@@ -1,12 +1,8 @@
 package com.jiajiaohello.core.account.model;
 
-import com.jiajiaohello.core.info.Course;
-import com.jiajiaohello.core.info.Grade;
-import com.jiajiaohello.core.info.Stage;
+import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.support.core.CommonHelper;
-import org.hibernate.annotations.IndexColumn;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -28,9 +24,9 @@ public class TeacherInfo implements Serializable{
     private Integer id;
 
     private String school;
-    @NotBlank
     private String description;
-    @ManyToMany(fetch = FetchType.EAGER)
+    private String freeTime;
+    @ManyToMany
     @OrderColumn
     List<Course> courses;
 
@@ -146,5 +142,13 @@ public class TeacherInfo implements Serializable{
 
     public void setEducationUrl(String educationUrl) {
         this.educationUrl = educationUrl;
+    }
+
+    public String getFreeTime() {
+        return freeTime;
+    }
+
+    public void setFreeTime(String freeTime) {
+        this.freeTime = freeTime;
     }
 }

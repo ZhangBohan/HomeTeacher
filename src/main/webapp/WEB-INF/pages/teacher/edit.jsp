@@ -122,6 +122,11 @@
                         <span class="text-light-blue">如果是在校大学生请写所上的学校，如果是老师请写任教学校。</span>
                         <input type="text" name="school" class="form-control" placeholder="请输入教育信息" value="${teacherAccount.info.school}"/>
                     </div>
+                    <div class="form-group">
+                        <label>授课时间</label>
+                        <span class="text-light-blue">什么时间方便授课（例如：周六周日全天等）。</span>
+                        <textarea name="freeTime" class="form-control" rows="3" placeholder="授课时间">${teacherAccount.info.freeTime}</textarea>
+                    </div>
             </div><!-- /.box-body -->
             <div class="box-footer">
                 <input type="hidden" name="username" value="${teacherAccount.username}">

@@ -5,6 +5,7 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
+import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
 import org.apache.commons.lang3.StringUtils;
@@ -52,6 +53,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         account.setName(editForm.getName());
         account.getInfo().setDescription(editForm.getDescription());
         account.getInfo().setSchool(editForm.getSchool());
+        account.getInfo().setFreeTime(editForm.getFreeTime());
 
         String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
         if(StringUtils.isNotBlank(avatar)) {
@@ -65,7 +67,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         if(StringUtils.isNotBlank(educationUrl)) {
             account.getInfo().setEducationUrl(educationUrl);
         }
-        AuthHelper.reloadAccount(account);
+        AuthHelper.reloadAccount(account, TeacherUserDetailService.authorities);
         teacherAccountDao.saveOrUpdate(account);
     }
 }
