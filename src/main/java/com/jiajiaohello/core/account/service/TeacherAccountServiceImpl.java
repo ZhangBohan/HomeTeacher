@@ -5,6 +5,7 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
+import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.OSSBucket;
@@ -77,15 +78,14 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
     @Override
     public void create(RegisterForm registerForm) {
-        //TODO 把放入Redis的验证码拿出来验证
-
         TeacherAccount teacherAccount = new TeacherAccount();
         try {
             BeanUtils.copyProperties(teacherAccount, registerForm);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        teacherAccount.setUsername(registerForm.getPhone());
+        teacherAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
         teacherAccountDao.saveOrUpdate(teacherAccount);
     }
 }

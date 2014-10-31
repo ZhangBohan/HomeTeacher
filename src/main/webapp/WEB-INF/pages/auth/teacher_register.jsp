@@ -32,25 +32,28 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
-    <div class="header">教员登录 | <a class="header-link" href="/auth/login/teacher">用户点我登录</a></div>
-    <form action="/teacher/j_spring_security_check" method="post">
+    <div class="header">教员注册 | <a class="header-link" href="#">用户点我注册</a></div>
+    <form action="" method="post">
         <div class="body bg-gray">
             <div class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="用户名" value="bohan" />
+                <input type="text" name="phone" id="username" class="form-control" placeholder="手机号" value="18511870280" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="verifyCode" class="form-control" placeholder="验证码" />
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="密码" value="123456"/>
             </div>
             <div class="form-group">
-                <input type="checkbox" name="_spring_security_remember_me" checked /> 记住我
+                <input type="password" name="repeatPassword" class="form-control" placeholder="确认密码" value="123456"/>
             </div>
         </div>
         <div class="footer">
-            <button type="submit" class="btn bg-olive btn-block">登录</button>
+            <button type="submit" class="btn bg-olive btn-block">注册</button>
 
-            <p><a href="#">忘记密码</a></p>
-
-            <a href="/auth/register/teacher" class="text-center">注册</a>
+            <p>
+                已有账号？<a href="/auth/login/teacher" class="text-center">登录</a>
+            </p>
         </div>
     </form>
 </div>
@@ -60,6 +63,15 @@
 <script src="/public/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
-
+<script>
+    $(function () {
+        $("#username").blur(function () {
+            var phone = $("#username").val();
+            $.ajax('/auth/verify/' + phone).done(function (code) {
+                alert(code);
+            });
+        });
+    });
+</script>
 </body>
 </html>
