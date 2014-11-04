@@ -2,7 +2,6 @@ package com.jiajiaohello.core.ticket;
 
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.core.info.model.Course;
-import com.jiajiaohello.core.info.model.Grade;
 import com.jiajiaohello.support.core.CommonHelper;
 
 import javax.persistence.*;
@@ -25,8 +24,6 @@ public class ClassTicket implements Serializable {
     @ManyToOne
     private Course course;
     @ManyToOne
-    private Grade grade;
-    @ManyToOne
     private UserAccount userAccount;
     private Integer status = TicketStatus.open.getId();
     private Date createdAt;
@@ -43,7 +40,6 @@ public class ClassTicket implements Serializable {
                 "id=" + id +
                 ", description='" + description + '\'' +
                 ", course=" + course +
-                ", grade=" + grade +
                 ", userAccount=" + userAccount +
                 ", status=" + status +
                 ", createdAt=" + createdAt +
@@ -73,14 +69,6 @@ public class ClassTicket implements Serializable {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
     }
 
     public UserAccount getUserAccount() {

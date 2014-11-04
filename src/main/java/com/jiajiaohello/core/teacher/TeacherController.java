@@ -3,6 +3,8 @@ package com.jiajiaohello.core.teacher;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
+import com.jiajiaohello.core.info.model.Stage;
+import com.jiajiaohello.core.info.service.CourseService;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.exception.TeacherInfoNotFillException;
@@ -33,6 +35,8 @@ public class TeacherController {
 
     @Autowired
     private TeacherAccountService teacherAccountService;
+    @Autowired
+    private CourseService courseService;
 
     @RequestMapping
     public String index() throws TeacherInfoNotFillException {
@@ -58,6 +62,13 @@ public class TeacherController {
             MessageHelper.addSuccessAttribute(redirectAttributes, "更新成功！");
         }
         return "redirect:/teacher/edit";
+    }
+
+    @RequestMapping(value = "/courses", method = RequestMethod.GET)
+    public String getCourses(Model model) {
+        List<Stage> stages = courseService.getStages();
+        model.addAttribute("stages", stages);
+        return "teacher/course";
     }
 
     public void verify() throws TeacherInfoNotFillException {

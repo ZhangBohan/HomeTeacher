@@ -121,11 +121,11 @@
                     <div class="form-group">
                         <label>您是一名：</label> <br>
                         <input type="radio" name="identity" value="1"
-                               <c:if test="${teacherAccount.info.identity == 1}">checked</c:if>>在职教师&nbsp;&nbsp;&nbsp;&nbsp;
+                               <c:if test="${teacherAccount.info.identity == 1}">checked</c:if>>在职教员&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="identity" value="2"
-                               <c:if test="${teacherAccount.info.identity == 2}">checked</c:if>>退休教师&nbsp;&nbsp;&nbsp;&nbsp;
+                               <c:if test="${teacherAccount.info.identity == 2}">checked</c:if>>专职教员&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="radio" name="identity" value="3"
-                               <c:if test="${teacherAccount.info.identity == 3}">checked</c:if>>大学生&nbsp;&nbsp;&nbsp;&nbsp;
+                               <c:if test="${teacherAccount.info.identity == 3}">checked</c:if>>大学生教员&nbsp;&nbsp;&nbsp;&nbsp;
                     </div>
                     <div class="form-group">
                         <label>教育信息</label>

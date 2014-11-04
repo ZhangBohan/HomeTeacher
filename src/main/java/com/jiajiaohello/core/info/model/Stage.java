@@ -26,7 +26,7 @@ public class Stage {
     private String name;
     private String description;
     @ManyToMany
-    private List<Grade> grades;
+    List<Course> courses;
     private Date createdAt;
     private Date updatedAt;
 
@@ -41,7 +41,7 @@ public class Stage {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", grades=" + grades +
+                ", courses=" + courses +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -71,14 +71,6 @@ public class Stage {
         this.description = description;
     }
 
-    public List<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(List<Grade> grades) {
-        this.grades = grades;
-    }
-
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -93,5 +85,13 @@ public class Stage {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }
