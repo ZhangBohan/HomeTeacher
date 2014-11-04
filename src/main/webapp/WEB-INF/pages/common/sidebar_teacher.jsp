@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="left-side sidebar-offcanvas">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -18,13 +19,13 @@
         <!-- sidebar menu -->
         <ul class="sidebar-menu">
             <li>
-                <a href="/public/index.html">
+                <a href="/teacher" <c:if test="${param.activeMenu == 'index'}">class="menu-active" </c:if>>
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="../widgets.html">
-                    <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
+                <a href="/teacher/edit" <c:if test="${param.activeMenu == 'edit'}">class="menu-active" </c:if>>
+                    <i class="fa fa-th"></i> <span>个人资料</span>
                 </a>
             </li>
         </ul>

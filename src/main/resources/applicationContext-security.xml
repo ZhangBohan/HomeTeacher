@@ -50,12 +50,13 @@
 
     <http use-expressions="true" auto-config="true" pattern="/teacher/**" authentication-manager-ref="teacherAuthenticationManager">
         <intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')"/>
-        <form-login default-target-url="/"
+        <form-login default-target-url="/teacher"
                     login-page="/auth/login/teacher"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/auth/login/teacher?error=true"
                     login-processing-url="/teacher/j_spring_security_check"
+                    always-use-default-target="true"
                 />
         <logout logout-url="/teacher/j_spring_security_logout" logout-success-url="/" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />

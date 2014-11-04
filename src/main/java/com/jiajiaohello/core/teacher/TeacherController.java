@@ -35,10 +35,9 @@ public class TeacherController {
     private TeacherAccountService teacherAccountService;
 
     @RequestMapping
-    @ResponseBody
-    public TeacherAccount index() throws TeacherInfoNotFillException {
+    public String index() throws TeacherInfoNotFillException {
         verify();
-        return teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
+        return "teacher/index";
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)

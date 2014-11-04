@@ -67,3 +67,7 @@ footer p {
     width: 100px;
     height: 100px;
 }
+
+.menu-active {
+    background-color: #B2B3B3;
+}

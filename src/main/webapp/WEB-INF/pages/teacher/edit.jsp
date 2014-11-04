@@ -72,7 +72,9 @@
 </nav>
 </header>
 <div class="wrapper row-offcanvas row-offcanvas-left">
-    <jsp:include page="../common/sidebar_teacher.jsp" />
+    <jsp:include page="../common/sidebar_teacher.jsp" flush="true">
+        <jsp:param name="activeMenu" value="edit" />
+    </jsp:include>
 
 <!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">
@@ -82,9 +84,8 @@
         更新资料
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Forms</a></li>
-        <li class="active">General Elements</li>
+        <li><i class="fa fa-dashboard"></i>首页</li>
+        <li class="active"><i class="fa fa-th"></i>个人资料</li>
     </ol>
 </section>
 
