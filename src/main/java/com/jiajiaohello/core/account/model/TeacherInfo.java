@@ -22,7 +22,7 @@ public class TeacherInfo implements Serializable{
     @Id
     @GeneratedValue
     private Integer id;
-    private Integer identity = IdentityStatus.student.getId();
+    private Integer identity = IdentityStatus.collegeTeacher.getId();
     private String school;
     private String description;
     private String freeTime;

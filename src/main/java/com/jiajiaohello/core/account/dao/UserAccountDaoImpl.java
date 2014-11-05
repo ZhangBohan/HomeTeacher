@@ -35,6 +35,11 @@ public class UserAccountDaoImpl implements UserAccountDao {
     }
 
     @Override
+    public UserAccount get(Integer id) {
+        return hibernateTemplate.get(UserAccount.class, id);
+    }
+
+    @Override
     public List<UserAccount> list(UserAccount account) {
         return hibernateTemplate.findByExample(account);
     }

@@ -34,6 +34,11 @@ public class AccountDaoImpl<K extends Account> implements AccountDao<K> {
     }
 
     @Override
+    public K get(Integer id) {
+        return null;
+    }
+
+    @Override
     public List<K> list(K account) {
         return hibernateTemplate.findByExample(account);
     }

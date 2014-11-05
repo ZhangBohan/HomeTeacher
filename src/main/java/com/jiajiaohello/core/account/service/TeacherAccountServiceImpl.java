@@ -1,8 +1,11 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.dao.TeacherAccountDao;
+import com.jiajiaohello.core.account.model.IdentityStatus;
+import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
+import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.auth.PasswordEncoder;
@@ -14,11 +17,14 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Teacher: bohan
@@ -31,6 +37,8 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     private TeacherAccountDao teacherAccountDao;
     @Autowired
     private OSSService ossService;
+    @Autowired
+    private Jedis jedis;
 
     @Override
     @Transactional
@@ -43,6 +51,11 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         account.setUpdatedAt(new Date());
         teacherAccountDao.saveOrUpdate(account);
         return account;
+    }
+
+    @Override
+    public TeacherAccount get(Integer teacherId) {
+        return teacherAccountDao.get(teacherId);
     }
 
     @Override
@@ -87,5 +100,32 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         teacherAccount.setUsername(registerForm.getPhone());
         teacherAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
         teacherAccountDao.saveOrUpdate(teacherAccount);
+    }
+
+    @Override
+    public void updateCourses(Integer[] courseIds) {
+        TeacherAccount teacherAccount = teacherAccountDao.get(new TeacherAccount(AuthHelper.getUsername()));
+        List<Course> courses = new ArrayList<>();
+        for (Integer courseId : courseIds) {
+            Course course = new Course();
+            course.setId(courseId);
+            courses.add(course);
+        }
+        teacherAccount.getInfo().setCourses(courses);
+
+        teacherAccountDao.saveOrUpdate(teacherAccount);
+    }
+
+    @Override
+    public List<TeacherAccount> getRecommendTeacherAccounts(RecommendType recommendType, Integer start, Integer size) {
+        List<String> teacherIdStrings = jedis.lrange("recommend:teachers:" + recommendType, start, size);
+        List<TeacherAccount> list = new ArrayList<>();
+        for (String teacherIdString : teacherIdStrings) {
+            TeacherAccount teacherAccount = teacherAccountDao.get(Integer.parseInt(teacherIdString));
+            list.add(teacherAccount);
+        }
+
+
+        return list;
     }
 }

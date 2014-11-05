@@ -23,6 +23,10 @@ public class AuthHelper {
                 .getAuthentication().getPrincipal();
     }
 
+    public static String getUsername() {
+        return getUserDetails().getUsername();
+    }
+
     public static UserDetails getUserDetails() {
         Object principal = getPrincipal();
         if (principal instanceof UserDetails) {

@@ -71,6 +71,12 @@ public class TeacherController {
         return "teacher/course";
     }
 
+    @RequestMapping(value = "/courses", method = RequestMethod.POST)
+    public String postCourses(Integer[] courseIds) {
+        teacherAccountService.updateCourses(courseIds);
+        return "redirect:/teacher/courses";
+    }
+
     public void verify() throws TeacherInfoNotFillException {
         TeacherAccount teacherAccount = teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
         TeacherInfo info = teacherAccount.getInfo();

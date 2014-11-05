@@ -35,6 +35,11 @@ public class ManagerAccountDaoImpl implements ManagerAccountDao {
     }
 
     @Override
+    public ManagerAccount get(Integer id) {
+        return hibernateTemplate.get(ManagerAccount.class, id);
+    }
+
+    @Override
     public List<ManagerAccount> list(ManagerAccount account) {
         return hibernateTemplate.findByExample(account);
     }

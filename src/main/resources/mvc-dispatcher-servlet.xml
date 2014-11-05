@@ -105,6 +105,10 @@
         <property name="poolConfig" ref="jedisPoolConfig" />
     </bean>
 
+    <bean id="jedis" class="redis.clients.jedis.Jedis">
+        <constructor-arg name="host" value="localhost" />
+    </bean>
+
     <bean
             id="stringRedisSerializer"
             class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
@@ -115,6 +119,8 @@
         <property name="keySerializer" ref="stringRedisSerializer" />
         <property name="hashKeySerializer" ref="stringRedisSerializer" />
     </bean>
+
+
 
     <bean id="ossClient" class="com.aliyun.openservices.oss.OSSClient">
         <constructor-arg name="endpoint" value="http://${ossClient.endpoint.domain}" />

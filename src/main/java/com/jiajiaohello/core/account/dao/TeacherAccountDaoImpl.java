@@ -38,6 +38,11 @@ public class TeacherAccountDaoImpl implements TeacherAccountDao {
     }
 
     @Override
+    public TeacherAccount get(Integer id) {
+        return hibernateTemplate.get(TeacherAccount.class, id);
+    }
+
+    @Override
     public List<TeacherAccount> list(TeacherAccount account) {
         return hibernateTemplate.findByExample(account);
     }

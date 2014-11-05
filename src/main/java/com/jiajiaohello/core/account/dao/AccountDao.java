@@ -14,6 +14,8 @@ public interface AccountDao<T extends Account> {
 
     T get(T account);
 
+    T get(Integer id);
+
     List<T> list(T account);
 
     List<T> list(T account, int firstResult, int maxResult);
