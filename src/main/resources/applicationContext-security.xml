@@ -27,7 +27,7 @@
         </authentication-provider>
     </authentication-manager>
 
-    <authentication-manager id="mangerAuthenticationManager">
+    <authentication-manager id="managerAuthenticationManager">
         <authentication-provider user-service-ref="managerUserDetailsService">
             <password-encoder ref="encoder" />
         </authentication-provider>
@@ -63,16 +63,16 @@
         <remember-me key="jiajiaohello_teacher" user-service-ref="teacherUserDetailsService" />
     </http>
 
-    <http use-expressions="true" auto-config="true" pattern="/admin/**" authentication-manager-ref="mangerAuthenticationManager">
+    <http use-expressions="true" auto-config="true" pattern="/admin/**" authentication-manager-ref="managerAuthenticationManager">
         <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-        <form-login default-target-url="/teachers/index"
-                    login-page="/auth/admins/login"
+        <form-login default-target-url="/admin"
+                    login-page="/auth/login/admin"
                     username-parameter="username"
                     password-parameter="password"
-                    authentication-failure-url="/public/login.html?error=true"
+                    authentication-failure-url="/auth/login/admin?error=true"
                     login-processing-url="/admin/j_spring_security_check"
                 />
-        <logout logout-success-url="/auth/admin/login" delete-cookies="JSESSIONID"/>
+        <logout logout-success-url="/auth/login/admin" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_manager" user-service-ref="managerUserDetailsService" />
     </http>
 </beans:beans>

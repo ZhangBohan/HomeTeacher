@@ -1,9 +1,14 @@
 package com.jiajiaohello.support.auth;
 
+import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.web.MessageHelper;
+<<<<<<< HEAD
 import org.apache.commons.lang3.BooleanUtils;
+=======
+
+>>>>>>> aec19145d7ad9cfeab11c7ff66a2546351f2773a
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import redis.clients.jedis.Jedis;
 
 import javax.validation.Valid;
@@ -29,6 +35,8 @@ import javax.validation.Valid;
 public class AuthController {
     @Autowired
     private TeacherAccountService teacherAccountService;
+    @Autowired
+    private ManagerAccountService mannagerAccountService;
 
     Jedis jedis = new Jedis("localhost");
 
@@ -50,6 +58,16 @@ public class AuthController {
         model.addAttribute("form", form);
         return "auth/teacher_register";
     }
+    
+    @RequestMapping(value = "/login/admin", method = RequestMethod.GET)
+    public String adminLogin() {
+        return "auth/admin_login";
+    }
+
+    @RequestMapping(value = "/register/admin", method = RequestMethod.GET)
+    public String adminRegister() {
+        return "auth/admin_register";
+    }
 
     @RequestMapping(value = "/register/teacher", method = RequestMethod.POST)
     public String postTeacherRegister(@Valid RegisterForm form, BindingResult result, Model model) {
@@ -70,7 +88,24 @@ public class AuthController {
         teacherAccountService.create(form);
         return "redirect:/auth/login/teacher";
     }
+    @RequestMapping(value = "/register/admin", method = RequestMethod.POST)
+    public String postAdminRegister(@Valid RegisterForm form, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            for (ObjectError objectError : result.getAllErrors()) {
+                MessageHelper.addErrorAttribute(model, objectError.getDefaultMessage());
+            }
+            return "auth/admin_register";
+        }
 
+        String key = "verifies:" + form.getPhone();
+        if(!form.getVerifyCode().equals(jedis.get(key))) {
+            MessageHelper.addErrorAttribute(model, "验证码错误");
+            return "auth/admin_register";
+        }
+
+        mannagerAccountService.create(form);
+        return "redirect:/auth/login/admin";
+    }
     @RequestMapping("/verify/{phone}")
     @ResponseBody
     public String verifyCode(@PathVariable("phone") String phone) {
