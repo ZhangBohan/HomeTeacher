@@ -1,5 +1,6 @@
 package com.jiajiaohello;
 
+import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.support.core.IpData;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.jiajiaohello.support.core.CommonHelper;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Controller
@@ -25,6 +27,10 @@ public class MainController {
     @RequestMapping
     public String index(Model model) {
         //TODO set recommend teachers list
+        for (RecommendType recommendType : RecommendType.class.getEnumConstants()) {
+            List<TeacherAccount> list = teacherAccountService.getRecommendTeacherAccounts(recommendType, 0, 10);
+        }
+
         return "index";
     }
 

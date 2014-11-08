@@ -13,9 +13,11 @@ import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
+import com.jiajiaohello.support.core.RedisKeys;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.jedis.JedisUtils;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
@@ -118,13 +120,12 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
     @Override
     public List<TeacherAccount> getRecommendTeacherAccounts(RecommendType recommendType, Integer start, Integer size) {
-        List<String> teacherIdStrings = jedis.lrange("recommend:teachers:" + recommendType, start, size);
+        List<String> teacherIdStrings = jedis.lrange(RedisKeys.recommendTeachers.getKey(recommendType), start, size);
         List<TeacherAccount> list = new ArrayList<>();
         for (String teacherIdString : teacherIdStrings) {
             TeacherAccount teacherAccount = teacherAccountDao.get(Integer.parseInt(teacherIdString));
             list.add(teacherAccount);
         }
-
 
         return list;
     }
