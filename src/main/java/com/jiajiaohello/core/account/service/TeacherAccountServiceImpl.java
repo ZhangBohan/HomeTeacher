@@ -1,7 +1,6 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.dao.TeacherAccountDao;
-import com.jiajiaohello.core.account.model.IdentityStatus;
 import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
@@ -11,19 +10,18 @@ import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
+import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
 import com.jiajiaohello.support.core.RedisKeys;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.jedis.JedisUtils;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.Jedis;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -99,6 +97,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        teacherAccount.setAvatar(CommonHelper.DEFAULT_AVATAR_URL);
         teacherAccount.setUsername(registerForm.getPhone());
         teacherAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
         teacherAccountDao.saveOrUpdate(teacherAccount);

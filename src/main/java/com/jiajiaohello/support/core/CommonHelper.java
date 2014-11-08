@@ -31,6 +31,8 @@ public class CommonHelper {
 
     public static final String OSS_DEFAULT_BUCKET_NAME = "static-jjh";
 
+    public static final String DEFAULT_AVATAR_URL = "http://jjh-avatar.oss-cn-beijing.aliyuncs.com/default.png";
+
     /**
      * <p>淘宝IP地址库</p>
      *

@@ -47,7 +47,8 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register/teacher", method = RequestMethod.GET)
-    public String teacherRegister() {
+    public String teacherRegister(RegisterForm form, Model model) {
+        model.addAttribute("form", form);
         return "auth/teacher_register";
     }
     
@@ -63,6 +64,7 @@ public class AuthController {
 
     @RequestMapping(value = "/register/teacher", method = RequestMethod.POST)
     public String postTeacherRegister(@Valid RegisterForm form, BindingResult result, Model model) {
+        model.addAttribute("form", form);
         if(result.hasErrors()) {
             for (ObjectError objectError : result.getAllErrors()) {
                 MessageHelper.addErrorAttribute(model, objectError.getDefaultMessage());
