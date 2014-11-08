@@ -1,6 +1,7 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.ManagerAccount;
+import com.jiajiaohello.support.auth.RegisterForm;
 
 /**
  * User: bohan
@@ -9,4 +10,5 @@ import com.jiajiaohello.core.account.model.ManagerAccount;
  */
 public interface ManagerAccountService {
     ManagerAccount get(String username);
+    void create(RegisterForm registerForm);
 }
