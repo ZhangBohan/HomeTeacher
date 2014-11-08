@@ -50,6 +50,7 @@
 
     <http use-expressions="true" auto-config="true" pattern="/teacher/**" authentication-manager-ref="teacherAuthenticationManager">
         <intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')"/>
+        <intercept-url pattern="/teacher/edit" access="hasRole('ROLE_TEACHER_EDIT')"/>
         <form-login default-target-url="/teacher"
                     login-page="/auth/login/teacher"
                     username-parameter="username"

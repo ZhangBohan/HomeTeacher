@@ -36,20 +36,20 @@
     <form action="" method="post">
         <div class="body bg-gray">
             <div class="form-group">
-                <input type="text" name="phone" id="username" class="form-control" placeholder="手机号" value="18511870280" />
+                <input type="text" name="phone" id="username" class="form-control" placeholder="手机号" value="${form.phone}" />
             </div>
             <div class="form-group">
-                <input type="text" name="name" id="name" class="form-control" placeholder="姓名" />
+                <input type="text" name="name" id="name" class="form-control" placeholder="姓名" value="${form.name}" />
             </div>
             <div class="form-group">
                 <input type="text" name="verifyCode" class="form-control span1" placeholder="验证码" />
                 <button type="button" class="btn btn-default" id="verify-send">发送验证码</button>
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="密码" value="123456"/>
+                <input type="password" name="password" class="form-control" placeholder="密码" />
             </div>
             <div class="form-group">
-                <input type="password" name="repeatPassword" class="form-control" placeholder="确认密码" value="123456"/>
+                <input type="password" name="repeatPassword" class="form-control" placeholder="确认密码" />
             </div>
         </div>
         <div class="footer">
