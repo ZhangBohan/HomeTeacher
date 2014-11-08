@@ -31,7 +31,7 @@ public class Account implements UserDetails {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private List<Area> areas;
     private Date createdAt;
     private Date updatedAt;

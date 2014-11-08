@@ -39,7 +39,11 @@
                 <input type="text" name="phone" id="username" class="form-control" placeholder="手机号" value="18511870280" />
             </div>
             <div class="form-group">
-                <input type="text" name="verifyCode" class="form-control" placeholder="验证码" />
+                <input type="text" name="name" id="name" class="form-control" placeholder="姓名" />
+            </div>
+            <div class="form-group">
+                <input type="text" name="verifyCode" class="form-control span1" placeholder="验证码" />
+                <button type="button" class="btn btn-default" id="verify-send">发送验证码</button>
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="密码" value="123456"/>
@@ -65,7 +69,7 @@
 <script src="/public/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
     $(function () {
-        $("#username").blur(function () {
+        $("#verify-send").click(function () {
             var phone = $("#username").val();
             $.ajax('/auth/verify/' + phone).done(function (code) {
                 alert(code);

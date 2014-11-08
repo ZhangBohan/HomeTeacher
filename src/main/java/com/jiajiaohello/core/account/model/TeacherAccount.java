@@ -1,13 +1,7 @@
 package com.jiajiaohello.core.account.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * User: bohan

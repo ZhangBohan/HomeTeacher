@@ -1,5 +1,7 @@
 package com.jiajiaohello.support.auth;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Size;
 
@@ -11,6 +13,8 @@ import javax.validation.constraints.Size;
 public class RegisterForm {
     @Size(min = 11, max = 11, message = "请输入11位的手机号")
     private String phone;
+    @NotBlank(message = "名称不能为空")
+    private String name;
     @Size(min = 6, max = 20, message = "密码长度需在6到22之间")
     private String password;
     private String repeatPassword;
@@ -61,5 +65,13 @@ public class RegisterForm {
 
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
