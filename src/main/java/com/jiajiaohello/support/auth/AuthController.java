@@ -3,6 +3,7 @@ package com.jiajiaohello.support.auth;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.web.MessageHelper;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,10 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/login/teacher", method = RequestMethod.GET)
-    public String teacherLogin() {
+    public String teacherLogin(Boolean error, Model model) {
+        if(BooleanUtils.isTrue(error)) {
+            MessageHelper.addErrorAttribute(model, "用户名或密码错误！");
+        }
         return "auth/teacher_login";
     }
 
