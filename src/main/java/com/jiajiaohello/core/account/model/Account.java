@@ -1,8 +1,6 @@
 package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.core.area.Area;
-import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -31,7 +29,7 @@ public class Account implements UserDetails {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Area> areas;
     private Date createdAt;
     private Date updatedAt;

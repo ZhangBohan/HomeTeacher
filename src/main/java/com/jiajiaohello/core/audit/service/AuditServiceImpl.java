@@ -22,7 +22,7 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public void pass(Integer auditId, String message) {
-        // TODO
+        updateStatus(auditId, AuditStatus.pass, message);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class AuditServiceImpl implements AuditService {
 
     @Override
     public void reject(Integer auditId, String message) {
-        // TODO
+        updateStatus(auditId, AuditStatus.reject, message);
     }
 
     @Override
@@ -47,14 +47,28 @@ public class AuditServiceImpl implements AuditService {
         return identityAuditDao.getList(audit, pager.getOffset(), pager.getSize());
     }
 
+    private void updateStatus(Integer auditId, AuditStatus status, String message) {
+        IdentityAudit audit = identityAuditDao.get(auditId);
+        audit.setStatus(status.getId());
+        audit.setMessage(message);
+        identityAuditDao.saveOrUpdate(audit);
+    }
+
     @Override
     public void create(Integer teacherId) {
         IdentityAudit audit = new IdentityAudit();
-        audit.init();
         audit.setStatus(AuditStatus.open.getId());
         TeacherAccount teacherAccount = new TeacherAccount();
         teacherAccount.setId(teacherId);
         audit.setTeacher(teacherAccount);
+
+        // 关闭当前打开的审核
+        for (IdentityAudit identityAudit : identityAuditDao.getList(audit)) {
+            identityAudit.setStatus(AuditStatus.close.getId());
+            identityAuditDao.saveOrUpdate(identityAudit);
+        }
+
+        audit.init();
         identityAuditDao.saveOrUpdate(audit);
     }
 }

@@ -61,13 +61,9 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     @Override
     public void update(EditForm editForm) throws IOException {
         TeacherAccount account = get(editForm.getUsername());
-        if(account.getInfo() == null) {
-            TeacherInfo teacherInfo = new TeacherInfo();
-            teacherInfo.init();
-            account.setInfo(teacherInfo);
-        }
 
         account.setName(editForm.getName());
+        account.getInfo().setCompleted(Boolean.TRUE);
         account.getInfo().setDescription(editForm.getDescription());
         account.getInfo().setSchool(editForm.getSchool());
         account.getInfo().setFreeTime(editForm.getFreeTime());
@@ -100,6 +96,9 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         teacherAccount.setAvatar(CommonHelper.DEFAULT_AVATAR_URL);
         teacherAccount.setUsername(registerForm.getPhone());
         teacherAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
+        TeacherInfo info = new TeacherInfo();
+        info.init();
+        teacherAccount.setInfo(info);
         teacherAccountDao.saveOrUpdate(teacherAccount);
     }
 

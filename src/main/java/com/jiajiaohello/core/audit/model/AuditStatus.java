@@ -10,7 +10,8 @@ package com.jiajiaohello.core.audit.model;
 public enum AuditStatus {
     open(0),    // 打开状态，默认为打开
     pass(1),    // 通过状态
-    reject(-1);  // 拒绝状态
+    reject(-1), // 拒绝状态
+    close(-2);  // 关闭状态
 
     AuditStatus(Integer id) {
         this.id = id;

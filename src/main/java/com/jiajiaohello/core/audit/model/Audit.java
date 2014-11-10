@@ -23,6 +23,7 @@ public class Audit {
      * @see com.jiajiaohello.core.audit.model.AuditStatus
      */
     private Integer status;
+    private String message;
 
     private Date createdAt;
     private Date updatedAt;
@@ -62,5 +63,13 @@ public class Audit {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

@@ -3,6 +3,7 @@ package com.jiajiaohello.core.audit.model;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * User: bohan
@@ -11,12 +12,15 @@ import javax.persistence.Entity;
  */
 @Entity
 public class IdentityAudit extends Audit {
+    @ManyToOne
     private TeacherAccount teacher;
 
     @Override
     public String toString() {
         return "IdentityAudit{" +
-                "teacher=" + teacher +
+                "id=" + getId() +
+                "\nstatus=" + getStatus() +
+                "\nteacher=" + teacher +
                 '}';
     }
 

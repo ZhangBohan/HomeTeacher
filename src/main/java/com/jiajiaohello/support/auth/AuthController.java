@@ -4,11 +4,8 @@ import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.web.MessageHelper;
-<<<<<<< HEAD
 import org.apache.commons.lang3.BooleanUtils;
-=======
 
->>>>>>> aec19145d7ad9cfeab11c7ff66a2546351f2773a
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

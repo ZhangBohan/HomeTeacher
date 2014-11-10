@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -23,6 +24,7 @@ public class IdentityAuditDaoImpl implements IdentityAuditDao{
     }
 
     @Override
+    @Transactional
     public void saveOrUpdate(IdentityAudit entity) {
         hibernateTemplate.saveOrUpdate(entity);
     }
