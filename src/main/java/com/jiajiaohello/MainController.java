@@ -26,11 +26,15 @@ public class MainController {
 
     @RequestMapping
     public String index(Model model) {
-        //TODO set recommend teachers list
-        for (RecommendType recommendType : RecommendType.class.getEnumConstants()) {
-            List<TeacherAccount> list = teacherAccountService.getRecommendTeacherAccounts(recommendType, 0, 10);
-        }
-
+        // set recommend teachers list
+        List<TeacherAccount> list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.top, 0, 4);
+        model.addAttribute("topList", list);
+        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row1, 0, 3);
+        model.addAttribute("row1List", list);
+        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row2, 0, 3);
+        model.addAttribute("row2List", list);
+        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row3, 0, 3);
+        model.addAttribute("row3List", list);
         return "index";
     }
 

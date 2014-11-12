@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -212,192 +213,83 @@
 </div>
 <div class="row">
     <h2>专职教员推荐</h2>
-    <div class="col-md-3">
-        <div class="teacher-block bg-color-white">
-            <div class="avatar-block">
-                <img src="/public/img/bohan.png">
-            </div>
-            <div class="teacher-content text-center">
-                <p>张伯函</p>
-                <p>鞍山师范学院</p>
-                <p>东城区</p>
-                <a href="#" class="btn btn-success">预约</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="teacher-block bg-color-white">
-            <div class="avatar-block">
-                <img src="/public/img/bohan.png">
-            </div>
-            <div class="teacher-content text-center">
-                <p>张伯函</p>
-                <p>鞍山师范学院</p>
-                <p>东城区</p>
-                <a href="#" class="btn btn-success">预约</a>
+    <c:forEach items="${topList}" var="teacher">
+        <div class="col-md-3">
+            <div class="teacher-block bg-color-white">
+                <div class="avatar-block">
+                    <img src="${teacher.avatar}">
+                </div>
+                <div class="teacher-content text-center">
+                    <p>${teacher.name}</p>
+                    <p>${teacher.info.school}</p>
+                    <p>${teacher.username}</p>
+                    <a href="#" class="btn btn-success">预约</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="teacher-block bg-color-white">
-            <div class="avatar-block">
-                <img src="/public/img/bohan.png">
-            </div>
-            <div class="teacher-content text-center">
-                <p>张伯函</p>
-                <p>鞍山师范学院</p>
-                <p>东城区</p>
-                <a href="#" class="btn btn-success">预约</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="teacher-block bg-color-white">
-            <div class="avatar-block">
-                <img src="/public/img/bohan.png">
-            </div>
-            <div class="teacher-content text-center">
-                <p>张伯函</p>
-                <p>鞍山师范学院</p>
-                <p>东城区</p>
-                <a href="#" class="btn btn-success">预约</a>
-            </div>
-        </div>
-    </div>
+    </c:forEach>
 </div>
 
 <div class="row">
     <div class="rank col-lg-4">
         <h2>英语教员推荐</h2>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
+        <c:forEach items="${row1List}" var="teacher">
+            <div class="col-md-12">
+                <div class="teacher-block bg-color-white">
+                    <div class="avatar-block">
+                        <img src="/public/img/bohan.png">
+                    </div>
+                    <div class="teacher-content text-center">
+                        <p>张伯函</p>
+                        <p>鞍山师范学院</p>
+                        <p>东城区</p>
+                        <a href="#" class="btn btn-success">预约</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
         <div class="col-lg-12">
             <a href="#" class="btn btn-link btn-block">查看更多</a>
         </div>
     </div>
     <div class="rank col-lg-4">
         <h2>英语教员推荐</h2>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
+        <c:forEach items="${row2List}" var="teacher">
+            <div class="col-md-12">
+                <div class="teacher-block bg-color-white">
+                    <div class="avatar-block">
+                        <img src="/public/img/bohan.png">
+                    </div>
+                    <div class="teacher-content text-center">
+                        <p>张伯函</p>
+                        <p>鞍山师范学院</p>
+                        <p>东城区</p>
+                        <a href="#" class="btn btn-success">预约</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
         <div class="col-lg-12">
             <a href="#" class="btn btn-link btn-block">查看更多</a>
         </div>
     </div>
     <div class="rank col-md-4">
         <h2>英语教员推荐</h2>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
+        <c:forEach items="${row2List}" var="teacher">
+            <div class="col-md-12">
+                <div class="teacher-block bg-color-white">
+                    <div class="avatar-block">
+                        <img src="/public/img/bohan.png">
+                    </div>
+                    <div class="teacher-content text-center">
+                        <p>张伯函</p>
+                        <p>鞍山师范学院</p>
+                        <p>东城区</p>
+                        <a href="#" class="btn btn-success">预约</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="/public/img/bohan.png">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>张伯函</p>
-                    <p>鞍山师范学院</p>
-                    <p>东城区</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
-        </div>
+        </c:forEach>
         <div class="col-lg-12">
             <a href="#" class="btn btn-link btn-block">查看更多</a>
         </div>

@@ -122,7 +122,9 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         List<TeacherAccount> list = new ArrayList<>();
         for (String teacherIdString : teacherIdStrings) {
             TeacherAccount teacherAccount = teacherAccountDao.get(Integer.parseInt(teacherIdString));
-            list.add(teacherAccount);
+            if(teacherAccount != null) {  // 如果取到数据，则加入
+                list.add(teacherAccount);
+            }
         }
 
         return list;
