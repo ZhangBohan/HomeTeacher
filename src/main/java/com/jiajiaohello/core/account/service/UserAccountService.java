@@ -1,6 +1,7 @@
 package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.UserAccount;
+import com.jiajiaohello.support.auth.RegisterForm;
 
 /**
  * User: bohan
@@ -9,4 +10,6 @@ import com.jiajiaohello.core.account.model.UserAccount;
  */
 public interface UserAccountService {
     UserAccount get(String username);
+
+    void create(RegisterForm form);
 }

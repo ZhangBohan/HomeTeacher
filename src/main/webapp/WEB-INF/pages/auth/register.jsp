@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="bg-light-blue">
@@ -32,18 +33,22 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
-    <div class="header">教员注册 | <a class="header-link" href="#">用户点我注册</a></div>
+    <div class="header">注册</div>
     <form action="" method="post">
         <div class="body bg-gray">
+            <div class="form-group">
+                <input type="radio" name="account" value="0" <c:if test="${form.account == 0}">checked="" </c:if>>&nbsp;我是用户&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio"  name="account" value="1" <c:if test="${form.account == 1}">checked="" </c:if>>&nbsp;我是教员
+            </div>
             <div class="form-group">
                 <input type="text" name="phone" id="username" class="form-control" placeholder="手机号" value="${form.phone}" />
             </div>
             <div class="form-group">
-                <input type="text" name="name" id="name" class="form-control" placeholder="姓名" value="${form.name}" />
-            </div>
-            <div class="form-group">
                 <input type="text" name="verifyCode" class="form-control span1" placeholder="验证码" />
                 <button type="button" class="btn btn-default" id="verify-send">发送验证码</button>
+            </div>
+            <div class="form-group">
+                <input type="text" name="name" id="name" class="form-control" placeholder="姓名" value="${form.name}" />
             </div>
             <div class="form-group">
                 <input type="password" name="password" class="form-control" placeholder="密码" />

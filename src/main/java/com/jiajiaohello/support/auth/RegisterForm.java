@@ -11,6 +11,10 @@ import javax.validation.constraints.Size;
  * Time: 6:44 PM
  */
 public class RegisterForm {
+    /**
+     * 用户类型，0为用户 1为教员
+     */
+    private Integer account = 0;
     @Size(min = 11, max = 11, message = "请输入11位的手机号")
     private String phone;
     @NotBlank(message = "名称不能为空")
@@ -73,5 +77,13 @@ public class RegisterForm {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAccount() {
+        return account;
+    }
+
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 }

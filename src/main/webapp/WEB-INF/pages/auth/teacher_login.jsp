@@ -32,7 +32,7 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
-    <div class="header">教员登录 | <a class="header-link" href="/auth/login/teacher">用户点我登录</a></div>
+    <div class="header">教员登录 | <a class="header-link" href="/auth/login/user">用户点我登录</a></div>
     <form action="/teacher/j_spring_security_check" method="post">
         <div class="body bg-gray">
             <div class="form-group">
@@ -50,7 +50,7 @@
 
             <p><a href="#">忘记密码</a></p>
 
-            <a href="/auth/register/teacher" class="text-center">注册</a>
+            <a href="/auth/register?account=1" class="text-center">注册</a>
         </div>
     </form>
 </div>

@@ -2,6 +2,7 @@ package com.jiajiaohello.support.auth;
 
 import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
+import com.jiajiaohello.core.account.service.UserAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.web.MessageHelper;
 import org.apache.commons.lang3.BooleanUtils;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import redis.clients.jedis.Jedis;
 
@@ -33,7 +31,9 @@ public class AuthController {
     @Autowired
     private TeacherAccountService teacherAccountService;
     @Autowired
-    private ManagerAccountService mannagerAccountService;
+    private ManagerAccountService managerAccountService;
+    @Autowired
+    private UserAccountService userAccountService;
 
     Jedis jedis = new Jedis("localhost");
 
@@ -50,10 +50,10 @@ public class AuthController {
         return "auth/teacher_login";
     }
 
-    @RequestMapping(value = "/register/teacher", method = RequestMethod.GET)
-    public String teacherRegister(RegisterForm form, Model model) {
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String getRegister(RegisterForm form, Model model) {
         model.addAttribute("form", form);
-        return "auth/teacher_register";
+        return "auth/register";
     }
     
     @RequestMapping(value = "/login/admin", method = RequestMethod.GET)
@@ -66,22 +66,25 @@ public class AuthController {
         return "auth/admin_register";
     }
 
-    @RequestMapping(value = "/register/teacher", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String postTeacherRegister(@Valid RegisterForm form, BindingResult result, Model model) {
         model.addAttribute("form", form);
         if(result.hasErrors()) {
             for (ObjectError objectError : result.getAllErrors()) {
                 MessageHelper.addErrorAttribute(model, objectError.getDefaultMessage());
             }
-            return "auth/teacher_register";
+            return "auth/register";
         }
 
         String key = "verifies:" + form.getPhone();
         if(!form.getVerifyCode().equals(jedis.get(key))) {
             MessageHelper.addErrorAttribute(model, "验证码错误");
-            return "auth/teacher_register";
+            return "auth/register";
         }
-
+        if(form.getAccount().equals(0)) {
+            userAccountService.create(form);
+            return "redirect:/auth/login/user";
+        }
         teacherAccountService.create(form);
         return "redirect:/auth/login/teacher";
     }
@@ -100,7 +103,7 @@ public class AuthController {
             return "auth/admin_register";
         }
 
-        mannagerAccountService.create(form);
+        managerAccountService.create(form);
         return "redirect:/auth/login/admin";
     }
     @RequestMapping("/verify/{phone}")
