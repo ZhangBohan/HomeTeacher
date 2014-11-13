@@ -41,8 +41,13 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     private Jedis jedis;
 
     @Override
-    @Transactional
     public TeacherAccount get(String username) {
+        return teacherAccountDao.get(new TeacherAccount(username));
+    }
+
+    @Override
+    @Transactional
+    public TeacherAccount loginLoad(String username) {
         TeacherAccount account = new TeacherAccount(username);
         account = teacherAccountDao.get(account);
         if (account == null) {
@@ -68,6 +73,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         account.getInfo().setSchool(editForm.getSchool());
         account.getInfo().setFreeTime(editForm.getFreeTime());
         account.getInfo().setIdentity(editForm.getIdentity());
+        account.getInfo().setSex(editForm.getSex());
 
         String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
         if(StringUtils.isNotBlank(avatar)) {

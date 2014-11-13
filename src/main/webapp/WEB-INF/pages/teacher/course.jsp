@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="/WEB-INF/custom.tld" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,13 +96,35 @@
                         ${message.message}
                 </div>
             </c:if>
-            <div class="row">
-                <!-- right column -->
-                <div>
-                    <!-- general form elements disabled -->
+            <form role="form" method="post">
+                <div class="box">
+                    <div class="box-title"></div>
+                    <div class="box-body">
+                        <div class="box-group">
+                            <c:forEach items="${stages}" var="stage">
+                                <div class="box-info">
+                                    <h4 class="page-header">${stage.name}</h4>
 
-                </div><!--/.col (right) -->
-            </div>   <!-- /.row -->
+                                    <div class="row fontawesome-icon-list">
+                                        <c:forEach var="course" items="${stage.courses}">
+                                            <div class="col-md-3 col-sm-4">
+                                                <input name="courseIds" type="checkbox" value="${course.id}"
+                                                    <c:if test="${fn:contains(teacherAccount.info.courses, course )}">checked</c:if>>
+                                                    ${course.name}
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
         </section><!-- /.content -->
     </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->

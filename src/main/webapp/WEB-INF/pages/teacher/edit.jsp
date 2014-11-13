@@ -114,6 +114,12 @@
                         <input type="text" name="name" class="form-control" placeholder="请输入名称" value="${teacherAccount.name}"/>
                     </div>
                     <div class="form-group">
+                        <label>性别</label>
+                        <span class="text-light-blue">请填写性别，方便用户筛选</span>
+                        <input type="radio" name="sex" value="false">男
+                        <input type="radio" name="sex" value="true">女
+                    </div>
+                    <div class="form-group">
                         <label>描述</label>
                         <span class="text-light-blue">写一段自我介绍吧，一个好的介绍可以直接打动别人。</span>
                         <textarea name="description" class="form-control" rows="3" placeholder="自我介绍">${teacherAccount.info.description}</textarea>

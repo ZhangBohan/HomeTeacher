@@ -5,8 +5,6 @@ import com.jiajiaohello.core.account.service.TeacherAccountService;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -30,7 +28,10 @@ public class TeacherUserDetailService implements UserDetailsService {
 
     @Override
     public AuthUser loadUserByUsername(String username) throws UsernameNotFoundException {
-        TeacherAccount teacherAccount = teacherAccountService.get(username);
+        TeacherAccount teacherAccount = teacherAccountService.loginLoad(username);
+        if(teacherAccount == null) {
+            throw new UsernameNotFoundException("未找到该用户！");
+        }
         AuthUser user = new AuthUser();
         try {
             BeanUtils.copyProperties(user, teacherAccount);

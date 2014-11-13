@@ -10,11 +10,10 @@ package com.jiajiaohello.core.info.model;
  */
 
 import com.jiajiaohello.support.core.CommonHelper;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +24,8 @@ public class Stage {
     private Integer id;
     private String name;
     private String description;
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     List<Course> courses;
     private Date createdAt;
     private Date updatedAt;

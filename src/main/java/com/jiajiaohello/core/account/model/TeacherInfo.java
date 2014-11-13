@@ -2,6 +2,8 @@ package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.support.core.CommonHelper;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,14 +27,19 @@ public class TeacherInfo implements Serializable{
     private String school;
     private String description;
     private String freeTime;
+    /**
+     * <code>true</code>表示女，因为女人永远是对的。。。
+     */
+    private Boolean sex;
 
     /**
      * 用户录制视频URL
      */
     private String videoUrl;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @OrderColumn
+    @Fetch(FetchMode.SELECT)
     List<Course> courses;
 
     private String identityUrl;
@@ -59,6 +66,7 @@ public class TeacherInfo implements Serializable{
                 ", school='" + school + '\'' +
                 ", description='" + description + '\'' +
                 ", freeTime='" + freeTime + '\'' +
+                ", sex='" + sex + '\'' +
                 ", videoUrl='" + videoUrl + '\'' +
                 ", courses=" + courses +
                 ", identityUrl='" + identityUrl + '\'' +
@@ -68,10 +76,6 @@ public class TeacherInfo implements Serializable{
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public Integer getId() {
@@ -176,5 +180,13 @@ public class TeacherInfo implements Serializable{
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 }

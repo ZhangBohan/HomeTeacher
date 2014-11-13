@@ -65,6 +65,9 @@ public class TeacherController {
     @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public String getCourses(Model model) {
         List<Stage> stages = courseService.getStages();
+        TeacherAccount teacherAccount = teacherAccountService.get(AuthHelper.getUserAccount().getUsername());
+
+        model.addAttribute("teacherAccount", teacherAccount);
         model.addAttribute("stages", stages);
         return "teacher/course";
     }

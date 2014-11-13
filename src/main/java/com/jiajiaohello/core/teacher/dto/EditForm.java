@@ -29,6 +29,8 @@ public class EditForm {
     @NotNull(message = "请选择您的身份")
     private Integer identity;
 
+    private Boolean sex;
+
     private MultipartFile avatarFile;
     private MultipartFile identityFile;
     private MultipartFile educationFile;
@@ -103,5 +105,13 @@ public class EditForm {
 
     public void setIdentity(Integer identity) {
         this.identity = identity;
+    }
+
+    public Boolean getSex() {
+        return sex;
+    }
+
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 }
