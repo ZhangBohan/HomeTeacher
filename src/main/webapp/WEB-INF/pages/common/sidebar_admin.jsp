@@ -19,15 +19,15 @@
         <!-- sidebar menu -->
         <ul class="sidebar-menu">
             <li>
-                <a href="/teacher" <c:if test="${param.activeMenu == 'index'}">class="menu-active" </c:if>>
+                <a href="/admin" <c:if test="${param.activeMenu == 'index'}">class="menu-active" </c:if>>
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/teacher/edit" <c:if test="${param.activeMenu == 'edit'}">class="menu-active" </c:if>>
+                <a href="/admin/edit" <c:if test="${param.activeMenu == 'edit'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>个人资料</span>
                 </a>
-                <a href="/teacher/course" <c:if test="${param.activeMenu == 'course'}">class="menu-active" </c:if>>
+                <a href="/admin/course" <c:if test="${param.activeMenu == 'course'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>选择科目</span>
                 </a>
             </li>

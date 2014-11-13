@@ -17,10 +17,10 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="/teacher/edit" class="btn btn-default btn-flat">修改资料</a>
+                <a href="/admin/edit" class="btn btn-default btn-flat">修改资料</a>
             </div>
             <div class="pull-right">
-                <a href="/teacher/j_spring_security_logout" class="btn btn-default btn-flat">退出</a>
+                <a href="/admin/j_spring_security_logout" class="btn btn-default btn-flat">退出</a>
             </div>
         </li>
     </ul>

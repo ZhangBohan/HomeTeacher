@@ -15,7 +15,8 @@ import java.util.List;
  */
 @Entity
 public class ManagerAccount extends Account {
-    static final String DEFAULT_ROLE = "ROLE_ADMIN";
+	private static final long serialVersionUID = -6301850334377748839L;
+	static final String DEFAULT_ROLE = "ROLE_ADMIN";
     static List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(DEFAULT_ROLE));
 
     public ManagerAccount() {
