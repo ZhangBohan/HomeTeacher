@@ -45,6 +45,10 @@ body {
     padding: 5px 5px 5px 5px;
 }
 
+.avatar-big {
+    width: 200px;
+}
+
 .teacher-content {
     margin-left: 100px;
     padding: 5px 0 5px 0;
@@ -70,4 +74,10 @@ footer p {
 
 .menu-active {
     background-color: #B2B3B3;
+}
+
+.teacher-info {
+    font-size: 14px;
+    color: #7f7f7f;
+    margin-bottom: 6px;
 }

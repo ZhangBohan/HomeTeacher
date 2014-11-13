@@ -212,90 +212,47 @@
     </div>
 </div>
 <div class="row">
-    <h2>专职教员推荐</h2>
-    <c:forEach items="${topList}" var="teacher">
-        <div class="col-md-3">
-            <div class="teacher-block bg-color-white">
-                <div class="avatar-block">
-                    <img src="${teacher.avatar}">
-                </div>
-                <div class="teacher-content text-center">
-                    <p>${teacher.name}</p>
-                    <p>${teacher.info.school}</p>
-                    <p>${teacher.username}</p>
-                    <a href="#" class="btn btn-success">预约</a>
-                </div>
-            </div>
+    <div class="col-md-2">
+        <img src="${teacher.avatar}" class="avatar-big">
+        <div class="text-center">
+            <span class="label label-success">认证教员</span>
+            <span class="label label-success">教学认可</span>
         </div>
-    </c:forEach>
+    </div>
+    <div class="col-md-8">
+        <h1>${teacher.name}</h1>
+        <c:if test="${teacher.info.identity == 1}">
+            <p class="teacher-info">
+                在职教员
+            </p>
+        </c:if>
+        <c:if test="${teacher.info.identity == 2}">
+            <p class="teacher-info">
+                专职教员
+            </p>
+        </c:if>
+        <c:if test="${teacher.info.identity == 3}">
+            <p class="teacher-info">
+                大学生教员
+            </p>
+        </c:if>
+        <p class="teacher-info">
+            ${teacher.info.school}
+        </p>
+    </div>
 </div>
-
 <div class="row">
-    <div class="rank col-lg-4">
-        <h2>英语教员推荐</h2>
-        <c:forEach items="${row1List}" var="teacher">
-            <div class="col-md-12">
-                <div class="teacher-block bg-color-white">
-                    <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
-                    </div>
-                    <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-        <div class="col-lg-12">
-            <a href="#" class="btn btn-link btn-block">查看更多</a>
-        </div>
-    </div>
-    <div class="rank col-lg-4">
-        <h2>英语教员推荐</h2>
-        <c:forEach items="${row2List}" var="teacher">
-            <div class="col-md-12">
-                <div class="teacher-block bg-color-white">
-                    <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
-                    </div>
-                    <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-        <div class="col-lg-12">
-            <a href="#" class="btn btn-link btn-block">查看更多</a>
-        </div>
-    </div>
-    <div class="rank col-md-4">
-        <h2>英语教员推荐</h2>
-        <c:forEach items="${row2List}" var="teacher">
-            <div class="col-md-12">
-                <div class="teacher-block bg-color-white">
-                    <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
-                    </div>
-                    <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-        <div class="col-lg-12">
-            <a href="#" class="btn btn-link btn-block">查看更多</a>
-        </div>
-    </div>
+    <h2>个人资料</h2>
+    <p>${teacher.info.description}</p>
 </div>
-
+<div class="row">
+    <h2>授课时间</h2>
+    <p>${teacher.info.freeTime}</p>
+</div>
+<div class="row">
+    <h2>授课视频</h2>
+    ${teacher.info.videoUrl}
+</div>
 </div>
 
 <jsp:include page="common/footer.jsp" />

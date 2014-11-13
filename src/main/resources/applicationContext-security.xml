@@ -35,16 +35,16 @@
 
     <http pattern="/" security="none"/>
     <http pattern="/public/**" security="none"/>
-    <http use-expressions="true" auto-config="true" pattern="/users/**" authentication-manager-ref="userAuthenticationManager">
-        <intercept-url pattern="/users/**" access="hasRole('ROLE_USER')"/>
+    <http use-expressions="true" auto-config="true" pattern="/user/**" authentication-manager-ref="userAuthenticationManager">
+        <intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
         <form-login default-target-url="/"
                     login-page="/auth/user/login"
                     username-parameter="username"
                     password-parameter="password"
-                    authentication-failure-url="/public/login.html?error=true"
-                    login-processing-url="/users/j_spring_security_check"
+                    authentication-failure-url="/auth/login/user?error=true"
+                    login-processing-url="/user/j_spring_security_check"
                 />
-        <logout logout-success-url="/public/login.html" delete-cookies="JSESSIONID"/>
+        <logout logout-success-url="/user/j_spring_security_logout" logout-url="/" delete-cookies="JSESSIONID"/>
         <remember-me key="jiajiaohello_user" user-service-ref="userUserDetailsService" />
     </http>
 

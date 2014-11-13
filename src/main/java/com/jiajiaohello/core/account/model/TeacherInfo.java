@@ -2,7 +2,6 @@ package com.jiajiaohello.core.account.model;
 
 import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.support.core.CommonHelper;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +25,12 @@ public class TeacherInfo implements Serializable{
     private String school;
     private String description;
     private String freeTime;
+
+    /**
+     * 用户录制视频URL
+     */
+    private String videoUrl;
+
     @ManyToMany
     @OrderColumn
     List<Course> courses;
@@ -54,6 +59,7 @@ public class TeacherInfo implements Serializable{
                 ", school='" + school + '\'' +
                 ", description='" + description + '\'' +
                 ", freeTime='" + freeTime + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
                 ", courses=" + courses +
                 ", identityUrl='" + identityUrl + '\'' +
                 ", educationUrl='" + educationUrl + '\'' +
@@ -162,5 +168,13 @@ public class TeacherInfo implements Serializable{
 
     public void setIdentity(Integer identity) {
         this.identity = identity;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 }

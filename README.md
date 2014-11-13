@@ -1,4 +1,8 @@
 # 家教，你好
+
+##脑图
+
+[项目结构脑图](http://naotu.baidu.com/viewshare.html?shareId=ar4togreg4k4)
  
 ##依赖
   

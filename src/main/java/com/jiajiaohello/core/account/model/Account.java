@@ -29,7 +29,7 @@ public class Account implements UserDetails {
     private Boolean disabled = false;
     private String avatar;
     private String name;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Area> areas;
     private Date createdAt;
     private Date updatedAt;

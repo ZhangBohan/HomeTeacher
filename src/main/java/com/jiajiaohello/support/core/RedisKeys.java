@@ -6,14 +6,13 @@ package com.jiajiaohello.support.core;
  * Time: 2:29 PM
  */
 public enum RedisKeys {
-    recommendTeachers("recommend:teachers:%s", "首页推荐教员");
+    // 首页推荐教员
+    recommendTeachers("recommend:teachers:%s");
 
     private String keyBase;
-    private String description;
 
-    RedisKeys(String keyBase, String description) {
+    RedisKeys(String keyBase) {
         this.keyBase = keyBase;
-        this.description = description;
     }
 
     public String getKey(Object ... obj) {
