@@ -1,9 +1,9 @@
 package com.jiajiaohello.core.account.service;
 
-import com.jiajiaohello.core.account.dao.UserAccountDao;
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
+import com.jiajiaohello.support.core.CommonDao;
 import com.jiajiaohello.support.core.CommonHelper;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ import java.util.Date;
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
     @Autowired
-    private UserAccountDao userAccountDao;
+    private CommonDao<UserAccount> userAccountCommonDao;
 
     @Override
     @Transactional
     public UserAccount get(String username) {
         UserAccount account = new UserAccount(username);
-        account = userAccountDao.get(account);
+        account = userAccountCommonDao.get(account);
         if(account == null) {
             return null;
         }
         account.setUpdatedAt(new Date());
-        userAccountDao.saveOrUpdate(account);
+        userAccountCommonDao.saveOrUpdate(account);
         return account;
     }
 
@@ -46,6 +46,6 @@ public class UserAccountServiceImpl implements UserAccountService {
         userAccount.setAvatar(CommonHelper.DEFAULT_AVATAR_URL);
         userAccount.setUsername(form.getPhone());
         userAccount.setPassword(new PasswordEncoder().encode(form.getPassword()));   // 加密后保存
-        userAccountDao.saveOrUpdate(userAccount);
+        userAccountCommonDao.saveOrUpdate(userAccount);
     }
 }

@@ -75,6 +75,38 @@
 **取得方法**
 
     <h2 class="${message.type}">${message.message}</h2>
+
+###如何访问数据库
+如果只是基本的`CRUD`请直接使用`com.jiajiaohello.support.core.CommonDao`，谨记`DRY`原则，如果是共用的可以直接扩充该类
+
+使用方法：
+
+    public class CommonDaoTest extends BaseTest {
+        @Autowired
+        private CommonDao<Course> courseCommonDao;
+
+        @Test
+        public void testGet() throws Exception {
+            Course course = courseCommonDao.get(-1, Course.class);
+            assertNull(course);
+        }
+
+        @Test
+        public void testSaveOrUpdate() throws Exception {
+            Course course = new Course();
+            course.init();
+            course.setName("aaa");
+            course.setDescription("www");
+            courseCommonDao.saveOrUpdate(course);
+        }
+
+        @Test
+        public void testGetList() throws Exception {
+            List<Course> list = courseCommonDao.getList(new Course());
+            System.out.println(list);
+            assertNotNull(list);
+        }
+    }
    
 ##要完全的工作
 

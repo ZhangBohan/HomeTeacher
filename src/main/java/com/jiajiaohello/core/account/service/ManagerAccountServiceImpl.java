@@ -1,12 +1,12 @@
 package com.jiajiaohello.core.account.service;
 
-import com.jiajiaohello.core.account.dao.ManagerAccountDao;
 import com.jiajiaohello.core.account.model.ManagerAccount;
 import com.jiajiaohello.core.admin.dto.EditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.auth.ManagerUserDetailService;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
+import com.jiajiaohello.support.core.CommonDao;
 import com.jiajiaohello.support.core.OSSBucket;
 import com.jiajiaohello.support.core.OSSService;
 
@@ -28,19 +28,19 @@ import java.util.Date;
 @Service
 public class ManagerAccountServiceImpl implements ManagerAccountService {
     @Autowired
-    private ManagerAccountDao managerAccountDao;
+    private CommonDao<ManagerAccount> managerAccountCommonDao;
     @Autowired
     private OSSService ossService;
     @Override
     @Transactional
     public ManagerAccount get(String username) {
         ManagerAccount account = new ManagerAccount(username);
-        account = managerAccountDao.get(account);
+        account = managerAccountCommonDao.get(account);
         if(account == null) {
             return null;
         }
         account.setUpdatedAt(new Date());
-        managerAccountDao.saveOrUpdate(account);
+        managerAccountCommonDao.saveOrUpdate(account);
         return account;
     }
 
@@ -54,7 +54,7 @@ public class ManagerAccountServiceImpl implements ManagerAccountService {
 	        }
 	        mannagerAccount.setUsername(registerForm.getPhone());
 	        mannagerAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
-	        managerAccountDao.saveOrUpdate(mannagerAccount);
+	        managerAccountCommonDao.saveOrUpdate(mannagerAccount);
 	}
 	
 	 @Override
@@ -68,6 +68,6 @@ public class ManagerAccountServiceImpl implements ManagerAccountService {
 	            account.setAvatar(avatar);
 	        }
 	        AuthHelper.reloadAccount(account, ManagerUserDetailService.authorities);
-	        managerAccountDao.saveOrUpdate(account);
+	        managerAccountCommonDao.saveOrUpdate(account);
 	    }
 }

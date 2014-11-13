@@ -1,8 +1,7 @@
 package com.jiajiaohello.core.info.service;
 
-import com.jiajiaohello.core.info.dao.CourseDao;
-import com.jiajiaohello.core.info.dao.StageDao;
 import com.jiajiaohello.core.info.model.Stage;
+import com.jiajiaohello.support.core.CommonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,10 @@ import java.util.List;
 @Service
 public class CourseServiceImpl implements CourseService {
     @Autowired
-    private CourseDao courseDao;
-    @Autowired
-    private StageDao stageDao;
+    private CommonDao<Stage> stageCommonDao;
 
     @Override
     public List<Stage> getStages() {
-        return stageDao.getList(new Stage());
+        return stageCommonDao.getList(new Stage());
     }
 }
