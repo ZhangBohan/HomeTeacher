@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class CommonDao<T> {
     public T get(T entity) {
         List<T> list = getList(entity);
         if(CollectionUtils.isEmpty(list)) {
-            return null;
+            throw new EntityNotFoundException();
         }
         return list.get(0);
     }
@@ -41,5 +42,18 @@ public class CommonDao<T> {
 
     public List<T> getList(T entity, int firstResult, int maxResult) {
         return hibernateTemplate.findByExample(entity, firstResult, maxResult);
+    }
+
+    @Transactional
+    public void delete(T entity) {
+        hibernateTemplate.delete(entity);
+    }
+
+    public void delete(Integer id, Class<T> clazz) {
+        T t = get(id, clazz);
+        if(t == null) {
+            throw new EntityNotFoundException();
+        }
+        delete(t);
     }
 }

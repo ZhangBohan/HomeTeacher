@@ -1,12 +1,16 @@
 package com.jiajiaohello.core.ticket;
 
+import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.support.core.CommonHelper;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: bohan
@@ -19,17 +23,26 @@ public class ClassTicket implements Serializable {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(columnDefinition = "TEXT")
+    private String name;
+    private String phone;
+    private String address;
+
     private String description;
     @ManyToOne
-    private Course course;
+    private Course course = new Course();
     @ManyToOne
     private UserAccount userAccount;
-    private Integer status = TicketStatus.open.getId();
+    @ManyToOne
+    private TeacherAccount teacherAccount;
+    private Integer status;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    private List<ClassTicketNote> notes;
     private Date createdAt;
     private Date updatedAt;
 
     public void init() {
+        this.status = TicketStatus.open.getId();
         this.createdAt = CommonHelper.now();
         this.updatedAt = CommonHelper.now();
     }
@@ -38,10 +51,15 @@ public class ClassTicket implements Serializable {
     public String toString() {
         return "ClassTicket{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
                 ", description='" + description + '\'' +
                 ", course=" + course +
                 ", userAccount=" + userAccount +
+                ", teacherAccount=" + teacherAccount +
                 ", status=" + status +
+                ", notes=" + notes +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
@@ -53,6 +71,30 @@ public class ClassTicket implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDescription() {
@@ -79,12 +121,28 @@ public class ClassTicket implements Serializable {
         this.userAccount = userAccount;
     }
 
+    public TeacherAccount getTeacherAccount() {
+        return teacherAccount;
+    }
+
+    public void setTeacherAccount(TeacherAccount teacherAccount) {
+        this.teacherAccount = teacherAccount;
+    }
+
     public Integer getStatus() {
         return status;
     }
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<ClassTicketNote> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<ClassTicketNote> notes) {
+        this.notes = notes;
     }
 
     public Date getCreatedAt() {
