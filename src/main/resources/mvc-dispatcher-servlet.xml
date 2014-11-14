@@ -127,4 +127,6 @@
         <constructor-arg name="accessKeyId" value="${ossClient.accessKeyId}" />
         <constructor-arg name="accessKeySecret" value="${ossClient.accessKeySecret}" />
     </bean>
+
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
 </beans>
