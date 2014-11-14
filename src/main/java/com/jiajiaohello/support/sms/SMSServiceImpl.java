@@ -15,6 +15,8 @@ import java.util.List;
  */
 @Service
 public class SMSServiceImpl implements SMSService {
+    private static final String VERIFY_CODE_TEMPLATE = "您的验证码是%s【家教你好】";
+
     @Autowired
     private ObjectMapper mapper;
 
@@ -32,6 +34,11 @@ public class SMSServiceImpl implements SMSService {
             CommonHelper.LOG.error("SMS ERROR: " + e.getMessage(), e);
             throw new SMSException();
         }
+    }
+
+    @Override
+    public void sendVerifyCode(String code, String mobile) throws SMSException {
+        send(String.format(VERIFY_CODE_TEMPLATE, code), mobile);
     }
 
     @Override

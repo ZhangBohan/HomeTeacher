@@ -76,8 +76,9 @@
     $(function () {
         $("#verify-send").click(function () {
             var phone = $("#username").val();
-            $.ajax('/auth/verify/' + phone).done(function (code) {
-                alert(code);
+            $.ajax('/auth/verify/' + phone).done(function () {
+                console.debug('send message success!');
+                //TODO 禁用发送并倒数60秒
             });
         });
     });

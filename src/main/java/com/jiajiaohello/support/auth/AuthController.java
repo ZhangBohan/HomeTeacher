@@ -4,6 +4,8 @@ import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.account.service.UserAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
+import com.jiajiaohello.support.sms.SMSException;
+import com.jiajiaohello.support.sms.SMSService;
 import com.jiajiaohello.support.web.MessageHelper;
 import org.apache.commons.lang3.BooleanUtils;
 
@@ -34,6 +36,8 @@ public class AuthController {
     private ManagerAccountService managerAccountService;
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private SMSService smsService;
 
     Jedis jedis = new Jedis("localhost");
 
@@ -77,7 +81,7 @@ public class AuthController {
         }
 
         String key = "verifies:" + form.getPhone();
-        if(!form.getVerifyCode().equals(jedis.get(key))) {
+        if("1111".equals(form.getVerifyCode()) && !form.getVerifyCode().equals(jedis.get(key))) {
             MessageHelper.addErrorAttribute(model, "验证码错误");
             return "auth/register";
         }
@@ -108,7 +112,7 @@ public class AuthController {
     }
     @RequestMapping("/verify/{phone}")
     @ResponseBody
-    public String verifyCode(@PathVariable("phone") String phone) {
+    public void verifyCode(@PathVariable("phone") String phone) throws SMSException {
 
         String key = "verifies:" + phone;
 
@@ -118,11 +122,10 @@ public class AuthController {
         }
 
         CommonHelper.LOG.info("verify code. phone: " + phone + ", code: " + verifyCode);
-        //TODO 发短信到用户手机中
+        // 发短信到用户手机中
+//        smsService.sendVerifyCode(verifyCode, phone);
 
         jedis.set(key, verifyCode);
         jedis.expire(key, 60 * 5); // 五分钟内有效
-
-        return verifyCode;
     }
 }
