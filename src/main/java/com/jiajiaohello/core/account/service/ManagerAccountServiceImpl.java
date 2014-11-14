@@ -46,15 +46,15 @@ public class ManagerAccountServiceImpl implements ManagerAccountService {
 
 	@Override
 	public void create(RegisterForm registerForm) {
-		   ManagerAccount mannagerAccount = new ManagerAccount();
+		   ManagerAccount managerAccount = new ManagerAccount();
 	        try {
-	            BeanUtils.copyProperties(mannagerAccount, registerForm);
+	            BeanUtils.copyProperties(managerAccount, registerForm);
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        mannagerAccount.setUsername(registerForm.getPhone());
-	        mannagerAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
-	        managerAccountCommonDao.saveOrUpdate(mannagerAccount);
+	        managerAccount.setUsername(registerForm.getPhone());
+	        managerAccount.setPassword(new PasswordEncoder().encode(registerForm.getPassword()));   // 加密后保存
+	        managerAccountCommonDao.saveOrUpdate(managerAccount);
 	}
 	
 	 @Override

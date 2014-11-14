@@ -41,6 +41,10 @@ public class Account implements UserDetails {
         this.username = username;
     }
 
+    public Account(Integer id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
