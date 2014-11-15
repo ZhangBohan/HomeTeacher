@@ -76,9 +76,17 @@
     $(function () {
         $("#verify-send").click(function () {
             var phone = $("#username").val();
-            $.ajax('/auth/verify/' + phone).done(function () {
-                console.debug('send message success!');
-                //TODO 禁用发送并倒数60秒
+
+            $.ajax({
+                url: '/auth/verify/' + phone,
+                success: function () {
+                    console.debug('send message success!');
+                    //TODO 禁用发送并倒数60秒
+                },
+                error: function (XMLHttpRequest) {
+                    console.error(XMLHttpRequest.responseText);
+                    alert(XMLHttpRequest.responseText);
+                }
             });
         });
     });
