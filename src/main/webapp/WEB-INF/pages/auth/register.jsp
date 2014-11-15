@@ -81,10 +81,24 @@
                 url: '/auth/verify/' + phone,
                 success: function () {
                     console.debug('send message success!');
-                    //TODO 禁用发送并倒数60秒
+                    // 禁用发送并倒数60秒
+                    $("#verify-send").attr('disabled','disabled');
+
+                    var seconds = 60;
+                    function tick() {
+                        seconds--;
+                        $("#verify-send").text("已发送（" + seconds + "秒）");
+                        if( seconds > 0 ) {
+                            setTimeout(tick, 1000);
+                        } else {
+                            $("#verify-send").removeAttr('disabled');
+                            $("#verify-send").text("重新发送");
+                        }
+                    }
+                    tick();
                 },
                 error: function (XMLHttpRequest) {
-                    console.error(XMLHttpRequest.responseText);
+                    console.log(XMLHttpRequest.responseText);
                     alert(XMLHttpRequest.responseText);
                 }
             });
