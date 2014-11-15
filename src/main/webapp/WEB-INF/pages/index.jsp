@@ -42,8 +42,8 @@
                 </div>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="user.html">用户版</a></li>
-                <li><a href="teacher.html">教员版</a></li>
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="teacher.html">教员页</a></li>
             </ul>
         </div>
         <div class="navbar-right">
@@ -220,10 +220,38 @@
                     <img src="${teacher.avatar}">
                 </div>
                 <div class="teacher-content text-center">
-                    <p>${teacher.name}</p>
-                    <p>${teacher.info.school}</p>
-                    <p>${teacher.username}</p>
-                    <a href="#" class="btn btn-success">预约</a>
+                    <p>
+                        ${teacher.name}
+                        <c:if test="${empty teacher.info.sex or not teacher.info.sex}">
+                            男
+                        </c:if>
+                        <c:if test="${not empty teacher.info.sex and teacher.info.sex}">
+                            女
+                        </c:if>
+                    </p>
+                    <p>
+                        <c:if test="${teacher.info.identity == 1}">
+                        <p class="teacher-info">
+                            在职教员
+                        </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 2}">
+                            <p class="teacher-info">
+                                专职教员
+                            </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 3}">
+                            <p class="teacher-info">
+                                大学生教员
+                            </p>
+                        </c:if>
+                    </p>
+                    <p>
+                        <c:forEach items="${teacher.info.courses}" var="course">
+                            <span class="label label-info">${course.name}</span>
+                        </c:forEach>
+                    </p>
+                    <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
                 </div>
             </div>
         </div>
@@ -233,17 +261,45 @@
 <div class="row">
     <div class="rank col-lg-4">
         <h2>英语教员推荐</h2>
-        <c:forEach items="${row1List}" var="teacher">
+        <c:forEach items="${row2List}" var="teacher">
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
+                        <img src="${teacher.avatar}">
                     </div>
                     <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
+                        <p>
+                                ${teacher.name}
+                            <c:if test="${empty teacher.info.sex or not teacher.info.sex}">
+                                男
+                            </c:if>
+                            <c:if test="${not empty teacher.info.sex and teacher.info.sex}">
+                                女
+                            </c:if>
+                        </p>
+                        <p>
+                            <c:if test="${teacher.info.identity == 1}">
+                        <p class="teacher-info">
+                            在职教员
+                        </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 2}">
+                            <p class="teacher-info">
+                                专职教员
+                            </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 3}">
+                            <p class="teacher-info">
+                                大学生教员
+                            </p>
+                        </c:if>
+                        </p>
+                        <p>
+                            <c:forEach items="${teacher.info.courses}" var="course">
+                                <span class="label label-info">${course.name}</span>
+                            </c:forEach>
+                        </p>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
                     </div>
                 </div>
             </div>
@@ -258,13 +314,41 @@
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
+                        <img src="${teacher.avatar}">
                     </div>
                     <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
+                        <p>
+                                ${teacher.name}
+                            <c:if test="${empty teacher.info.sex or not teacher.info.sex}">
+                                男
+                            </c:if>
+                            <c:if test="${not empty teacher.info.sex and teacher.info.sex}">
+                                女
+                            </c:if>
+                        </p>
+                        <p>
+                            <c:if test="${teacher.info.identity == 1}">
+                        <p class="teacher-info">
+                            在职教员
+                        </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 2}">
+                            <p class="teacher-info">
+                                专职教员
+                            </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 3}">
+                            <p class="teacher-info">
+                                大学生教员
+                            </p>
+                        </c:if>
+                        </p>
+                        <p>
+                            <c:forEach items="${teacher.info.courses}" var="course">
+                                <span class="label label-info">${course.name}</span>
+                            </c:forEach>
+                        </p>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
                     </div>
                 </div>
             </div>
@@ -279,13 +363,41 @@
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
-                        <img src="/public/img/bohan.png">
+                        <img src="${teacher.avatar}">
                     </div>
                     <div class="teacher-content text-center">
-                        <p>张伯函</p>
-                        <p>鞍山师范学院</p>
-                        <p>东城区</p>
-                        <a href="#" class="btn btn-success">预约</a>
+                        <p>
+                                ${teacher.name}
+                            <c:if test="${empty teacher.info.sex or not teacher.info.sex}">
+                                男
+                            </c:if>
+                            <c:if test="${not empty teacher.info.sex and teacher.info.sex}">
+                                女
+                            </c:if>
+                        </p>
+                        <p>
+                            <c:if test="${teacher.info.identity == 1}">
+                        <p class="teacher-info">
+                            在职教员
+                        </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 2}">
+                            <p class="teacher-info">
+                                专职教员
+                            </p>
+                        </c:if>
+                        <c:if test="${teacher.info.identity == 3}">
+                            <p class="teacher-info">
+                                大学生教员
+                            </p>
+                        </c:if>
+                        </p>
+                        <p>
+                            <c:forEach items="${teacher.info.courses}" var="course">
+                                <span class="label label-info">${course.name}</span>
+                            </c:forEach>
+                        </p>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
                     </div>
                 </div>
             </div>

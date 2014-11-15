@@ -222,17 +222,17 @@
     <div class="col-md-8">
         <h1>${teacher.name}</h1>
         <c:if test="${teacher.info.identity == 1}">
-            <p class="teacher-info">
+            <p class="teacher-info text-bold">
                 在职教员
             </p>
         </c:if>
         <c:if test="${teacher.info.identity == 2}">
-            <p class="teacher-info">
+            <p class="teacher-info text-bold">
                 专职教员
             </p>
         </c:if>
         <c:if test="${teacher.info.identity == 3}">
-            <p class="teacher-info">
+            <p class="teacher-info  text-bold">
                 大学生教员
             </p>
         </c:if>
@@ -249,10 +249,12 @@
     <h2>授课时间</h2>
     <p>${teacher.info.freeTime}</p>
 </div>
-<div class="row">
-    <h2>授课视频</h2>
-    ${teacher.info.videoUrl}
-</div>
+<c:if test="${not empty teacher.info.videoUrl}">
+    <div class="row">
+        <h2>授课视频</h2>
+            ${teacher.info.videoUrl}
+    </div>
+</c:if>
 </div>
 
 <jsp:include page="common/footer.jsp" />
