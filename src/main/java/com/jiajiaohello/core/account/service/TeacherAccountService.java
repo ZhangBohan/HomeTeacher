@@ -3,9 +3,11 @@ package com.jiajiaohello.core.account.service;
 import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.exception.UserLogicException;
+import com.jiajiaohello.support.web.Pager;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,6 +41,8 @@ public interface TeacherAccountService {
     List<TeacherAccount> getRecommendTeacherAccounts(RecommendType recommendType, Integer start, Integer size);
     
     List<TeacherAccount> getTeacherAccounts(TeacherAccount entity,Integer firstResult, Integer maxResult) ;
+    
+    List<TeacherAccount> getTeacherAccountsByCondition(SearchForm searchform,Pager page);
     
     int getCount();
     

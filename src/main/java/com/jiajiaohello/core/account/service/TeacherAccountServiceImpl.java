@@ -5,12 +5,14 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.*;
+import com.jiajiaohello.support.web.Pager;
 
 import com.jiajiaohello.support.exception.UserLogicException;
 import org.apache.commons.beanutils.BeanUtils;
@@ -177,5 +179,26 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
         }
         return account;
     }
+
+	@Override
+	public List<TeacherAccount> getTeacherAccountsByCondition(
+			SearchForm searchform, Pager page) {
+		if(page.getTotal()==-1){
+			int count=getCount();
+			page.setTotal(count);
+		}
+		TeacherAccount account=new TeacherAccount();
+		account.setUsername(searchform.getUsername());
+		TeacherInfo info =new TeacherInfo();
+		info.setDescription(searchform.getDescription());
+		info.setFreeTime(searchform.getFreeTime());
+		info.setIdentity(searchform.getIdentity());
+		account.setName(searchform.getName());
+		info.setSex( searchform.getSex());
+		account.setUsername(searchform.getUsername());
+		account.setInfo(info);
+		List<TeacherAccount> teacherAccountList=getTeacherAccounts(account,page.getOffset(), page.getMaxResult());
+		return teacherAccountList;
+	}
     
 }

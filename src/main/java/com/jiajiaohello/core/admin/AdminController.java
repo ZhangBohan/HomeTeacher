@@ -23,6 +23,7 @@ import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.account.service.UserAccountService;
 import com.jiajiaohello.core.admin.dto.EditForm;
+import com.jiajiaohello.core.audit.service.AuditService;
 import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.AuthHelper;
@@ -45,6 +46,8 @@ public class AdminController {
 	private TeacherAccountService teacherAccountService;
 	@Autowired
 	private UserAccountService userAccountService;
+	@Autowired
+	private AuditService auditService;
 	@RequestMapping
 	public String index() {
 		return "admin/index";
@@ -67,29 +70,15 @@ public class AdminController {
 		}
 		return "redirect:/admin/edit";
 	}
-	@RequestMapping(value = "/showteacher", method = RequestMethod.GET)
+	@RequestMapping(value = "/teacher/show", method = RequestMethod.GET)
 	public String getShowTeacher(Model model,SearchForm searchform,Pager page) {
-		if(page.getTotal()==-1){
-			int count=teacherAccountService.getCount();
-			page.setTotal(count);
-		}
-		TeacherAccount account=new TeacherAccount();
-		account.setUsername(searchform.getUsername());
-		TeacherInfo info =new TeacherInfo();
-		info.setDescription(searchform.getDescription());
-		info.setFreeTime(searchform.getFreeTime());
-		info.setIdentity(searchform.getIdentity());
-		account.setName(searchform.getName());
-		info.setSex( searchform.getSex());
-		account.setUsername(searchform.getUsername());
-		account.setInfo(info);
-		List<TeacherAccount> teahcerAccountList=teacherAccountService.getTeacherAccounts(account,page.getOffset(), page.getMaxResult());
-		model.addAttribute("teahcerAccountList",teahcerAccountList);
+		List<TeacherAccount> teacherAccountList=teacherAccountService.getTeacherAccountsByCondition(searchform, page);
+		model.addAttribute("teacherAccountList",teacherAccountList);
 		model.addAttribute("page", page);
-		return "admin/showteacher";
+		return "admin/teacher/show";
 	}
-	@RequestMapping(value = "/verifyteacher", method = RequestMethod.GET)
-	public String getVerityTeacher(Model model,SearchForm searchform,Pager page) {
+	@RequestMapping(value = "/teacher/verify", method = RequestMethod.GET)
+	public String getAudits(Model model,SearchForm searchform,Pager page) {
 		if(page.getTotal()==-1){
 			int count=teacherAccountService.getCount();
 			page.setTotal(count);
@@ -105,38 +94,31 @@ public class AdminController {
 		info.setSex( searchform.getSex());
 		account.setUsername(searchform.getUsername());
 		account.setInfo(info);
-		List<TeacherAccount> teahcerAccountList=teacherAccountService.getTeacherAccounts(account,page.getOffset(), page.getMaxResult());
-		model.addAttribute("teahcerAccountList",teahcerAccountList);
+		List<TeacherAccount> teacherAccountList=teacherAccountService.getTeacherAccounts(account,page.getOffset(), page.getMaxResult());
+		model.addAttribute("teacherAccountList",teacherAccountList);
 		model.addAttribute("page", page);
-		return "admin/verifyteacher";
+		return "admin/teacher/verify";
 	}
-	@RequestMapping(value = "/showuser", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/show", method = RequestMethod.GET)
 	public String getShowUser(Model model,SearchForm searchform,Pager page) {
-		if(page.getTotal()==-1){
-			int count=userAccountService.getCount();
-			page.setTotal(count);
-		}
-		UserAccount account=new UserAccount();
-		account.setUsername(searchform.getUsername());
-		account.setName(searchform.getName());
-		List<UserAccount> userAccountList=userAccountService.getUserAccounts(account,page.getOffset(), page.getMaxResult());
+		List<UserAccount> userAccountList=userAccountService.getUserAccountsByCondition(searchform, page);
 		model.addAttribute("userAccountList",userAccountList);
 		model.addAttribute("page", page);
-		return "admin/showuser";
+		return "admin/user/show";
 	}
 	@RequestMapping(value = "/verify", method = RequestMethod.GET)
 	public String verityTeacher(VerifyForm verifyform) {
 		teacherAccountService.verityTeacher(verifyform);
-		return "redirect:verifyteacher";
+		return "redirect:/admin/teacher/verify";
 	}
-	@RequestMapping(value = "/editteacher", method = RequestMethod.GET)
+	@RequestMapping(value = "/teacher/edit", method = RequestMethod.GET)
 	public String editTeacher(Model model,String username) {
 		TeacherAccount teacherAccount = teacherAccountService.get(username);
 		model.addAttribute("teacherAccount", teacherAccount);
-		return "admin/editteacher";
+		return "admin/teacher/edit";
 	}
 
-	@RequestMapping(value = "/editteacher", method = RequestMethod.POST)
+	@RequestMapping(value = "/teacher/edit", method = RequestMethod.POST)
 	public String postEditTeacher(@Valid com.jiajiaohello.core.teacher.dto.EditForm editForm, BindingResult result, RedirectAttributes redirectAttributes) throws IOException {
 		if(result.hasErrors()) {
 			for (ObjectError objectError : result.getAllErrors()) {
@@ -146,7 +128,7 @@ public class AdminController {
 			teacherAccountService.updateTeacher(editForm);
 			MessageHelper.addSuccessAttribute(redirectAttributes, "更新成功！");
 		}
-		return "redirect:editteacher";
+		return "redirect:/admin/teacher/edit";
 	}
 
 }
