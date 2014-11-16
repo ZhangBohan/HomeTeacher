@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import java.util.Date;
 
 /**
+ * 审核类
+ *
  * User: bohan
  * Date: 11/8/14
  * Time: 3:28 PM

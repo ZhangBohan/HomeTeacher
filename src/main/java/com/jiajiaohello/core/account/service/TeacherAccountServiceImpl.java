@@ -38,6 +38,8 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     @Autowired
     private CommonDao<TeacherAccount> teacherAccountCommonDao;
     @Autowired
+    private CommonDao<TeacherInfo> teacherInfoCommonDao;
+    @Autowired
     private OSSService ossService;
     @Autowired
     private Jedis jedis;
@@ -139,7 +141,7 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 		TeacherAccount account = get(verifyform.getUsername());
 		
 		account.getInfo().setAudited(verifyform.isAudited());
-        teacherAccountCommonDao.saveOrUpdate(account);
+        teacherInfoCommonDao.saveOrUpdate(account.getInfo());
 	}
 
 	@Override
