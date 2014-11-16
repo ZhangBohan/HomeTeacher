@@ -117,13 +117,14 @@
 										</tr>
 										<c:forEach var="teacherAccount" items="${teahcerAccountList}">
 											<tr>
-												<td>${teacherAccount.username}</td>
-												<td><c:choose>
+												<td><a
+													href="editteacher?username=${teacherAccount.username}">${teacherAccount.username}</a></td>
+												<td width="100"><c:choose>
 														<c:when test="${empty teacherAccount.avatar}">
-															<img data-src="holder.js/72x72" />
+															<img data-src="holder.js/100x100" />
 														</c:when>
 														<c:otherwise>
-															<img src="${teacherAccount.avatar}" class="avatar" > 
+															<img src="${teacherAccount.avatar}" class="avatar">
 														</c:otherwise>
 													</c:choose></td>
 												<td>${teacherAccount.name}</td>
@@ -132,8 +133,8 @@
 														var="course">
 														<span class="label label-info">${course.name}</span>
 													</c:forEach></td>
-												<td>${teacherAccount.info.description }</td>
-												<td>${teacherAccount.info.freeTime }</td>
+												<td width="150">${teacherAccount.info.description }</td>
+												<td width="150">${teacherAccount.info.freeTime }</td>
 												<td><c:choose>
 														<c:when test="${teacherAccount.info.sex}">女</c:when>
 														<c:otherwise>男</c:otherwise>
