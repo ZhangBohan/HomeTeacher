@@ -27,9 +27,16 @@
                 <a href="/admin/edit" <c:if test="${param.activeMenu == 'edit'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>个人资料</span>
                 </a>
-                <a href="/admin/course" <c:if test="${param.activeMenu == 'course'}">class="menu-active" </c:if>>
-                    <i class="fa fa-th"></i> <span>选择科目</span>
+                <a href="/admin/showteacher" <c:if test="${param.activeMenu == 'showteacher'}">class="menu-active" </c:if>>
+                    <i class="fa fa-th"></i> <span>查看教员资料</span>
                 </a>
+                <a href="/admin/showuser" <c:if test="${param.activeMenu == 'showuser'}">class="menu-active" </c:if>>
+                    <i class="fa fa-th"></i> <span>查看用户资料</span>
+                </a>
+                <a href="/admin/verifyteacher" <c:if test="${param.activeMenu =='verifyteacher'}">class="menu-active" </c:if>>
+                    <i class="fa fa-th"></i> <span>审核教员资料</span>
+                </a>
+                
             </li>
         </ul>
     </section>
