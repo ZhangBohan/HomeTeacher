@@ -124,7 +124,8 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
     @Override
     public List<TeacherAccount> getRecommendTeacherAccounts(RecommendType recommendType, Integer start, Integer size) {
-        List<String> teacherIdStrings = jedis.lrange(RedisKeys.recommendTeachers.getKey(recommendType), start, size);
+        int end = start + size - 1;
+        List<String> teacherIdStrings = jedis.lrange(RedisKeys.recommendTeachers.getKey(recommendType), start, end);
         List<TeacherAccount> list = new ArrayList<>();
         for (String teacherIdString : teacherIdStrings) {
             TeacherAccount teacherAccount = teacherAccountCommonDao.get(Integer.parseInt(teacherIdString), TeacherAccount.class);

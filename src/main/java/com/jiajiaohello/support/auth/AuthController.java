@@ -4,11 +4,11 @@ import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.account.service.UserAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
-import com.jiajiaohello.support.sms.SMSException;
+import com.jiajiaohello.support.exception.CrashException;
+import com.jiajiaohello.support.exception.JSONCrashException;
 import com.jiajiaohello.support.sms.SMSService;
 import com.jiajiaohello.support.web.MessageHelper;
 import org.apache.commons.lang3.BooleanUtils;
-
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import redis.clients.jedis.Jedis;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -81,7 +84,7 @@ public class AuthController {
         }
 
         String key = "verifies:" + form.getPhone();
-        if("1111".equals(form.getVerifyCode()) && !form.getVerifyCode().equals(jedis.get(key))) {
+        if("1111".equals(form.getVerifyCode()) || !form.getVerifyCode().equals(jedis.get(key))) {
             MessageHelper.addErrorAttribute(model, "验证码错误");
             return "auth/register";
         }
@@ -112,10 +115,22 @@ public class AuthController {
     }
     @RequestMapping("/verify/{phone}")
     @ResponseBody
-    public void verifyCode(@PathVariable("phone") String phone) throws SMSException {
+    public void verifyCode(@PathVariable("phone") String phone, HttpServletRequest request) throws CrashException {
+        if(StringUtils.isBlank(phone) || phone.length() != 11) {
+            throw new JSONCrashException("非法手机号！");
+        }
 
-        String key = "verifies:" + phone;
+        // 60秒内同IP不能重复发送
+        String ip = CommonHelper.getIP(request);
+        String key = "verify:ips:" + ip;
+        if(jedis.get(key) != null) {
+            throw new JSONCrashException("请求频繁");
+        } else {
+            jedis.set(key, "");
+            jedis.expire(key, 60);  // 一分钟过期
+        }
 
+        key = "verify:phones:" + phone;
         String verifyCode = jedis.get(key);
         if(StringUtils.isBlank(verifyCode)) {
             verifyCode = RandomStringUtils.random(4, false, true);
