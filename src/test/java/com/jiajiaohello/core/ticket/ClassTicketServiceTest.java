@@ -14,10 +14,7 @@ public class ClassTicketServiceTest extends BaseTest {
     @Before
     public void setUp() throws Exception {
         classTicket = new ClassTicket();
-        classTicket.setName("张伯函");
-        classTicket.setDescription("找一个初中地理老师");
-        classTicket.setAddress("东城区");
-        classTicket.setPhone("18511870281");
+        classTicket.setDescription("东城区");
         classTicket.getCourse().setId(1);
     }
 

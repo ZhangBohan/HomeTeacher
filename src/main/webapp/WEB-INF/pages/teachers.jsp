@@ -211,6 +211,42 @@
         </div>
     </div>
 </div>
+<div class="box box-primary">
+    <div class="box-header">
+        <h2>教员资料：${teacher.name}</h2>
+    </div>
+    <div class="box-body">
+        <img src="${teacher.avatar}" class="avatar-big">
+        <div class="text-center">
+            <span class="label label-success">认证教员</span>
+            <span class="label label-success">教学认可</span>
+        </div>
+
+        <div class="box-group">
+            <div class="box-info">
+                <div class="box-header">
+
+                </div>
+                <div class="box-body"></div>
+            </div>
+            <div class="box-info">
+                <div class="box-header">
+
+                </div>
+                <div class="box-body"></div>
+            </div>
+            <div class="box-info">
+                <div class="box-header">
+
+                </div>
+                <div class="box-body"></div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button class="btn btn-success btn-lg">免费预约</button>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-2">
         <img src="${teacher.avatar}" class="avatar-big">
@@ -219,7 +255,7 @@
             <span class="label label-success">教学认可</span>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-4">
         <h1>${teacher.name}</h1>
         <c:if test="${teacher.info.identity == 1}">
             <p class="teacher-info text-bold">
@@ -240,6 +276,9 @@
             ${teacher.info.school}
         </p>
     </div>
+</div>
+<div class="row">
+    <button class="btn btn-success btn-lg">免费预约</button>
 </div>
 <div class="row">
     <h2>个人资料</h2>
@@ -268,5 +307,10 @@
 <script src="../js/AdminLTE/app.js" type="text/javascript"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="../js/AdminLTE/demo.js" type="text/javascript"></script>
+<script>
+    $(function () {
+
+    });
+</script>
 </body>
 </html>

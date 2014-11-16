@@ -251,7 +251,7 @@
                             <span class="label label-info">${course.name}</span>
                         </c:forEach>
                     </p>
-                    <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
+                    <a href="/teachers/${teacher.id}" class="btn btn-success">查看</a>
                 </div>
             </div>
         </div>
@@ -299,7 +299,7 @@
                                 <span class="label label-info">${course.name}</span>
                             </c:forEach>
                         </p>
-                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">查看</a>
                     </div>
                 </div>
             </div>
@@ -348,7 +348,7 @@
                                 <span class="label label-info">${course.name}</span>
                             </c:forEach>
                         </p>
-                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">查看</a>
                     </div>
                 </div>
             </div>
@@ -397,7 +397,7 @@
                                 <span class="label label-info">${course.name}</span>
                             </c:forEach>
                         </p>
-                        <a href="/teachers/${teacher.id}" class="btn btn-success">预约</a>
+                        <a href="/teachers/${teacher.id}" class="btn btn-success">查看</a>
                     </div>
                 </div>
             </div>

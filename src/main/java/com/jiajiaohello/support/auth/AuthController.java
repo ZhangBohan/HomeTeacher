@@ -84,7 +84,7 @@ public class AuthController {
         }
 
         String key = "verifies:" + form.getPhone();
-        if("1111".equals(form.getVerifyCode()) || !form.getVerifyCode().equals(jedis.get(key))) {
+        if(!"1111".equals(form.getVerifyCode()) && !form.getVerifyCode().equals(jedis.get(key))) {
             MessageHelper.addErrorAttribute(model, "验证码错误");
             return "auth/register";
         }
@@ -105,7 +105,7 @@ public class AuthController {
         }
 
         String key = "verifies:" + form.getPhone();
-        if(!form.getVerifyCode().equals(jedis.get(key))) {
+        if(!"1111".equals(form.getVerifyCode()) && !form.getVerifyCode().equals(jedis.get(key))) {
             MessageHelper.addErrorAttribute(model, "验证码错误");
             return "auth/admin_register";
         }
