@@ -5,6 +5,7 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.teacher.dto.EditForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.RegisterForm;
+import com.jiajiaohello.support.exception.UserLogicException;
 
 import java.io.IOException;
 import java.util.List;
@@ -31,7 +32,7 @@ public interface TeacherAccountService {
     
     void updateTeacher(EditForm editForm) throws IOException;
      
-    void create(RegisterForm registerForm);
+    void create(RegisterForm registerForm) throws UserLogicException;
 
     void updateCourses(Integer[] courseIds);
 

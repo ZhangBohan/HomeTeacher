@@ -12,6 +12,7 @@ import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.*;
 
+import com.jiajiaohello.support.exception.UserLogicException;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,12 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     
     
     @Override
-    public void create(RegisterForm registerForm) {
-        TeacherAccount teacherAccount = new TeacherAccount();
+    public void create(RegisterForm registerForm) throws UserLogicException {
+        TeacherAccount teacherAccount = get(registerForm.getPhone());
+        if(teacherAccount != null) {
+            throw new UserLogicException("该账号已存在！");
+        }
+        teacherAccount = new TeacherAccount();
         try {
             BeanUtils.copyProperties(teacherAccount, registerForm);
         } catch (Exception e) {

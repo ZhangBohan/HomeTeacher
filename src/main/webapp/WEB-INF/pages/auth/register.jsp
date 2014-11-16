@@ -33,6 +33,11 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
+    <c:if test="${not empty message}">
+        <div class="alert alert-${message.type}">
+                ${message.message}
+        </div>
+    </c:if>
     <div class="header">注册</div>
     <form action="" method="post">
         <div class="body bg-gray">
@@ -102,6 +107,26 @@
                     alert(XMLHttpRequest.responseText);
                 }
             });
+        });
+
+        $("#username").blur(function () {
+            var phone = $("#username").val();
+            console.log('phone', phone);
+            if(!/1[3458]\d{9}/g.test(phone)) {
+                alert("手机号非法");
+            } else {
+                $.ajax({
+                    url: '/auth/phones/' + phone,
+                    success: function () {
+                        console.debug('send message success!');
+                        // 验证成功
+                    },
+                    error: function (XMLHttpRequest) {
+                        console.log(XMLHttpRequest.responseText);
+                        alert(XMLHttpRequest.responseText);
+                    }
+                });
+            }
         });
     });
 </script>

@@ -32,6 +32,11 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
+    <c:if test="${not empty message}">
+        <div class="alert alert-${message.type}">
+            ${message.message}
+        </div>
+    </c:if>
     <div class="header">用户登录 | <a class="header-link" href="/auth/login/teacher">教员点我登录</a></div>
     <form action="/user/j_spring_security_check" method="post">
         <div class="body bg-gray">

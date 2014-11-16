@@ -32,6 +32,11 @@
 <body class="bg-light-blue">
 
 <div class="form-box" id="login-box">
+    <c:if test="${not empty message}">
+        <div class="alert alert-${message.type}">
+            ${message.message}
+        </div>
+    </c:if>
     <div class="header">管理员登录</div>
     <form action="/admin/j_spring_security_check" method="post">
         <div class="body bg-gray">

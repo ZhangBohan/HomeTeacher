@@ -1,11 +1,14 @@
 package com.jiajiaohello.support.auth;
 
+import com.jiajiaohello.core.account.model.Account;
+import com.jiajiaohello.core.account.service.AccountService;
 import com.jiajiaohello.core.account.service.ManagerAccountService;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.account.service.UserAccountService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.exception.CrashException;
 import com.jiajiaohello.support.exception.JSONCrashException;
+import com.jiajiaohello.support.exception.UserLogicException;
 import com.jiajiaohello.support.sms.SMSService;
 import com.jiajiaohello.support.web.MessageHelper;
 import org.apache.commons.lang3.BooleanUtils;
@@ -39,6 +42,8 @@ public class AuthController {
     private ManagerAccountService managerAccountService;
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private AccountService accountService;
     @Autowired
     private SMSService smsService;
 
@@ -74,7 +79,7 @@ public class AuthController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String postTeacherRegister(@Valid RegisterForm form, BindingResult result, Model model) {
+    public String postTeacherRegister(@Valid RegisterForm form, BindingResult result, Model model) throws UserLogicException {
         model.addAttribute("form", form);
         if(result.hasErrors()) {
             for (ObjectError objectError : result.getAllErrors()) {
@@ -113,6 +118,7 @@ public class AuthController {
         managerAccountService.create(form);
         return "redirect:/auth/login/admin";
     }
+
     @RequestMapping("/verify/{phone}")
     @ResponseBody
     public void verifyCode(@PathVariable("phone") String phone, HttpServletRequest request) throws CrashException {
@@ -142,5 +148,19 @@ public class AuthController {
 
         jedis.set(key, verifyCode);
         jedis.expire(key, 60 * 5); // 五分钟内有效
+    }
+
+
+    @RequestMapping("/phones/{phone}")
+    @ResponseBody
+    public void phones(@PathVariable("phone") String phone, HttpServletRequest request) throws CrashException {
+        if(StringUtils.isBlank(phone) || phone.length() != 11) {
+            throw new JSONCrashException("非法手机号！");
+        }
+
+        Account account = accountService.get(phone);
+        if(account != null) {
+            throw new JSONCrashException("该账号已存在！");
+        }
     }
 }
