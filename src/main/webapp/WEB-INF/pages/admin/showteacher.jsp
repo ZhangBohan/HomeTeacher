@@ -99,15 +99,18 @@
 							<input type="hidden" id="page" name="page" value="${ page.page }">
 							<input type="hidden" id="size" name="size" value="${ page.size }">
 							<input type="hidden" id="total" name="total"
-								value="${ page.total }">
+								value="${ page.total }"> <input type="hidden" id=avatar
+								name="total" value="${teacherAccount.avatar}">
 
 							<div class="box">
 								<table class="table table-bordered">
 									<tbody>
 										<tr>
 											<th>用户名</th>
+											<th>头像</th>
 											<th>姓名</th>
 											<th>学校</th>
+											<th>课程</th>
 											<th>描述</th>
 											<th>空闲时间</th>
 											<th>性别</th>
@@ -115,8 +118,20 @@
 										<c:forEach var="teacherAccount" items="${teahcerAccountList}">
 											<tr>
 												<td>${teacherAccount.username}</td>
+												<td><c:choose>
+														<c:when test="${empty teacherAccount.avatar}">
+															<img data-src="holder.js/72x72" />
+														</c:when>
+														<c:otherwise>
+															<img src="${teacherAccount.avatar}" class="avatar">
+														</c:otherwise>
+													</c:choose></td>
 												<td>${teacherAccount.name}</td>
 												<td>${teacherAccount.info.school }</td>
+												<td><c:forEach items="${teacherAccount.info.courses}"
+														var="course">
+														<span class="label label-info">${course.name}</span>
+													</c:forEach></td>
 												<td>${teacherAccount.info.description }</td>
 												<td>${teacherAccount.info.freeTime }</td>
 												<td><c:choose>
@@ -165,23 +180,23 @@
 				var page = $('#page').val();
 				total = $('#total').val();
 				size = $('#size').val();
-				page=page+1;
-				var maxpage=1;
+				page = page + 1;
+				var maxpage = 1;
 				if (total % size == 0) {
-					maxpage =total / size;
+					maxpage = total / size;
 				} else {
-					maxpage =parseInt(total / size) + 1;
+					maxpage = parseInt(total / size) + 1;
 				}
 				if (page > maxpage) {
 					page = maxpage;
 				}
-				alert("page="+page+",maxpage="+maxpage);
+				alert("page=" + page + ",maxpage=" + maxpage);
 				$("#page").val(page);
 				$("#main-form").submit();
 			});
 			$(".previous_page").click(function() {
 				var page = $('#page').val();
-				page=page-1;
+				page = page - 1;
 				if (page <= 0) {
 					page = 1;
 				}
@@ -190,6 +205,6 @@
 			});
 		})(window.jQuery);
 	</script>
-	<script src="../js/app.js" type="text/javascript"></script>
+	<script src="/public/js/app.js" type="text/javascript"></script>
 </body>
 </html>

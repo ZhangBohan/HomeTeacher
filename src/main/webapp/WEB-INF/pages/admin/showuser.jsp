@@ -178,6 +178,6 @@
 			});
 		})(window.jQuery);
 	</script>
-	<script src="../js/app.js" type="text/javascript"></script>
+	<script src="/public/js/app.js" type="text/javascript"></script>
 </body>
 </html>

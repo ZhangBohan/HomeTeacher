@@ -106,8 +106,10 @@
 									<tbody>
 										<tr>
 											<th>用户名</th>
+											<th>头像</th>
 											<th>姓名</th>
 											<th>学校</th>
+											<th>课程</th>
 											<th>描述</th>
 											<th>空闲时间</th>
 											<th>性别</th>
@@ -116,8 +118,20 @@
 										<c:forEach var="teacherAccount" items="${teahcerAccountList}">
 											<tr>
 												<td>${teacherAccount.username}</td>
+												<td><c:choose>
+														<c:when test="${empty teacherAccount.avatar}">
+															<img data-src="holder.js/72x72" />
+														</c:when>
+														<c:otherwise>
+															<img src="${teacherAccount.avatar}" class="avatar" > 
+														</c:otherwise>
+													</c:choose></td>
 												<td>${teacherAccount.name}</td>
 												<td>${teacherAccount.info.school }</td>
+												<td><c:forEach items="${teacherAccount.info.courses}"
+														var="course">
+														<span class="label label-info">${course.name}</span>
+													</c:forEach></td>
 												<td>${teacherAccount.info.description }</td>
 												<td>${teacherAccount.info.freeTime }</td>
 												<td><c:choose>
@@ -192,6 +206,6 @@
 			});
 		})(window.jQuery);
 	</script>
-	<script src="../js/app.js" type="text/javascript"></script>
+	<script src="/public/js/app.js" type="text/javascript"></script>
 </body>
 </html>
