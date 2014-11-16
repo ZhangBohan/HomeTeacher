@@ -21,4 +21,5 @@ public class UserUserDetailService implements UserDetailsService {
     public UserAccount loadUserByUsername(String username) throws UsernameNotFoundException {
         return userAccountService.get(username);
     }
+    
 }

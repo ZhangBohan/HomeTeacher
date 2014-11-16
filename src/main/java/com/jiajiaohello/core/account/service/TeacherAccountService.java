@@ -3,6 +3,7 @@ package com.jiajiaohello.core.account.service;
 import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.RegisterForm;
 
 import java.io.IOException;
@@ -33,4 +34,10 @@ public interface TeacherAccountService {
     void updateCourses(Integer[] courseIds);
 
     List<TeacherAccount> getRecommendTeacherAccounts(RecommendType recommendType, Integer start, Integer size);
+    
+    List<TeacherAccount> getTeacherAccounts(TeacherAccount entity,Integer firstResult, Integer maxResult) ;
+    
+    int getCount();
+    
+     void verityTeacher(VerifyForm verifyform) ;
 }

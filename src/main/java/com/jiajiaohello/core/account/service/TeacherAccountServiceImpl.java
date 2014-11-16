@@ -5,18 +5,22 @@ import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.auth.TeacherUserDetailService;
 import com.jiajiaohello.support.core.*;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import redis.clients.jedis.Jedis;
 
 import javax.transaction.Transactional;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -131,4 +135,28 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
         return list;
     }
+
+	@Override
+	public List<TeacherAccount> getTeacherAccounts(TeacherAccount entity,Integer firstResult, Integer maxResult) {
+		
+		List<TeacherAccount> teacherAccountList =teacherAccountCommonDao.getList(entity, firstResult, maxResult);
+		
+		return teacherAccountList;
+	}
+
+	@Override
+	public int getCount() {
+		
+		return teacherAccountCommonDao.getCount(TeacherAccount.class);
+	}
+
+	@Override
+	public void verityTeacher(VerifyForm verifyform) {
+		TeacherAccount account = get(verifyform.getUsername());
+		
+		account.getInfo().setAudited(verifyform.isAudited());
+        teacherAccountCommonDao.saveOrUpdate(account);
+	}
+    
+    
 }

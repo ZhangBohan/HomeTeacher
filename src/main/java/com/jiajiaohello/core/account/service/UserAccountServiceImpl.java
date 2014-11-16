@@ -1,16 +1,20 @@
 package com.jiajiaohello.core.account.service;
 
+import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.core.CommonDao;
 import com.jiajiaohello.support.core.CommonHelper;
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: bohan
@@ -48,4 +52,17 @@ public class UserAccountServiceImpl implements UserAccountService {
         userAccount.setPassword(new PasswordEncoder().encode(form.getPassword()));   // 加密后保存
         userAccountCommonDao.saveOrUpdate(userAccount);
     }
+    @Override
+	public List<UserAccount> getUserAccounts(UserAccount entity,Integer firstResult, Integer maxResult) {
+		
+		List<UserAccount> userAccountList =userAccountCommonDao.getList(entity, firstResult, maxResult);
+		
+		return userAccountList;
+	}
+
+	@Override
+	public int getCount() {
+		
+		return userAccountCommonDao.getCount(UserAccount.class);
+	}
 }

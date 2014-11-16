@@ -16,44 +16,49 @@ import java.util.List;
  */
 @Repository
 public class CommonDao<T> {
-    @Autowired
-    private HibernateTemplate hibernateTemplate;
+	@Autowired
+	private HibernateTemplate hibernateTemplate;
 
-    public T get(Integer id, Class<T> clazz) {
-        return hibernateTemplate.get(clazz, id);
-    }
+	public T get(Integer id, Class<T> clazz) {
+		return hibernateTemplate.get(clazz, id);
+	}
 
-    public T get(T entity) {
-        List<T> list = getList(entity);
-        if(CollectionUtils.isEmpty(list)) {
-            throw new EntityNotFoundException();
-        }
-        return list.get(0);
-    }
+	public T get(T entity) {
+		List<T> list = getList(entity);
+		if(CollectionUtils.isEmpty(list)) {
+			throw new EntityNotFoundException();
+		}
+		return list.get(0);
+	}
 
-    @Transactional
-    public void saveOrUpdate(T entity) {
-        hibernateTemplate.saveOrUpdate(entity);
-    }
+	@Transactional
+	public void saveOrUpdate(T entity) {
+		hibernateTemplate.saveOrUpdate(entity);
+	}
 
-    public List<T> getList(T entity) {
-        return hibernateTemplate.findByExample(entity);
-    }
+	public List<T> getList(T entity) {
+		return hibernateTemplate.findByExample(entity);
+	}
 
-    public List<T> getList(T entity, int firstResult, int maxResult) {
-        return hibernateTemplate.findByExample(entity, firstResult, maxResult);
-    }
+	public List<T> getList(T entity, int firstResult, int maxResult) {
+		return hibernateTemplate.findByExample(entity, firstResult, maxResult);
+	}
 
-    @Transactional
-    public void delete(T entity) {
-        hibernateTemplate.delete(entity);
-    }
+	@Transactional
+	public void delete(T entity) {
+		hibernateTemplate.delete(entity);
+	}
 
-    public void delete(Integer id, Class<T> clazz) {
-        T t = get(id, clazz);
-        if(t == null) {
-            throw new EntityNotFoundException();
-        }
-        delete(t);
-    }
+	public void delete(Integer id, Class<T> clazz) {
+		T t = get(id, clazz);
+		if(t == null) {
+			throw new EntityNotFoundException();
+		}
+		delete(t);
+	}
+	public int getCount( Class<T> clazz) {
+		String hql = "select count(1) from "+clazz.getName();
+		int count = Integer.parseInt(hibernateTemplate.find(hql).listIterator().next()+"");
+		return count;
+	}
 }
