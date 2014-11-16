@@ -57,6 +57,16 @@ public class MainController {
         return "hello";
     }
 
+    @RequestMapping(value = "/ticket", method = RequestMethod.GET)
+    public String getTicket(Integer teacherId, Model model) {
+        if(teacherId != null) {
+            TeacherAccount teacherAccount = teacherAccountService.get(teacherId);
+            model.addAttribute("teacher", teacherAccount);
+        }
+
+        return "ticket";
+    }
+
     @RequestMapping(value = "error",method = RequestMethod.GET)
     public void error() throws Exception {
         CommonHelper.LOG.error("exception test");
