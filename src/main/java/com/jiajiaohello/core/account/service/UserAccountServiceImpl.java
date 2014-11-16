@@ -1,11 +1,12 @@
 package com.jiajiaohello.core.account.service;
 
-import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.UserAccount;
+import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.support.auth.PasswordEncoder;
 import com.jiajiaohello.support.auth.RegisterForm;
 import com.jiajiaohello.support.core.CommonDao;
 import com.jiajiaohello.support.core.CommonHelper;
+import com.jiajiaohello.support.web.Pager;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +65,20 @@ public class UserAccountServiceImpl implements UserAccountService {
 	public int getCount() {
 		
 		return userAccountCommonDao.getCount(UserAccount.class);
+	}
+
+	@Override
+	public List<UserAccount> getUserAccountsByCondition(SearchForm searchform,
+			Pager page) {
+		
+		if(page.getTotal()==-1){
+			int count=getCount();
+			page.setTotal(count);
+		}
+		UserAccount account=new UserAccount();
+		account.setUsername(searchform.getUsername());
+		account.setName(searchform.getName());
+		List<UserAccount> userAccountList=getUserAccounts(account,page.getOffset(), page.getMaxResult());
+		return userAccountList;
 	}
 }
