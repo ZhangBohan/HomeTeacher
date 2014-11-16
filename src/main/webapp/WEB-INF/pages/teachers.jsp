@@ -213,87 +213,80 @@
 </div>
 <div class="box box-primary">
     <div class="box-header">
-        <h2>教员资料：${teacher.name}</h2>
+        <h2>
+            教员资料：${teacher.name}
+            <small>
+                <span class="label label-success">认证教员</span>
+                <span class="label label-success">教学认可</span>
+            </small>
+        </h2>
+
     </div>
     <div class="box-body">
-        <img src="${teacher.avatar}" class="avatar-big">
-        <div class="text-center">
-            <span class="label label-success">认证教员</span>
-            <span class="label label-success">教学认可</span>
+        <div class="row">
+            <div class="col-md-2">
+                <img src="${teacher.avatar}" class="avatar-big">
+            </div>
+            <div>
+                <p class="teacher-info">
+                    <c:if test="${empty teacher.info.sex or not teacher.info.sex}">
+                        男
+                    </c:if>
+                    <c:if test="${not empty teacher.info.sex and teacher.info.sex}">
+                        女
+                    </c:if>
+                </p>
+                <c:if test="${teacher.info.identity == 1}">
+                    <p class="teacher-info text-bold">
+                        在职教员
+                    </p>
+                </c:if>
+                <c:if test="${teacher.info.identity == 2}">
+                    <p class="teacher-info text-bold">
+                        专职教员
+                    </p>
+                </c:if>
+                <c:if test="${teacher.info.identity == 3}">
+                    <p class="teacher-info  text-bold">
+                        大学生教员
+                    </p>
+                </c:if>
+                <p class="teacher-info">
+                    ${teacher.info.school}
+                </p>
+            </div>
         </div>
-
-        <div class="box-group">
-            <div class="box-info">
-                <div class="box-header">
-
-                </div>
-                <div class="box-body"></div>
+        <div class="box box-info">
+            <div class="box-header">
+                <h3>个人资料</h3>
             </div>
-            <div class="box-info">
-                <div class="box-header">
-
-                </div>
-                <div class="box-body"></div>
-            </div>
-            <div class="box-info">
-                <div class="box-header">
-
-                </div>
-                <div class="box-body"></div>
+            <div class="box-body">
+                ${teacher.info.description}
             </div>
         </div>
+        <div class="box box-info">
+            <div class="box-header">
+                <h3>授课时间</h3>
+            </div>
+            <div class="box-body">
+                ${teacher.info.freeTime}
+            </div>
+        </div>
+        <c:if test="${not empty teacher.info.videoUrl}">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h3>授课视频</h3>
+                </div>
+                <div class="box-body">
+                        ${teacher.info.videoUrl}
+                </div>
+            </div>
+        </c:if>
     </div>
     <div class="box-footer">
         <button class="btn btn-success btn-lg">免费预约</button>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-2">
-        <img src="${teacher.avatar}" class="avatar-big">
-        <div class="text-center">
-            <span class="label label-success">认证教员</span>
-            <span class="label label-success">教学认可</span>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h1>${teacher.name}</h1>
-        <c:if test="${teacher.info.identity == 1}">
-            <p class="teacher-info text-bold">
-                在职教员
-            </p>
-        </c:if>
-        <c:if test="${teacher.info.identity == 2}">
-            <p class="teacher-info text-bold">
-                专职教员
-            </p>
-        </c:if>
-        <c:if test="${teacher.info.identity == 3}">
-            <p class="teacher-info  text-bold">
-                大学生教员
-            </p>
-        </c:if>
-        <p class="teacher-info">
-            ${teacher.info.school}
-        </p>
-    </div>
-</div>
-<div class="row">
-    <button class="btn btn-success btn-lg">免费预约</button>
-</div>
-<div class="row">
-    <h2>个人资料</h2>
-    <p>${teacher.info.description}</p>
-</div>
-<div class="row">
-    <h2>授课时间</h2>
-    <p>${teacher.info.freeTime}</p>
-</div>
-<c:if test="${not empty teacher.info.videoUrl}">
-    <div class="row">
-        <h2>授课视频</h2>
-            ${teacher.info.videoUrl}
-    </div>
-</c:if>
 </div>
 
 <jsp:include page="common/footer.jsp" />
