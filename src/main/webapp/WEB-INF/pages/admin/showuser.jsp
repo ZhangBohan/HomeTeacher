@@ -106,11 +106,20 @@
 									<tbody>
 										<tr>
 											<th>用户名</th>
+											<th>头像</th>
 											<th>姓名</th>
 										</tr>
 										<c:forEach var="userAccount" items="${userAccountList}">
 											<tr>
 												<td>${userAccount.username}</td>
+												<td width="100"><c:choose>
+														<c:when test="${empty teacherAccount.avatar}">
+															<img data-src="holder.js/100x100" />
+														</c:when>
+														<c:otherwise>
+															<img src="${teacherAccount.avatar}" class="avatar">
+														</c:otherwise>
+													</c:choose></td>
 												<td>${userAccount.name}</td>
 											</tr>
 										</c:forEach>

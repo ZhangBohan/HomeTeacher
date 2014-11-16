@@ -65,32 +65,13 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 
     @Override
     public void update(EditForm editForm) throws IOException {
-        TeacherAccount account = get(editForm.getUsername());
-
-        account.setName(editForm.getName());
-        account.getInfo().setCompleted(Boolean.TRUE);
-        account.getInfo().setDescription(editForm.getDescription());
-        account.getInfo().setSchool(editForm.getSchool());
-        account.getInfo().setFreeTime(editForm.getFreeTime());
-        account.getInfo().setIdentity(editForm.getIdentity());
-        account.getInfo().setSex(editForm.getSex());
-
-        String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
-        if(StringUtils.isNotBlank(avatar)) {
-            account.setAvatar(avatar);
-        }
-        String identityUrl = ossService.upload(editForm.getIdentityFile(), OSSBucket.avatar, "identity_" + account.getId());
-        if(StringUtils.isNotBlank(identityUrl)) {
-            account.getInfo().setIdentityUrl(identityUrl);
-        }
-        String educationUrl = ossService.upload(editForm.getEducationFile(), OSSBucket.avatar, "education_" + account.getId());
-        if(StringUtils.isNotBlank(educationUrl)) {
-            account.getInfo().setEducationUrl(educationUrl);
-        }
+    	TeacherAccount account = packageTeacherAccount(editForm);
         AuthHelper.reloadAccount(account, TeacherUserDetailService.authorities);
         teacherAccountCommonDao.saveOrUpdate(account);
     }
 
+    
+    
     @Override
     public void create(RegisterForm registerForm) {
         TeacherAccount teacherAccount = new TeacherAccount();
@@ -158,6 +139,36 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 		account.getInfo().setAudited(verifyform.isAudited());
         teacherAccountCommonDao.saveOrUpdate(account);
 	}
-    
+
+	@Override
+	public void updateTeacher(EditForm editForm) throws IOException {
+		TeacherAccount account = packageTeacherAccount(editForm);
+        teacherAccountCommonDao.saveOrUpdate(account);
+	}
+    public TeacherAccount packageTeacherAccount(EditForm editForm)throws IOException {
+    	TeacherAccount account = get(editForm.getUsername());
+
+        account.setName(editForm.getName());
+        account.getInfo().setCompleted(Boolean.TRUE);
+        account.getInfo().setDescription(editForm.getDescription());
+        account.getInfo().setSchool(editForm.getSchool());
+        account.getInfo().setFreeTime(editForm.getFreeTime());
+        account.getInfo().setIdentity(editForm.getIdentity());
+        account.getInfo().setSex(editForm.getSex());
+
+        String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
+        if(StringUtils.isNotBlank(avatar)) {
+            account.setAvatar(avatar);
+        }
+        String identityUrl = ossService.upload(editForm.getIdentityFile(), OSSBucket.avatar, "identity_" + account.getId());
+        if(StringUtils.isNotBlank(identityUrl)) {
+            account.getInfo().setIdentityUrl(identityUrl);
+        }
+        String educationUrl = ossService.upload(editForm.getEducationFile(), OSSBucket.avatar, "education_" + account.getId());
+        if(StringUtils.isNotBlank(educationUrl)) {
+            account.getInfo().setEducationUrl(educationUrl);
+        }
+        return account;
+    }
     
 }

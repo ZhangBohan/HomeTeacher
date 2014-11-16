@@ -28,7 +28,9 @@ public interface TeacherAccountService {
     TeacherAccount get(Integer teacherId);
 
     void update(EditForm editForm) throws IOException;
-
+    
+    void updateTeacher(EditForm editForm) throws IOException;
+     
     void create(RegisterForm registerForm);
 
     void updateCourses(Integer[] courseIds);
