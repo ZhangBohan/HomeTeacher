@@ -159,7 +159,7 @@
 				if (total % size == 0) {
 					maxpage = total / size;
 				} else {
-					maxpage = total / size + 1;
+					maxpage =parseInt(total / size) + 1;
 				}
 				if (page > maxpage) {
 					page = maxpage;

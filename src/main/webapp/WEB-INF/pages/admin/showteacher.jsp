@@ -168,13 +168,14 @@
 				page=page+1;
 				var maxpage=1;
 				if (total % size == 0) {
-					maxpage = total / size;
+					maxpage =total / size;
 				} else {
-					maxpage = total / size + 1;
+					maxpage =parseInt(total / size) + 1;
 				}
 				if (page > maxpage) {
 					page = maxpage;
 				}
+				alert("page="+page+",maxpage="+maxpage);
 				$("#page").val(page);
 				$("#main-form").submit();
 			});
