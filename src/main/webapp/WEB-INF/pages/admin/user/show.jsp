@@ -65,24 +65,24 @@
 							<li class="footer"><a href="#">See All Messages</a></li>
 						</ul></li>
 					<!-- User Account -->
-					<jsp:include page="../common/account_admin.jsp" />
+					<jsp:include page="../../common/account_admin.jsp" />
 				</ul>
 			</div>
 		</nav>
 	</header>
 	<div class="wrapper row-offcanvas row-offcanvas-left">
-		<jsp:include page="../common/sidebar_admin.jsp" flush="true">
-			<jsp:param name="activeMenu" value="verifyteacher" />
+		<jsp:include page="../../common/sidebar_admin.jsp" flush="true">
+			<jsp:param name="activeMenu" value="showuser" />
 		</jsp:include>
 
 		<!-- Right side column. Contains the navbar and content of the page -->
 		<aside class="right-side">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>审核教员资料</h1>
+				<h1>查看用户资料</h1>
 				<ol class="breadcrumb">
 					<li><i class="fa fa-dashboard"></i>首页</li>
-					<li class="active"><i class="fa fa-th"></i>审核教员资料</li>
+					<li class="active"><i class="fa fa-th"></i>查看用户资料</li>
 				</ol>
 			</section>
 
@@ -95,7 +95,7 @@
 					<!-- right column -->
 					<div>
 						<!-- general form elements disabled -->
-						<form id="main-form" action="/admin/verifyteacher" method="get">
+						<form id="main-form" action="/admin/showuser" method="get">
 							<input type="hidden" id="page" name="page" value="${ page.page }">
 							<input type="hidden" id="size" name="size" value="${ page.size }">
 							<input type="hidden" id="total" name="total"
@@ -108,17 +108,10 @@
 											<th>用户名</th>
 											<th>头像</th>
 											<th>姓名</th>
-											<th>学校</th>
-											<th>课程</th>
-											<th>描述</th>
-											<th>空闲时间</th>
-											<th>性别</th>
-											<th>操作</th>
 										</tr>
-										<c:forEach var="teacherAccount" items="${teahcerAccountList}">
+										<c:forEach var="userAccount" items="${userAccountList}">
 											<tr>
-												<td><a
-													href="editteacher?username=${teacherAccount.username}">${teacherAccount.username}</a></td>
+												<td>${userAccount.username}</td>
 												<td width="100"><c:choose>
 														<c:when test="${empty teacherAccount.avatar}">
 															<img data-src="holder.js/100x100" />
@@ -127,20 +120,7 @@
 															<img src="${teacherAccount.avatar}" class="avatar">
 														</c:otherwise>
 													</c:choose></td>
-												<td>${teacherAccount.name}</td>
-												<td>${teacherAccount.info.school }</td>
-												<td><c:forEach items="${teacherAccount.info.courses}"
-														var="course">
-														<span class="label label-info">${course.name}</span>
-													</c:forEach></td>
-												<td width="150">${teacherAccount.info.description }</td>
-												<td width="150">${teacherAccount.info.freeTime }</td>
-												<td><c:choose>
-														<c:when test="${teacherAccount.info.sex}">女</c:when>
-														<c:otherwise>男</c:otherwise>
-													</c:choose></td>
-												<td><a
-													href="verify?username=${teacherAccount.username}&audited=true">通过</a></td>
+												<td>${userAccount.name}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -183,8 +163,8 @@
 				var page = $('#page').val();
 				total = $('#total').val();
 				size = $('#size').val();
-				page = page + 1;
-				var maxpage = 1;
+				page=page+1;
+				var maxpage=1;
 				if (total % size == 0) {
 					maxpage = total / size;
 				} else {
@@ -198,7 +178,7 @@
 			});
 			$(".previous_page").click(function() {
 				var page = $('#page').val();
-				page = page - 1;
+				page=page-1;
 				if (page <= 0) {
 					page = 1;
 				}
