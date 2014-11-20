@@ -81,3 +81,13 @@ footer p {
     color: #7f7f7f;
     margin-bottom: 6px;
 }
+
+.jiajiao-logo {
+    width: 100px;
+}
+
+.relative-free-btn {
+    position: fixed;
+    right: 40px;
+    top: 500px;
+}

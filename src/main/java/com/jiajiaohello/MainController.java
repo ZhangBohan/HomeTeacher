@@ -3,6 +3,9 @@ package com.jiajiaohello;
 import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
+import com.jiajiaohello.core.info.service.CourseService;
+import com.jiajiaohello.core.ticket.ClassTicketService;
+import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.core.IpData;
 import com.jiajiaohello.support.web.MessageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.jiajiaohello.support.core.CommonHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -23,6 +24,10 @@ import java.util.List;
 public class MainController {
     @Autowired
     private TeacherAccountService teacherAccountService;
+    @Autowired
+    private CourseService courseService;
+    @Autowired
+    private ClassTicketService classTicketService;
 
     @RequestMapping
     public String index(Model model) {
@@ -55,16 +60,6 @@ public class MainController {
         model.addAttribute("ipData", ipData);
         MessageHelper.addSuccessAttribute(model, "你好，%s", "伯函1");
         return "hello";
-    }
-
-    @RequestMapping(value = "/ticket", method = RequestMethod.GET)
-    public String getTicket(Integer teacherId, Model model) {
-        if(teacherId != null) {
-            TeacherAccount teacherAccount = teacherAccountService.get(teacherId);
-            model.addAttribute("teacher", teacherAccount);
-        }
-
-        return "ticket";
     }
 
     @RequestMapping(value = "error",method = RequestMethod.GET)

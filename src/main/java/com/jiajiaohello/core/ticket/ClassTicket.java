@@ -24,6 +24,7 @@ public class ClassTicket implements Serializable {
     @GeneratedValue
     private Integer id;
     private String description;
+    private Date teachingAt;
 
     @ManyToOne
     private Course course = new Course();
@@ -49,6 +50,7 @@ public class ClassTicket implements Serializable {
         return "ClassTicket{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
+                ", teachingAt=" + teachingAt +
                 ", course=" + course +
                 ", userAccount=" + userAccount +
                 ", teacherAccount=" + teacherAccount +
@@ -129,5 +131,13 @@ public class ClassTicket implements Serializable {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Date getTeachingAt() {
+        return teachingAt;
+    }
+
+    public void setTeachingAt(Date teachingAt) {
+        this.teachingAt = teachingAt;
     }
 }

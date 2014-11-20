@@ -26,7 +26,7 @@ public class CommonDao<T> {
 	public T get(T entity) {
 		List<T> list = getList(entity);
 		if(CollectionUtils.isEmpty(list)) {
-			throw new EntityNotFoundException();
+			return null;
 		}
 		return list.get(0);
 	}

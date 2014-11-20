@@ -26,6 +26,13 @@ public class Course implements Serializable{
     private Date createdAt;
     private Date updatedAt;
 
+    public Course() {
+    }
+
+    public Course(Integer courseId) {
+        id = courseId;
+    }
+
     public void init() {
         this.createdAt = CommonHelper.now();
         this.updatedAt = CommonHelper.now();

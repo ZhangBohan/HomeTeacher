@@ -1,20 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="row top-content">
   <div class="col-md-3">
-    <img src="../img/logo.png">
+    <img src="/public/img/logo.png" class="jiajiao-logo">
     <!-- Single button -->
-    <div class="btn-group">
-      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-        Action <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </div>
+    <%--<div class="btn-group">--%>
+      <%--<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">--%>
+        <%--Action <span class="caret"></span>--%>
+      <%--</button>--%>
+      <%--<ul class="dropdown-menu" role="menu">--%>
+        <%--<li><a href="#">Action</a></li>--%>
+        <%--<li><a href="#">Another action</a></li>--%>
+        <%--<li><a href="#">Something else here</a></li>--%>
+        <%--<li class="divider"></li>--%>
+        <%--<li><a href="#">Separated link</a></li>--%>
+      <%--</ul>--%>
+    <%--</div>--%>
   </div>
   <div class="col-md-6">
     <div class="input-group input-group-lg">
@@ -36,7 +36,7 @@
   </div>
   <div class="col-md-3 text-center publish-message">
     <div>
-      <a href="/ticket" class="btn btn-success btn-lg">免费发布信息</a>
+      <a href="/user/ticket" class="btn btn-success btn-lg">免费发布信息</a>
     </div>
     <div>
       <p class="text-bold text-blue">也可直接拨打家教热线：18511870281</p>

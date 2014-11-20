@@ -283,12 +283,11 @@
             </div>
         </c:if>
     </div>
-    <div class="box-footer">
-        <button class="btn btn-success btn-lg">免费预约</button>
-    </div>
 </div>
 </div>
-
+<div class="relative-free-btn">
+    <a href="/user/ticket?teacherId=${teacher.id}" class="btn btn-primary btn-lg">免费预约该教员</a>
+</div>
 <jsp:include page="common/footer.jsp" />
 
 

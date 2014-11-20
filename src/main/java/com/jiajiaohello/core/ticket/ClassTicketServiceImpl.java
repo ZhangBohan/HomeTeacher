@@ -1,12 +1,17 @@
 package com.jiajiaohello.core.ticket;
 
 import com.jiajiaohello.core.account.model.Account;
+import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.UserAccount;
 import com.jiajiaohello.core.account.service.AccountService;
+import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.account.service.UserAccountService;
+import com.jiajiaohello.core.info.model.Course;
 import com.jiajiaohello.support.core.CommonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.ParseException;
 
 /**
  * User: bohan
@@ -23,15 +28,8 @@ public class ClassTicketServiceImpl implements ClassTicketService {
     private UserAccountService userAccountService;
     @Autowired
     private AccountService accountService;
-
-    @Override
-    public void create(ClassTicket ticket, String username) {
-        ticket.init();
-        UserAccount userAccount = userAccountService.get(username);
-        ticket.setUserAccount(userAccount);
-
-        classTicketCommonDao.saveOrUpdate(ticket);
-    }
+    @Autowired
+    private TeacherAccountService teacherAccountService;
 
     @Override
     public void process(Integer ticketId, TicketStatus status, String note, String username) {
@@ -47,5 +45,22 @@ public class ClassTicketServiceImpl implements ClassTicketService {
         classTicketNoteCommonDao.saveOrUpdate(classTicketNote);
         classTicket.getNotes().add(classTicketNote);
         classTicketCommonDao.saveOrUpdate(classTicket);
+    }
+
+    @Override
+    public void create(ClassTicketForm classTicketForm, String username) throws ParseException {
+        ClassTicket ticket = new ClassTicket();
+        ticket.init();
+        UserAccount userAccount = userAccountService.get(username);
+        ticket.setUserAccount(userAccount);
+        ticket.setCourse(new Course(classTicketForm.getCourse()));
+        ticket.setDescription(classTicketForm.getAddress());
+
+        ticket.setTeachingAt(classTicketForm.getTeachingDate());
+        if(classTicketForm.getTeacherId() != null) {
+            ticket.setTeacherAccount(new TeacherAccount(classTicketForm.getTeacherId()));
+        }
+
+        classTicketCommonDao.saveOrUpdate(ticket);
     }
 }

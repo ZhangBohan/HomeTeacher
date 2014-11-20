@@ -22,6 +22,10 @@ public class TeacherAccount extends Account {
         super(username);
     }
 
+    public TeacherAccount(Integer teacherId) {
+        this.setId(teacherId);
+    }
+
     public TeacherInfo getInfo() {
         return info;
     }
