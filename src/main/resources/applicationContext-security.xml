@@ -65,7 +65,7 @@
     <http use-expressions="true" auto-config="true" pattern="/user/**" authentication-manager-ref="userAuthenticationManager">
         <intercept-url pattern="/user/**" access="hasRole('ROLE_USER')"/>
         <form-login default-target-url="/"
-                    login-page="/auth/user/login"
+                    login-page="/auth/login/user"
                     username-parameter="username"
                     password-parameter="password"
                     authentication-failure-url="/auth/login/user?error=true"
