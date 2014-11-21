@@ -8,8 +8,31 @@ package com.jiajiaohello.core.account.model;
  * Time: 4:09 PM
  */
 public enum RecommendType {
-    top,
-    row1,
-    row2,
-    row3
+    top(1),
+    row1(2),
+    row2(3),
+    row3(4);
+    private Integer id;
+
+    public static RecommendType getInstance(Integer id) {
+        for (RecommendType recommendType : RecommendType.class.getEnumConstants()) {
+            if(recommendType.getId().equals(id)) {
+                return recommendType;
+            }
+        }
+
+        return null;
+    }
+
+    RecommendType(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

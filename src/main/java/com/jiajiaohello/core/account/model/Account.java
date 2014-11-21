@@ -1,5 +1,6 @@
 package com.jiajiaohello.core.account.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jiajiaohello.core.area.Area;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,7 @@ public class Account implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
     private Boolean disabled = false;
     private String avatar;
