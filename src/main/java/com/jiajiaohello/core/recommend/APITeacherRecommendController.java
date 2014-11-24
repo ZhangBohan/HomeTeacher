@@ -28,7 +28,7 @@ public class APITeacherRecommendController {
         return item;
     }
 
-    @RequestMapping(value = "/{typeId}/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{typeId}/{id}", method = RequestMethod.POST)
     public RecommendItem update(@RequestBody RecommendItem item, @PathVariable("typeId") Integer typeId) {
         recommendService.update(RecommendType.getInstance(typeId), item);
         return item;

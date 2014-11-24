@@ -36,7 +36,9 @@
                 <a href="/admin/teacher/verify" <c:if test="${param.activeMenu =='teacher_verify'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>审核教员资料</span>
                 </a>
-                
+                <a href="/admin/recommends" <c:if test="${param.activeMenu =='recommends'}">class="menu-active" </c:if>>
+                    <i class="fa fa-th"></i> <span>推荐</span>
+                </a>
             </li>
         </ul>
     </section>

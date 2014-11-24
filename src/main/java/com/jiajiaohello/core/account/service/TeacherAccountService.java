@@ -2,7 +2,7 @@ package com.jiajiaohello.core.account.service;
 
 import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
-import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.TeacherEditForm;
 import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.RegisterForm;
@@ -30,9 +30,9 @@ public interface TeacherAccountService {
 
     TeacherAccount get(Integer teacherId);
 
-    void update(EditForm editForm) throws IOException;
+    void update(TeacherEditForm teacherEditForm) throws IOException;
     
-    void updateTeacher(EditForm editForm) throws IOException;
+    void updateTeacher(TeacherEditForm teacherEditForm) throws IOException;
      
     void create(RegisterForm registerForm) throws UserLogicException;
 

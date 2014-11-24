@@ -49,6 +49,10 @@ body {
     width: 200px;
 }
 
+.avatar-in-list {
+    width: 72px;
+}
+
 .teacher-content {
     margin-left: 100px;
     padding: 5px 0 5px 0;

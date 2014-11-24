@@ -5,7 +5,7 @@ import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.info.model.Stage;
 import com.jiajiaohello.core.info.service.CourseService;
-import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.TeacherEditForm;
 import com.jiajiaohello.support.auth.AuthHelper;
 import com.jiajiaohello.support.exception.TeacherInfoNotFillException;
 import com.jiajiaohello.support.web.MessageHelper;
@@ -50,13 +50,13 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
-    public String postEdit(@Valid EditForm editForm, BindingResult result, RedirectAttributes redirectAttributes) throws IOException {
+    public String postEdit(@Valid TeacherEditForm teacherEditForm, BindingResult result, RedirectAttributes redirectAttributes) throws IOException {
         if(result.hasErrors()) {
             for (ObjectError objectError : result.getAllErrors()) {
                 MessageHelper.addErrorAttribute(redirectAttributes, objectError.getDefaultMessage());
             }
         } else {
-            teacherAccountService.update(editForm);
+            teacherAccountService.update(teacherEditForm);
             MessageHelper.addSuccessAttribute(redirectAttributes, "更新成功！");
         }
         return "redirect:/teacher/edit";

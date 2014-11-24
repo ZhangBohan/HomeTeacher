@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
  * Date: 10/24/14
  * Time: 3:11 PM
  */
-public class EditForm {
+public class TeacherEditForm {
     @NotBlank(message = "系统错误")
     private String username;
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -34,6 +36,12 @@ public class TeacherRecommendService implements RecommendService<TeacherAccount>
         RecommendItem item = new RecommendItem();
         item.setTypeId(recommendType.getId());
         List<RecommendItem> list = recommendItemCommonDao.getList(item);
+        Collections.sort(list, new Comparator<RecommendItem>() {
+            @Override
+            public int compare(RecommendItem o1, RecommendItem o2) {
+                return o2.getRank().compareTo(o1.getRank());
+            }
+        });
         for (RecommendItem recommendItem : list) {
             TeacherAccount teacherAccount = teacherAccountService.get(recommendItem.getItemId());
             recommendItem.setEntity(teacherAccount);

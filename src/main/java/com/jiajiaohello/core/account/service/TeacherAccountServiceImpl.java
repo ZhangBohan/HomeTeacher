@@ -4,7 +4,7 @@ import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.model.TeacherInfo;
 import com.jiajiaohello.core.info.model.Course;
-import com.jiajiaohello.core.teacher.dto.EditForm;
+import com.jiajiaohello.core.teacher.dto.TeacherEditForm;
 import com.jiajiaohello.core.teacher.dto.SearchForm;
 import com.jiajiaohello.core.teacher.dto.VerifyForm;
 import com.jiajiaohello.support.auth.AuthHelper;
@@ -69,8 +69,8 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
     }
 
     @Override
-    public void update(EditForm editForm) throws IOException {
-    	TeacherAccount account = packageTeacherAccount(editForm);
+    public void update(TeacherEditForm teacherEditForm) throws IOException {
+    	TeacherAccount account = packageTeacherAccount(teacherEditForm);
         AuthHelper.reloadAccount(account, TeacherUserDetailService.authorities);
         teacherAccountCommonDao.saveOrUpdate(account);
     }
@@ -150,30 +150,30 @@ public class TeacherAccountServiceImpl implements TeacherAccountService {
 	}
 
 	@Override
-	public void updateTeacher(EditForm editForm) throws IOException {
-		TeacherAccount account = packageTeacherAccount(editForm);
+	public void updateTeacher(TeacherEditForm teacherEditForm) throws IOException {
+		TeacherAccount account = packageTeacherAccount(teacherEditForm);
         teacherAccountCommonDao.saveOrUpdate(account);
 	}
-    public TeacherAccount packageTeacherAccount(EditForm editForm)throws IOException {
-    	TeacherAccount account = get(editForm.getUsername());
+    public TeacherAccount packageTeacherAccount(TeacherEditForm teacherEditForm)throws IOException {
+    	TeacherAccount account = get(teacherEditForm.getUsername());
 
-        account.setName(editForm.getName());
+        account.setName(teacherEditForm.getName());
         account.getInfo().setCompleted(Boolean.TRUE);
-        account.getInfo().setDescription(editForm.getDescription());
-        account.getInfo().setSchool(editForm.getSchool());
-        account.getInfo().setFreeTime(editForm.getFreeTime());
-        account.getInfo().setIdentity(editForm.getIdentity());
-        account.getInfo().setSex(editForm.getSex());
+        account.getInfo().setDescription(teacherEditForm.getDescription());
+        account.getInfo().setSchool(teacherEditForm.getSchool());
+        account.getInfo().setFreeTime(teacherEditForm.getFreeTime());
+        account.getInfo().setIdentity(teacherEditForm.getIdentity());
+        account.getInfo().setSex(teacherEditForm.getSex());
 
-        String avatar = ossService.upload(editForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
+        String avatar = ossService.upload(teacherEditForm.getAvatarFile(), OSSBucket.avatar, Integer.toString(account.getId()));
         if(StringUtils.isNotBlank(avatar)) {
             account.setAvatar(avatar);
         }
-        String identityUrl = ossService.upload(editForm.getIdentityFile(), OSSBucket.avatar, "identity_" + account.getId());
+        String identityUrl = ossService.upload(teacherEditForm.getIdentityFile(), OSSBucket.avatar, "identity_" + account.getId());
         if(StringUtils.isNotBlank(identityUrl)) {
             account.getInfo().setIdentityUrl(identityUrl);
         }
-        String educationUrl = ossService.upload(editForm.getEducationFile(), OSSBucket.avatar, "education_" + account.getId());
+        String educationUrl = ossService.upload(teacherEditForm.getEducationFile(), OSSBucket.avatar, "education_" + account.getId());
         if(StringUtils.isNotBlank(educationUrl)) {
             account.getInfo().setEducationUrl(educationUrl);
         }
