@@ -4,6 +4,8 @@ import com.jiajiaohello.core.account.model.RecommendType;
 import com.jiajiaohello.core.account.model.TeacherAccount;
 import com.jiajiaohello.core.account.service.TeacherAccountService;
 import com.jiajiaohello.core.info.service.CourseService;
+import com.jiajiaohello.core.recommend.RecommendItem;
+import com.jiajiaohello.core.recommend.RecommendService;
 import com.jiajiaohello.core.ticket.ClassTicketService;
 import com.jiajiaohello.support.core.CommonHelper;
 import com.jiajiaohello.support.core.IpData;
@@ -28,17 +30,19 @@ public class MainController {
     private CourseService courseService;
     @Autowired
     private ClassTicketService classTicketService;
+    @Autowired
+    private RecommendService<TeacherAccount> teacherAccountRecommendService;
 
     @RequestMapping
     public String index(Model model) {
         // set recommend teachers list
-        List<TeacherAccount> list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.top, 0, 4);
+        List<RecommendItem> list = teacherAccountRecommendService.getRecommendList(RecommendType.top, 0, 4);
         model.addAttribute("topList", list);
-        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row1, 0, 3);
+        list = teacherAccountRecommendService.getRecommendList(RecommendType.row1, 0, 3);
         model.addAttribute("row1List", list);
-        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row2, 0, 3);
+        list = teacherAccountRecommendService.getRecommendList(RecommendType.row2, 0, 3);
         model.addAttribute("row2List", list);
-        list = teacherAccountService.getRecommendTeacherAccounts(RecommendType.row3, 0, 3);
+        list = teacherAccountRecommendService.getRecommendList(RecommendType.row3, 0, 3);
         model.addAttribute("row3List", list);
         return "index";
     }

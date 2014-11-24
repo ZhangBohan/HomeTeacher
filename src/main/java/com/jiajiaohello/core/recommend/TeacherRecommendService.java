@@ -28,14 +28,9 @@ public class TeacherRecommendService implements RecommendService<TeacherAccount>
 
     @Override
     public List<RecommendItem> getRecommendList(RecommendType recommendType, Integer start, Integer size) {
-        return null;
-    }
-
-    @Override
-    public List<RecommendItem> getRecommendList(RecommendType recommendType) {
         RecommendItem item = new RecommendItem();
         item.setTypeId(recommendType.getId());
-        List<RecommendItem> list = recommendItemCommonDao.getList(item);
+        List<RecommendItem> list = recommendItemCommonDao.getList(item, start, size);
         Collections.sort(list, new Comparator<RecommendItem>() {
             @Override
             public int compare(RecommendItem o1, RecommendItem o2) {
@@ -48,6 +43,12 @@ public class TeacherRecommendService implements RecommendService<TeacherAccount>
         }
 
         return list;
+    }
+
+    @Override
+    public List<RecommendItem> getRecommendList(RecommendType recommendType) {
+
+        return getRecommendList(recommendType, 0, Integer.MAX_VALUE);
     }
 
     @Override

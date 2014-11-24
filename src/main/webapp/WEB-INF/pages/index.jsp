@@ -30,7 +30,8 @@
     <jsp:include page="common/user_search.jsp" />
 <div class="row">
     <h2>专职教员推荐</h2>
-    <c:forEach items="${topList}" var="teacher">
+    <c:forEach items="${topList}" var="item">
+        <c:set var="teacher" value="${item.entity}" />
         <div class="col-md-3">
             <div class="teacher-block bg-color-white">
                 <div class="avatar-block">
@@ -78,7 +79,8 @@
 <div class="row">
     <div class="rank col-lg-4">
         <h2>英语教员推荐</h2>
-        <c:forEach items="${row2List}" var="teacher">
+        <c:forEach items="${row1List}" var="item">
+            <c:set var="teacher" value="${item.entity}" />
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
@@ -127,7 +129,8 @@
     </div>
     <div class="rank col-lg-4">
         <h2>英语教员推荐</h2>
-        <c:forEach items="${row2List}" var="teacher">
+        <c:forEach items="${row2List}" var="item">
+            <c:set var="teacher" value="${item.entity}" />
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
@@ -176,7 +179,8 @@
     </div>
     <div class="rank col-md-4">
         <h2>英语教员推荐</h2>
-        <c:forEach items="${row2List}" var="teacher">
+        <c:forEach items="${row3List}" var="item">
+            <c:set var="teacher" value="${item.entity}" />
             <div class="col-md-12">
                 <div class="teacher-block bg-color-white">
                     <div class="avatar-block">
