@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * User: bohan
@@ -62,5 +63,12 @@ public class ClassTicketServiceImpl implements ClassTicketService {
         }
 
         classTicketCommonDao.saveOrUpdate(ticket);
+    }
+
+    @Override
+    public List<ClassTicket> getClassTickets(TicketStatus status) {
+        ClassTicket classTicket = new ClassTicket();
+        classTicket.setStatus(status.getId());
+        return classTicketCommonDao.getList(classTicket);
     }
 }

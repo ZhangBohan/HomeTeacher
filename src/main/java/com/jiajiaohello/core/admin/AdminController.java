@@ -7,6 +7,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.jiajiaohello.core.teacher.dto.TeacherEditForm;
+import com.jiajiaohello.core.ticket.ClassTicket;
+import com.jiajiaohello.core.ticket.ClassTicketService;
+import com.jiajiaohello.core.ticket.TicketStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +53,8 @@ public class AdminController {
     private UserAccountService userAccountService;
     @Autowired
     private AuditService auditService;
+    @Autowired
+    private ClassTicketService classTicketService;
 
     @RequestMapping
     public String index() {
@@ -150,5 +155,12 @@ public class AdminController {
     public String recommend(@PathVariable("recommendId") Integer recommendId, Model model) {
         model.addAttribute("recommendId", recommendId);
         return "admin/recommend";
+    }
+
+    @RequestMapping(value = "ticket", method = RequestMethod.GET)
+    public String ticket(Model model) {
+        List<ClassTicket> classTickets = classTicketService.getClassTickets(TicketStatus.open);
+        model.addAttribute("classTickets", classTickets);
+        return "admin/ticket";
     }
 }

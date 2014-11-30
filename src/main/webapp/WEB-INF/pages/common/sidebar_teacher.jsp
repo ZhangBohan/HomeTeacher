@@ -27,7 +27,7 @@
                 <a href="/teacher/edit" <c:if test="${param.activeMenu == 'edit'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>个人资料</span>
                 </a>
-                <a href="/teacher/course" <c:if test="${param.activeMenu == 'course'}">class="menu-active" </c:if>>
+                <a href="/teacher/courses" <c:if test="${param.activeMenu == 'course'}">class="menu-active" </c:if>>
                     <i class="fa fa-th"></i> <span>选择科目</span>
                 </a>
             </li>
